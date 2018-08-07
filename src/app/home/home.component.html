@@ -1,12 +1,52 @@
 <rcc-navigation></rcc-navigation>
 <br/>
 
-<h1 class="section-title">RCC Home</h1>
+<h1 class="section-title">Home</h1>
 
-<!-- <form id="login-form" action="" method="post"> -->
 <div class="container">
-  <div class="notification-">
+  <div class="notifications">
+    <mat-card>
+      You have <strong>3</strong> policies that need to be acknowledged.
+    </mat-card>
+    <mat-card>
+      You have <strong>2</strong> surveys that need to be completed.
+    </mat-card>
+    <mat-card>
+      <mat-card-title>Policies</mat-card-title>
+      <mat-card-subtitle>You have <strong class="">3</strong> policies that need to be acknowledged.</mat-card-subtitle>
+      <mat-card-content>
+        <ul class="policy-wrapper">
+          <li>There was an update to the Privacy Policy</li>
+          <li>There was a change that affects parking</li>
+          <li>There was an update to the Privacy Policy</li>
+        </ul>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary">View</button>
+      </mat-card-actions>
+    </mat-card>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <span>You have <strong class="">3</strong> policies that need to be acknowledged.</span>
+        </mat-expansion-panel-header>
+        <ul class="policy-wrapper">
+          <li>There was an update to the Privacy Policy</li>
+          <li>There was a change that affects parking</li>
+          <li>There was an update to the Privacy Policy</li>
+        </ul>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <span>You have <strong class="">2</strong> surveys that need to be acknowledged.</span>
+        </mat-expansion-panel-header>
+        <ul class="policy-wrapper">
+          <li>Employee satisfaction survey</li>
+          <li>Where to get lunch survey</li>
+        </ul>
+      </mat-expansion-panel>
+    </mat-accordion>
+
   </div>
 </div>
-<!-- </form> -->
-<!-- /form -->
