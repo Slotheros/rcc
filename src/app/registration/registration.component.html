@@ -1,0 +1,93 @@
+<!-- <div class="container">
+  <h1>Registration</h1>
+  <form (ngSubmit)="submit(info)" #info="ngForm">
+    <div class="form-group">
+      <label for="fName">First Name</label>
+      <input type="text" class="form-control" id="fName" required
+        [(ngModel)]="model.fName" name="fName">
+    </div>
+
+    <div class="form-group">
+      <label for="lName">Last Name</label>
+      <input type="text" class="form-control" id="lName" required
+        [(ngModel)]="model.lName" name="lName">
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="text" class="form-control" id="email" required
+        [(ngModel)]="model.email" name="email">
+    </div>
+
+    <div class="form-group">
+      <label for="phoneNum">Phone Number</label>
+      <input type="text" class="form-control" id="phoneNum" required
+        [(ngModel)]="model.phoneNum" name="phoneNum">
+    </div>
+
+    <div class="form-group">
+      <label for="department">Department</label>
+      <select class="form-control" id="department" required
+        [(ngModel)]="model.department" name="department">
+        <option *ngFor="let dept of departments" [value]="dept">{{dept}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="text" class="form-control" id="password" required
+        [(ngModel)]="model.password" name="password">
+    </div>
+
+    <button type="submit" class="btn btn-success">Submit</button>
+
+  </form>
+</div> -->
+<rcc-navigation></rcc-navigation>
+<br/>
+<h1>User Registration</h1>
+
+<div class="container">
+  <div id="form-box">
+    <mat-form-field>
+      <input matInput placeholder="First Name" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Last Name" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Email" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Phone Number" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="Department" id="department" required
+      [(ngModel)]="model.department" name="department">
+        <mat-option *ngFor="let dept of departments" [value]="dept">{{dept}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div id="form-box">
+    <p id="password-criteria-p">Your password must contain at least 8 characters.</p>
+    <ul id="password-criteria-list">
+        <li>1 uppercase</li>
+        <li>1 lowercase</li>
+        <li>1 numeric</li>
+        <li>1 special character</li>
+      </ul>
+    <mat-form-field>
+      <input matInput type="password" placeholder="Password" id="password" [(ngModel)]="model.password" name="password" required>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput type="password" placeholder="Re-enter Password" id="password" name="password" required>
+    </mat-form-field>
+  </div>
+  <button mat-raised-button color="primary">Register</button>
+
+</div>
