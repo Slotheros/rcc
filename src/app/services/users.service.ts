@@ -9,6 +9,10 @@ export class UsersService {
 
   constructor() { }
 
+  /**
+   * Registers the user in our system.
+   * @param registrant - registration information
+   */
   register(registrant: Registrant): Observable<boolean> {
     return of(true);
   }

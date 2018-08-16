@@ -10,17 +10,19 @@ export class AuthService {
 
   /**
    * Passes the login credentials to the backend for authentication.
-   * Currently not the full implementation. Will update once either the
-   * backend/in-memory-api is set up.
+   * !!!Currently not the full implementation.!!!
    * @param username
    * @param password
    */
   login(username: string, password: string): Observable<boolean> {
-    console.log(username);
-    console.log(password);
+    return of(this.tempAuth(username, password));
+  }
+
+  // placeholder function until the backend/in-memory-web-api is setup
+  private tempAuth(username: string, password: string): boolean {
     if (username === 'test' && password === 'password') {
-      return of(true);
+      return true;
     }
-    return of(false);
+    return false;
   }
 }
