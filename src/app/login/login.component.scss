@@ -1,41 +1,45 @@
 .container {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .container > * {
-    margin: 0 auto;
-    width: 80%;
-  }
-  
-  h1 {
-    font-family: Helvetica, Arial, sans-serif;
-    text-align: center;
-  }
-  
-  #form-box {
-    // padding: 30px;
-    // border: 1px dotted black;
-    margin-bottom: 50px;
-    font-family: Helvetica;
-    font-size: 12pt;
-    font-weight: 300;
-  }
-  
-  #form-box > * {
-    width: 100%;
-  }
+  display: flex;
+  flex-direction: column;
+}
 
-  h6, a {
-      text-align: center
-  }
-  #register-box {
-    margin-top: 40px;
-  }
+.container > * {
+  margin: 0 auto;
+  width: 80%;
+}
 
-  #register-box button {
-      width: 100%;
-  }
+h1 {
+  font-family: Helvetica, Arial, sans-serif;
+  text-align: center;
+}
+
+#form-box {
+  // padding: 30px;
+  // border: 1px dotted black;
+  margin-bottom: 50px;
+  font-family: Helvetica;
+  font-weight: 300;
+}
+
+#form-box > * {
+  width: 100%;
+}
+
+h6, a {
+  text-align: center
+}
+#register-box {
+  margin-top: 40px;
+}
+
+#register-box button {
+  width: 100%;
+}
+
+#invalidCreds{
+  color: red; 
+  text-align: center;
+}
   
   
   

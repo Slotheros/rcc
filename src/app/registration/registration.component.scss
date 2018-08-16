@@ -17,9 +17,7 @@ h1 {
 #form-box {
   // padding: 30px;
   // border: 1px dotted black;
-  margin-bottom: 50px;
   font-family: Helvetica;
-  font-size: 10pt;
   font-weight: 400;
 }
 
@@ -34,7 +32,15 @@ h1 {
 #password-criteria-list {
   margin: 0;
   padding: 0 0 10px 30px;
-  font-size: 8pt;
+  font-size: 0.9rem;
+}
+
+#buttons-container {
+  text-align: center;
+}
+
+#buttons-container button{
+  margin-bottom: 1rem; 
 }
 
 

@@ -1,27 +1,27 @@
-<rcc-navigation></rcc-navigation>
-<br/>
-
 <h1 class="section-title">Employee Login</h1>
-  
-<!-- <form id="login-form" action="" method="post"> -->
-  <div class="container">
-    <div id="form-box">
-      <mat-form-field>
-        <input matInput placeholder="Username" required>
-      </mat-form-field>
 
-      <mat-form-field>
-        <input matInput type="password" placeholder="Password" id="password" name="password" required>
-      </mat-form-field>
-    </div> <!-- /.form0group -->
+<form (ngSubmit)="login()" #loginForm="ngForm">
+<div class="container">
+  <div id="form-box">
+    <mat-form-field>
+      <input matInput placeholder="Username" name="username" [(ngModel)]="username" required>
+    </mat-form-field>
 
-    <button mat-raised-button color="primary">Login</button>
+    <mat-form-field>
+      <input matInput type="password" placeholder="Password" name="password" [(ngModel)]="password" name="password" required>
+    </mat-form-field>
 
-    <a href="#">Forgot Password</a>
-    <div id="register-box">
-      <h6>Register as a new user.</h6>
-      <button mat-raised-button color="primary" routerLink="/registration">Register</button>
+    <div [hidden]='hideInvalidMsg' id='invalidCreds'>
+      Invalid credentials. Please try again
     </div>
   </div>
-<!-- </form> -->
-<!-- /form -->
+
+  <button mat-raised-button type="submit" color="primary" [disabled]="!loginForm.form.valid">Login</button>
+  <a href="#">Forgot Password</a>
+
+  <div id="register-box">
+    <h6>Register as a new user.</h6>
+    <button mat-raised-button color="primary" routerLink="/registration">Register</button>
+  </div>
+</div>
+</form>
