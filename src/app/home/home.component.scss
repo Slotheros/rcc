@@ -5,6 +5,10 @@
 .notifications mat-card {
   margin-bottom: 40px;
 }
-.notifications mat-card-title {
-  margin-bottom: 0;
+.notifications mat-card-title,
+.notifications mat-card-subtitle {
+  margin-bottom: 4px;
+}
+ul a {
+  color: black;
 }

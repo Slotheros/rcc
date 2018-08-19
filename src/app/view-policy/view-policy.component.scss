@@ -1,0 +1,22 @@
+.policy-title {
+  font-size: 1.5em;
+}
+.section-title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+mat-card {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+mat-card .policy {
+  margin-top: 20px;
+}
+.policy .mat-checkbox {
+  font-size: 1.5em;
+  text-decoration: underline;
+}
+.policy .completed {
+  text-align: right;
+  font-style: italic;
+}

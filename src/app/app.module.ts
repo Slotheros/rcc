@@ -10,6 +10,8 @@ import { LoginComponent } from './login/login.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { HomeComponent } from './home/home.component';
+import { ViewSurveyComponent } from './view-survey/view-survey.component';
+import { ViewPolicyComponent } from './view-policy/view-policy.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { HomeComponent } from './home/home.component';
     RegistrationComponent,
     LoginComponent,
     NavigationComponent,
-    HomeComponent
+    HomeComponent,
+    ViewSurveyComponent,
+    ViewPolicyComponent
   ],
   imports: [
     BrowserModule,
