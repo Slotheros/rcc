@@ -37,4 +37,17 @@ h1 {
   font-size: 8pt;
 }
 
+@media only screen and (min-width: 992px) {
+  .container {
+    width: 50%;
+  }
+
+  #form-box {
+  }
+
+  #form-box > * {
+    margin: 0 auto;
+  }
+}
+
 

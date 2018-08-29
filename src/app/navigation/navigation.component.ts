@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../user'; 
 
 @Component({
   selector: 'rcc-navigation',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavigationComponent implements OnInit {
 
+  admin = true;
   constructor() { }
 
   ngOnInit() {

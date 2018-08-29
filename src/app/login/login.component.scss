@@ -14,19 +14,18 @@
   }
   
   #form-box {
-    // padding: 30px;
-    // border: 1px dotted black;
     margin-bottom: 50px;
     font-family: Helvetica;
     font-size: 12pt;
     font-weight: 300;
+    text-align: center;
   }
   
   #form-box > * {
     width: 100%;
   }
 
-  h6, a {
+  h6 {
       text-align: center
   }
   #register-box {
@@ -38,4 +37,24 @@
   }
   
   
+  @media only screen and (min-width: 992px) {
+    .container {
+      // flex-direction: row;
+      width: 60%;
+    }
+
+    #form-box > * {
+      width: 100%;
+    }
+
+    #form-box button {
+      width: 200px;
+      margin: 0;
+      float: left;
+    }
   
+    #form-box {
+      width: 80%;
+      margin-top: 80px;
+    }
+  }

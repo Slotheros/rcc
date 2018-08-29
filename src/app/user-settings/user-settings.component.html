@@ -1,0 +1,48 @@
+<rcc-navigation></rcc-navigation>
+<h1>User Settings</h1>
+<div class="container">
+    <div id="form-box">
+      <h5>Account Info</h5>
+      <mat-form-field>
+        <input matInput type="current-password" placeholder="Enter Current Password" id="current-password" name="current-password" required>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="password" placeholder="Enter New Password" id="password" name="password" required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="password" placeholder="Re-enter New Password" id="password" name="password" required>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary">Change Password</button>
+
+    </div>
+
+    <div id="form-box">
+        <h5>Personal Info</h5>
+        <mat-form-field>
+          <input matInput placeholder="First Name" required>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Last Name" required>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Email Address" required>
+        </mat-form-field>  
+
+        <mat-form-field>
+          <input matInput placeholder="Phone Number" required>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select placeholder="Department" id="department" name="department" required>
+            <mat-option *ngFor="let dept of departments" [value]="dept">{{dept}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <button mat-raised-button color="primary">Update Info</button>
+  
+      </div>
+  </div>
