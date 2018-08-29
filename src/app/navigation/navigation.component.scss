@@ -1,0 +1,13 @@
+#desktop-logout {
+    display: none;
+}
+
+@media only screen and (min-width: 992px) {
+
+    #logout-form {
+        display: none;
+    }
+    #desktop-logout{
+        display: block;
+    }
+} 

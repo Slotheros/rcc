@@ -7,10 +7,10 @@
             <li class="nav-item active">
                 <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item admin-option">
                 <a class="nav-link" href="#">Add/Delete User</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item admin-option">
                 <a class="nav-link" href="#">Manage Alerts</a>
             </li>
             <li class="nav-item dropdown">
@@ -19,9 +19,9 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="/view-policy/">View Policy</a>
-                    <a class="dropdown-item" href="#">Create Policy</a>
+                    <a class="dropdown-item admin-option" href="#">Create Policy</a>
                     <!--<div class="dropdown-divider"></div>-->
-                    <a class="dropdown-item" href="#">Update Policy</a>
+                    <a class="dropdown-item admin-option" href="#">Update Policy</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -30,23 +30,24 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="/view-survey/">View Survey</a>
-                    <a class="dropdown-item" href="#">Create Survey</a>
+                    <a class="dropdown-item admin-option" href="#">Create Survey</a>
                     <!--<div class="dropdown-divider"></div>-->
-                    <a class="dropdown-item" href="#">Update Survey</a>
+                    <a class="dropdown-item admin-option" href="#">Update Survey</a>
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">User Settings</a>
+                <a class="nav-link" routerLink="/user-settings">User Settings</a>
             </li>
         </ul>
         <!--      <div class="dropdown-divider"></div>-->
 
-        <form id="logout-form" action="login.html" method="post">
+        <form id="logout-form" action="login.html" method="post" class="order-sm-12">
             <button mat-raised-button color="primary" routerLink="/login">Logout</button>
           </form>
         <div class="dropdown-divider"></div>
 
     </div>
-    <h6>Welcome, TestUser</h6>
+    <h6 class="oder-sm-1">Welcome, {{username}}</h6>
     <i class="material-icons">inbox</i>
+    <button mat-raised-button color="primary" routerLink="/login" id="desktop-logout">Logout</button>
 </nav>

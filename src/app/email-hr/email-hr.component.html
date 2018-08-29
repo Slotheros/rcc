@@ -1,0 +1,15 @@
+<rcc-navigation></rcc-navigation>
+<div class='container'>
+
+<form id="email-form">
+    <h1>Email HR:</h1>
+    <!-- <label for="email">Email HR:</label> -->
+    <h5>Robin Antill</h5>
+    <h6>Director of Human Resources</h6>
+    <h6>rantill@rrcc.com</h6>
+    <label>From:</label>
+    <input matInput placeholder="{{username}}" disabled>
+    <textarea class="form-control" rows="10" id="email" name="msg" [(ngModel)]="emailMessage">{{alertMessage}}</textarea>
+    <button mat-raised-button color="primary" (click)="sendMessage(emailMessage)">Send Email</button>
+  </form>
+  </div>
