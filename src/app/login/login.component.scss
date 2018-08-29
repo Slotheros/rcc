@@ -14,8 +14,6 @@ h1 {
 }
 
 #form-box {
-  // padding: 30px;
-  // border: 1px dotted black;
   margin-bottom: 50px;
   font-family: Helvetica;
   font-weight: 300;
@@ -42,4 +40,24 @@ h6, a {
 }
   
   
-  
+@media only screen and (min-width: 992px) {
+  .container {
+    // flex-direction: row;
+    width: 60%;
+  }
+
+  #form-box > * {
+    width: 100%;
+  }
+
+  #form-box button {
+    width: 200px;
+    margin: 0;
+    float: left;
+  }
+
+  #form-box {
+    width: 80%;
+    margin-top: 80px;
+  }
+}
