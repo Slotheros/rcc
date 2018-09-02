@@ -35,6 +35,9 @@ export class RegistrationComponent implements OnInit {
 
 
   register() {
+    if (!(this.validationService.validatePassword(this.registrant.password))) {
+      return;
+    }
     this.usersService.register(this.registrant).subscribe(result => {
       if (result) {
         this.router.navigate(['home']);

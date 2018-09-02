@@ -16,5 +16,12 @@ export class ValidationService {
   validateUsername(username: String): boolean {
     return true;
   }
-  
+
+  /**
+   * Validate Password
+   * @param password - user's account password
+   */
+  validatePassword(password: String): boolean {
+    return false;
+  }
 }
