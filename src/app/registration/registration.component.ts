@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Registrant } from '../registrant';
 import { UsersService } from '../services/users.service';
+import { ValidationService } from '../services/validation.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -16,6 +17,7 @@ export class RegistrationComponent implements OnInit {
 
   constructor(
     private usersService: UsersService,
+    private validationService: ValidationService,
     private route: ActivatedRoute,
     private router: Router
   ) { }
