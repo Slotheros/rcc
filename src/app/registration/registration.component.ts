@@ -35,7 +35,9 @@ export class RegistrationComponent implements OnInit {
 
 
   register() {
-    if (!(this.validationService.validatePassword(this.registrant.password))) {
+    // Registration page fields validation
+    if (!(this.validationService.validateRegistrant(this.registrant))) {
+      // TODO: add error messages
       return;
     }
     this.usersService.register(this.registrant).subscribe(result => {
@@ -53,7 +55,7 @@ export class RegistrationComponent implements OnInit {
 
 //     console.log("CHECKING: " + this.model.password + " second pass =  " + this.confirmPassword);
 //     if (this.model.password != this.confirmPassword) {
-//       console.log("DOES NOT MATCH") 
+//       console.log("DOES NOT MATCH")
 //       // display error message
 //     } else {
 //       console.log("Login");
