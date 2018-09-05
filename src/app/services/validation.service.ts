@@ -16,10 +16,11 @@ export class ValidationService {
    * @param email - user's email address
    */
   validateEmail(email: string): boolean {
-    const regex = new RegExp(
-      '/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}' +
-      '\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/');
-    return regex.test(email.trim());
+    const regex = new RegExp('^(([^<>()\\[\\]\\\\.,;:\\s@"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]' +
+      '{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$');
+    const result = regex.test(email);
+    console.log('Email Valid: ' + result);
+    return result;
   }
 
   /**
@@ -29,7 +30,9 @@ export class ValidationService {
    */
   validatePassword(password: string): boolean {
     const regex = new RegExp('((?=.*\\d)(?=.*[A-Z])(?=.*\\W).{8,})');
-    return regex.test(password.trim());
+    const result = regex.test(password.trim());
+    console.log('Password Valid: ' + result);
+    return result;
   }
 
   /**
@@ -38,7 +41,9 @@ export class ValidationService {
    * @param name - user's name
    */
   validateName(name: string): boolean {
-    return !(name.trim() === '');
+    const result = !(name.trim() === '');
+    console.log('Name Valid: ' + result);
+    return result;
   }
 
   /**
@@ -49,7 +54,9 @@ export class ValidationService {
    */
   validatePhoneNumber(phoneNumber: string): boolean {
     const regex = new RegExp('^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$');
-    return regex.test(phoneNumber.trim());
+    const result = regex.test(phoneNumber.trim());
+    console.log('Phone Number Valid: ' + result);
+    return result;
   }
 
   /**
@@ -57,7 +64,9 @@ export class ValidationService {
    * @param selectedValue - user's dropdown choice
    */
   validateDropdown(selectedValue: string): boolean {
-    return !(selectedValue === '');
+    const result = !(selectedValue === '');
+    console.log('Dropdown Valid: ' + result);
+    return result;
   }
 
   /**
@@ -71,7 +80,7 @@ export class ValidationService {
       && this.validateName(registrant.lName)
       && this.validateEmail(registrant.email)
       && this.validatePhoneNumber(registrant.phoneNum)
-      && this.validateDropdown(registrant.department)
+      // && this.validateDropdown(registrant.department)
       && this.validatePassword(registrant.password));
   }
 }
