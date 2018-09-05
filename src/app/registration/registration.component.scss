@@ -1,3 +1,6 @@
+
+
+
 .container {
   display: flex;
   flex-direction: column;
@@ -15,8 +18,6 @@ h1 {
 }
 
 #form-box {
-  // padding: 30px;
-  // border: 1px dotted black;
   font-family: Helvetica;
   font-weight: 400;
 }
@@ -32,7 +33,7 @@ h1 {
 #password-criteria-list {
   margin: 0;
   padding: 0 0 10px 30px;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 
 #buttons-container {
@@ -43,14 +44,58 @@ h1 {
   margin-bottom: 1rem; 
 }
 
+#phone-num-section {
+  margin: 20px 0 0 0;
+}
+
+#phone-num-section label{
+  margin: 0;
+  font-size: 12pt;
+  color: gray;
+
+}
+
+#phone-num-fields label {
+  padding-top: 10px;
+}
+
+.phone-field {
+  margin: 0 5px;
+  font-size: 12pt;
+}
+
+.short-field {
+  width: 32px;
+}
+
+.long-field {
+  width: 48px;
+}
+
+.first-phone-field {
+  margin-left: 0;
+}
+
+#phone-num-fields {
+  margin-top: 0;
+  padding-top: 0;
+  display: flex;
+  width: 100%;
+}
+
+#phone-num-fields .mat-form-field-infix {
+  border-top: 0 solid transparent !important;
+}
+
+#password-section {
+  margin-top: 40px;
+}
+
 @media only screen and (min-width: 992px) {
   .container {
     width: 50%;
   }
-
-  #form-box {
-  }
-
+  
   #form-box > * {
     margin: 0 auto;
   }
