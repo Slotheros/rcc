@@ -44,6 +44,8 @@ export class RegistrationComponent implements OnInit {
       if (result) {
         this.router.navigate(['home']);
       } else { }
+    }, error => {
+      console.log('Error occurred');
     });
   }
 //   onRegister(registerInfo) {
