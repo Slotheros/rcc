@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Registrant } from '../registrant';
+import { Department } from '../department';
 import { UsersService } from '../services/users.service';
+import { ConfigService } from '../services/config.service';
 import { ValidationService } from '../services/validation.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -11,10 +13,10 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./registration.component.scss'],
   encapsulation: ViewEncapsulation.None
 
-  
+
 })
 export class RegistrationComponent implements OnInit {
-  departments = ['Sales', 'Garage', 'Admin(HR)', 'Food & Beverage', 'Productions'];
+  departments: Department[];
   registrant: Registrant;
   pwdValidation: string;
   phone1: string;
@@ -24,6 +26,7 @@ export class RegistrationComponent implements OnInit {
 
   constructor(
     private usersService: UsersService,
+    private configService: ConfigService,
     private validationService: ValidationService,
     private route: ActivatedRoute,
     private router: Router
@@ -38,6 +41,8 @@ export class RegistrationComponent implements OnInit {
       department: undefined,
       password: undefined
     };
+
+    this.departments = this.configService.getDepartments();
   }
 
   register() {

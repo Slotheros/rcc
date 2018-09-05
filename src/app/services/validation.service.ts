@@ -61,16 +61,6 @@ export class ValidationService {
   }
 
   /**
-   * Validate Dropdown
-   * @param selectedValue - user's dropdown choice
-   */
-  validateDropdown(selectedValue: string): boolean {
-    const result = !(selectedValue === '');
-    console.log('Dropdown Valid: ' + result);
-    return result;
-  }
-
-  /**
    * Validate Registrant
    * Returns true if all of the registrant's fields are valid
    * @param registrant - user's info entered on the registration page
@@ -81,7 +71,6 @@ export class ValidationService {
       && this.validateName(registrant.lName)
       && this.validateEmail(registrant.email)
       && this.validatePhoneNumber(registrant.phoneNum)
-      // && this.validateDropdown(registrant.department)
       && this.validatePassword(registrant.password));
   }
 }
