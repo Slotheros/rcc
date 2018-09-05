@@ -37,12 +37,13 @@ export class ValidationService {
 
   /**
    * Validate Name
-   * Returns true if the name is not an empty string, since there are so many unique names and characters
+   * Returns true if the name contains only letters, spaces, and characters ' and -
    * @param name - user's name
    */
   validateName(name: string): boolean {
-    const result = !(name.trim() === '');
-    console.log('Name Valid: ' + result);
+    const regex = new RegExp('^[A-Za-z][A-Za-z\\\'\\-]+([\\ A-Za-z][A-Za-z\\\'\\-]+)*');
+    const result = regex.test(name.trim());
+    console.log('Name: ' + name.trim() + ' | Valid: ' + result);
     return result;
   }
 
