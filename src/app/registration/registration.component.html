@@ -15,33 +15,53 @@
         <input matInput placeholder="Email" name="email" [(ngModel)]="registrant.email" required>
       </mat-form-field>
 
-      <mat-form-field>
-        <input matInput placeholder="Phone Number" name="phoneNum" [(ngModel)]="registrant.phoneNum" required>
-      </mat-form-field>
+
+      <!-- <mat-form-field>
+        <input matInput placeholder="Phone Number" name="phoneNum" [(ngModel)]="registrant.phoneNum" maxlength="3" required>
+      </mat-form-field> -->
+
+      <div id="phone-num-section">
+        <label>Phone Number *</label>
+        <div id="phone-num-fields">
+          <mat-form-field class="phone-field short-field first-phone-field">
+            <input matInput name="phone1" [(ngModel)]="phone1" minlength="3" maxlength="3" required>
+          </mat-form-field>
+          <label>-</label>
+          <mat-form-field class="phone-field short-field">
+            <input matInput name="phone2" [(ngModel)]="phone2" minlength="3" maxlength="3" required>
+          </mat-form-field>
+          <label>-</label>
+
+          <mat-form-field class="phone-field long-field">
+            <input matInput name="phone3" [(ngModel)]="phone3" minlength="4" maxlength="4" required>
+          </mat-form-field>
+        </div>
+      </div>
 
       <mat-form-field>
         <mat-select placeholder="Department" name="department" [(ngModel)]="registrant.department" required>
-          <mat-option *ngFor="let dept of departments" [value]="dept">{{dept}}</mat-option>
+          <mat-option *ngFor="let dept of departments" [value]="dept">{{dept.name}}</mat-option>
         </mat-select>
       </mat-form-field>
+      <div id="password-section">
+        <p id="password-criteria-p">Your password must contain at least 8 characters.</p>
+        <ul id="password-criteria-list">
+            <li>1 uppercase</li>
+            <li>1 lowercase</li>
+            <li>1 numeric</li>
+            <li>1 special character</li>
+          </ul>
+        <mat-form-field class="password-field">
+          <input matInput type="password" placeholder="Password" name="password" [(ngModel)]="registrant.password" required>
+        </mat-form-field>
 
-      <p id="password-criteria-p">Your password must contain at least 8 characters.</p>
-      <ul id="password-criteria-list">
-          <li>1 uppercase</li>
-          <li>1 lowercase</li>
-          <li>1 numeric</li>
-          <li>1 special character</li>
-        </ul>
-      <mat-form-field>
-        <input matInput type="password" placeholder="Password" name="password" [(ngModel)]="registrant.password" required>
-      </mat-form-field>
-
-      <mat-form-field>
-          <input matInput type="password" placeholder="Re-enter Password" name="pwdValidation" [(ngModel)]="pwdValidation" required>
-      </mat-form-field>
+        <mat-form-field class="password-field">
+            <input matInput type="password" placeholder="Re-enter Password" name="pwdValidation" [(ngModel)]="pwdValidation" required>
+        </mat-form-field>
+      </div>
     </div>
     <div id="buttons-container">
-      <button mat-raised-button color="primary" type="submit" [disabled]="!registrationForm.form.valid">Register</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!registrationForm.form.valid" (click)="testDialog()">Register</button>
       <br />
       <a color="primary" routerLink="/login">Back to Login</a>
     </div>
