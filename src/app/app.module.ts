@@ -1,8 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
-import {MatDialogModule} from '@angular/material';
+import {MatDialogModule} from "@angular/material";
 import { HttpClientModule } from '@angular/common/http';
+
 
 import { AppComponent } from './app.component';
 import { RegistrationComponent } from './registration/registration.component';
@@ -17,7 +18,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { UserSettingsComponent } from './user-settings/user-settings.component';
 import { AlertsComponent } from './alerts/alerts.component';
 import { EmailHRComponent } from './email-hr/email-hr.component';
-import { ValidateDirective } from './validate.directive';
 
 @NgModule({
   declarations: [
@@ -30,8 +30,7 @@ import { ValidateDirective } from './validate.directive';
     ViewPolicyComponent,
     UserSettingsComponent,
     AlertsComponent,
-    EmailHRComponent,
-    ValidateDirective
+    EmailHRComponent
   ],
   imports: [
     BrowserModule,
