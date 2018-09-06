@@ -54,7 +54,7 @@ export class ValidationService {
    * @param phoneNumber - user's phone number
    */
   validatePhoneNumber(phoneNumber: string): boolean {
-    const regex = new RegExp('^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$');
+    const regex = new RegExp('^(\\+\\d{1,2})?\\d{10}$');
     const result = regex.test(phoneNumber.trim());
     console.log('Phone Number Valid: ' + result);
     return result;

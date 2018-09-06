@@ -10,7 +10,6 @@ export class ErrorDialogService {
   constructor(public dialog: MatDialog) { }
 
   openDialog() {
-    console.log("TEST");
     this.dialog.open(ErrorDialogComponent);
   }
 }

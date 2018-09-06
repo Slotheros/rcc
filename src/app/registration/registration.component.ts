@@ -47,10 +47,6 @@ export class RegistrationComponent implements OnInit {
     this.departments = this.configService.getDepartments();
   }
 
-  testDialog() {
-    this.errorDialogService.openDialog();
-  }
-
   register() {
     this.registrant.phoneNum = "+1" + this.phone1 + this.phone2 + this.phone3;
     // Registration page fields validation
@@ -60,28 +56,10 @@ export class RegistrationComponent implements OnInit {
     }
     this.usersService.register(this.registrant).subscribe(result => {
       if (result) {
-        this.router.navigate(['home']);
+        this.router.navigate(['login']);
       } else { }
     }, error => {
-      console.log('Error occurred');
       this.errorDialogService.openDialog();
     });
   }
-//   onRegister(registerInfo) {
-//     console.log("THIS IS A TEST: " + registerInfo.value.fName);
-//     console.log(this.model.fName + "\n"
-//   + this.model.lName + "\n"
-// + this.model.email + "\n"
-// + this.model.department + "\n");
-
-//     console.log("CHECKING: " + this.model.password + " second pass =  " + this.confirmPassword);
-//     if (this.model.password != this.confirmPassword) {
-//       console.log("DOES NOT MATCH")
-//       // display error message
-//     } else {
-//       console.log("Login");
-//       //check all other fields create a new user in the database
-//       //route user to the login page.
-//   }
-//   }
 }
