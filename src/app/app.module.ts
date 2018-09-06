@@ -18,6 +18,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { UserSettingsComponent } from './user-settings/user-settings.component';
 import { AlertsComponent } from './alerts/alerts.component';
 import { EmailHRComponent } from './email-hr/email-hr.component';
+import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { EmailHRComponent } from './email-hr/email-hr.component';
     ViewPolicyComponent,
     UserSettingsComponent,
     AlertsComponent,
-    EmailHRComponent
+    EmailHRComponent,
+    ErrorDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +42,7 @@ import { EmailHRComponent } from './email-hr/email-hr.component';
     AppRoutingModule,
     HttpClientModule
   ],
+  entryComponents: [ErrorDialogComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

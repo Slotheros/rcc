@@ -51,17 +51,17 @@
             <li>1 numeric</li>
             <li>1 special character</li>
           </ul>
-        <mat-form-field>
+        <mat-form-field class="password-field">
           <input matInput type="password" placeholder="Password" name="password" [(ngModel)]="registrant.password" required>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="password-field">
             <input matInput type="password" placeholder="Re-enter Password" name="pwdValidation" [(ngModel)]="pwdValidation" required>
         </mat-form-field>
       </div>
     </div>
     <div id="buttons-container">
-      <button mat-raised-button color="primary" type="submit" [disabled]="!registrationForm.form.valid">Register</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!registrationForm.form.valid" (click)="testDialog()">Register</button>
       <br />
       <a color="primary" routerLink="/login">Back to Login</a>
     </div>

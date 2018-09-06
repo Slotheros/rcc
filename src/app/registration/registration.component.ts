@@ -6,6 +6,7 @@ import { UsersService } from '../services/users.service';
 import { ConfigService } from '../services/config.service';
 import { ValidationService } from '../services/validation.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ErrorDialogService } from '../services/error-dialog.service';
 
 @Component({
   selector: 'rcc-registration',
@@ -29,7 +30,8 @@ export class RegistrationComponent implements OnInit {
     private configService: ConfigService,
     private validationService: ValidationService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private errorDialogService: ErrorDialogService
   ) { }
 
   ngOnInit() {
@@ -45,6 +47,10 @@ export class RegistrationComponent implements OnInit {
     this.departments = this.configService.getDepartments();
   }
 
+  testDialog() {
+    this.errorDialogService.openDialog();
+  }
+
   register() {
     this.registrant.phoneNum = "+1" + this.phone1 + this.phone2 + this.phone3;
     // Registration page fields validation
@@ -58,6 +64,7 @@ export class RegistrationComponent implements OnInit {
       } else { }
     }, error => {
       console.log('Error occurred');
+      this.errorDialogService.openDialog();
     });
   }
 //   onRegister(registerInfo) {
