@@ -19,7 +19,6 @@ export class ValidationService {
     const regex = new RegExp('^(([^<>()\\[\\]\\\\.,;:\\s@"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]' +
       '{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$');
     const result = regex.test(email);
-    console.log('Email Valid: ' + result);
     return result;
   }
 
@@ -31,7 +30,6 @@ export class ValidationService {
   validatePassword(password: string): boolean {
     const regex = new RegExp('((?=.*\\d)(?=.*[A-Z])(?=.*\\W).{8,})');
     const result = regex.test(password.trim());
-    console.log('Password Valid: ' + result);
     return result;
   }
 
@@ -43,7 +41,6 @@ export class ValidationService {
   validateName(name: string): boolean {
     const regex = new RegExp('^[A-Za-z][A-Za-z\\\'\\-]+([\\ A-Za-z][A-Za-z\\\'\\-]+)*');
     const result = regex.test(name.trim());
-    console.log('Name: ' + name.trim() + ' | Valid: ' + result);
     return result;
   }
 
@@ -56,8 +53,17 @@ export class ValidationService {
   validatePhoneNumber(phoneNumber: string): boolean {
     const regex = new RegExp('^(\\+\\d{1,2})?\\d{10}$');
     const result = regex.test(phoneNumber.trim());
-    console.log('Phone Number Valid: ' + result);
     return result;
+  }
+
+  /**
+   * Validate Password Match
+   * Returns true if the two passwords are equal
+   * @param pw1 - first entered password
+   * @param pw2 - second entered password
+   */
+  validatePasswordMatch(pw1: string, pw2: string): boolean {
+    return ((pw1 === pw2) && this.validatePassword(pw1) && this.validatePassword(pw2));
   }
 
   /**

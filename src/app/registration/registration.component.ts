@@ -19,10 +19,17 @@ import { ErrorDialogService } from '../services/error-dialog.service';
 export class RegistrationComponent implements OnInit {
   departments: Department[];
   registrant: Registrant;
-  pwdValidation: string;
-  phone1: string;
-  phone2: string;
-  phone3: string;
+  passwordRepeated: string;
+  phone1 = '';
+  phone2 = '';
+  phone3 = '';
+  fNameValid = true;
+  lNameValid = true;
+  phoneValid = true;
+  emailValid = true;
+  pw1Valid = true;
+  pw2Valid = true;
+  pwMatch = true;
 
 
   constructor(
@@ -39,7 +46,7 @@ export class RegistrationComponent implements OnInit {
       fName: undefined,
       lName: undefined,
       email: undefined,
-      phoneNum: undefined,
+      phoneNum: '',
       department: undefined,
       password: undefined
     };
@@ -48,7 +55,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   register() {
-    this.registrant.phoneNum = "+1" + this.phone1 + this.phone2 + this.phone3;
+    this.registrant.phoneNum = '+1' + this.phone1 + this.phone2 + this.phone3;
     // Registration page fields validation
     if (!(this.validationService.validateRegistrant(this.registrant))) {
       // TODO: add error messages
@@ -61,5 +68,22 @@ export class RegistrationComponent implements OnInit {
     }, error => {
       this.errorDialogService.openDialog();
     });
+  }
+
+  validateField(value, type) {
+    console.log('validating a field');
+    switch (type) {
+      case 'fName' : this.fNameValid = this.validationService.validateName(value); break;
+      case 'lName' : this.lNameValid = this.validationService.validateName(value); break;
+      case 'email' : this.emailValid = this.validationService.validateEmail(value); break;
+      case 'phone' : this.registrant.phoneNum = '+1' + this.phone1 + this.phone2 + this.phone3;
+        this.phoneValid = this.validationService.validatePhoneNumber(this.registrant.phoneNum); break;
+      case 'pw1' : this.pw1Valid = this.validationService.validatePassword(value); break;
+      case 'pw2' : this.pw2Valid = this.validationService.validatePassword(value); break;
+    }
+  }
+
+  passwordMatch(pw1, pw2) {
+    this.pwMatch = this.validationService.validatePasswordMatch(pw1, pw2);
   }
 }
