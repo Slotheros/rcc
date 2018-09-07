@@ -9,7 +9,7 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  username: string;
+  email: string;
   password: string;
   hideInvalidMsg = true;
 
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
    * asked to re-enter credentials.
    */
   login() {
-    this.authService.login(this.username, this.password).subscribe(result => {
+    this.authService.login(this.email, this.password).subscribe(result => {
       if (result) {
         this.hideInvalidMsg = true;
         this.router.navigate(['home']);
