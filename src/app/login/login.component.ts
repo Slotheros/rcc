@@ -2,22 +2,26 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
+import { ValidationService } from '../services/validation.service';
 
 @Component({
   selector: 'rcc-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss', '../app.component.scss']
 })
 export class LoginComponent implements OnInit {
   email: string;
   password: string;
   hideInvalidMsg = true;
+  emailValid = true;
+  passwordValid = true;
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute,
-    public snackBar: MatSnackBar) { }
+    public snackBar: MatSnackBar,
+    private validationService: ValidationService) { }
 
   ngOnInit() {
   }
@@ -36,5 +40,13 @@ export class LoginComponent implements OnInit {
         this.hideInvalidMsg = false;
       }
     });
+  }
+
+  validateEmail(email) {
+    this.emailValid = this.validationService.validateEmail(email);
+  }
+
+  validatePassword(password) {
+    this.passwordValid = this.validationService.validatePassword(password);
   }
 }

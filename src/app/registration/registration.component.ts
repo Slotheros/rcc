@@ -11,10 +11,8 @@ import { ErrorDialogService } from '../services/error-dialog.service';
 @Component({
   selector: 'rcc-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss'],
+  styleUrls: ['./registration.component.scss', '../app.component.scss'],
   encapsulation: ViewEncapsulation.None
-
-
 })
 export class RegistrationComponent implements OnInit {
   departments: Department[];
