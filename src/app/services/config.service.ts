@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpHeaders } from '@angular/common/http';
 import { Department } from '../department';
 
 const departments: Department[] = [
@@ -8,6 +9,15 @@ const departments: Department[] = [
   { id: 4, name: 'Food & Beverage' },
   { id: 5, name: 'Productions' }
 ];
+
+const rccUrl: string = "http://localhost:3000";
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+  }), 
+  withCredentials: true
+};
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +29,13 @@ export class ConfigService {
 
   getDepartments(): Department[] {
     return departments;
+  }
+
+  getRccUrl(){
+    return rccUrl;
+  }
+
+  getHttpOptions(){
+    return httpOptions;
   }
 }

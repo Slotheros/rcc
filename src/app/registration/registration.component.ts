@@ -66,7 +66,7 @@ export class RegistrationComponent implements OnInit {
         this.router.navigate(['login']);
       } else { }
     }, error => {
-      this.errorDialogService.setErrorMsg(error);
+      this.errorDialogService.setErrorMsg(error.errMsg);
       this.errorDialogService.openDialog(this.errorDialogService.getErrorMsg());
     });
   }

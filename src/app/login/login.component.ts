@@ -20,6 +20,12 @@ export class LoginComponent implements OnInit {
     public snackBar: MatSnackBar) { }
 
   ngOnInit() {
+    this.authService.loggedIn().subscribe(result => {
+      console.log(result); 
+      if (result){
+        this.router.navigate(['home']);
+      }
+    })
   }
 
   /**
