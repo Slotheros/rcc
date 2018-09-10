@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material';
 
+// import { ErrorDialogService } from '../services/error-dialog.service';
 
 @Component({
   selector: 'rcc-error-dialog',
@@ -8,7 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ErrorDialogComponent implements OnInit {
 
-  constructor() { }
+  errorMsg = ""
+
+  // constructor(private errorDialogService: ErrorDialogService) { 
+  //   this.errorMsg = errorDialogService.getErrorMsg();
+  // }
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { 
+    this.errorMsg = data;
+  }
 
   ngOnInit() {
   }
