@@ -28,6 +28,7 @@ export class UsersService {
   getUsers(){
     return this.http.get(this.config.getRccUrl() + '/users/getUsers', this.config.getHttpOptions()).pipe(
       catchError(this.handleError)
+    );
   }
 
   private handleError(error: HttpErrorResponse) {
