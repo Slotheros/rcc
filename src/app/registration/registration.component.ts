@@ -11,18 +11,18 @@ import { ErrorDialogService } from '../services/error-dialog.service';
 @Component({
   selector: 'rcc-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss'],
+  styleUrls: ['./registration.component.scss', '../app.component.scss'],
   encapsulation: ViewEncapsulation.None
-
-
 })
 export class RegistrationComponent implements OnInit {
   departments: Department[];
   registrant: Registrant;
   passwordRepeated: string;
+  // holds each part of the phone number
   phone1 = '';
   phone2 = '';
   phone3 = '';
+  // used to display error messages
   fNameValid = true;
   lNameValid = true;
   phoneValid = true;
@@ -42,6 +42,7 @@ export class RegistrationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    // Initialize registrant object
     this.registrant = {
       fName: undefined,
       lName: undefined,
@@ -51,9 +52,15 @@ export class RegistrationComponent implements OnInit {
       password: undefined
     };
 
+    // populates departments
     this.departments = this.configService.getDepartments();
   }
 
+  /**
+   * Register attempts to add the user to the DB
+   * If any of the fields do not pass validation, display an error message
+   * If all fields validate, make a call to the backend to add the user to the DB
+   */
   register() {
     this.registrant.phoneNum = '+1' + this.phone1 + this.phone2 + this.phone3;
     // Registration page fields validation
@@ -71,6 +78,11 @@ export class RegistrationComponent implements OnInit {
     });
   }
 
+  /**
+   * Validate Field is used to validate the registrant's information
+   * @param value - a string representing the value in the field
+   * @param type - a string that is used in the switch statement to select the validation function
+   */
   validateField(value, type) {
     console.log('validating a field');
     switch (type) {
@@ -84,6 +96,12 @@ export class RegistrationComponent implements OnInit {
     }
   }
 
+  /**
+   * Password Match is used to check that the re-entered password is the same as the first entered password
+   * Returns true if the passwords are the same and valid.
+   * @param pw1 - a string of the value in the first password field
+   * @param pw2 - a string of the value in the second password field
+   */
   passwordMatch(pw1, pw2) {
     this.pwMatch = this.validationService.validatePasswordMatch(pw1, pw2);
   }
