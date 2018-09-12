@@ -25,6 +25,12 @@ export class LoginComponent implements OnInit {
     private validationService: ValidationService) { }
 
   ngOnInit() {
+    this.authService.loggedIn().subscribe(result => {
+      console.log(result); 
+      if (result){
+        this.router.navigate(['home']);
+      }
+    })
   }
 
   /**

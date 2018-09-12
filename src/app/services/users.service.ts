@@ -1,15 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Registrant } from '../registrant';
 import { Observable, of, throwError } from 'rxjs';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
-
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json'
-  })
-};
-const rccUrl = 'http://localhost:3000';
+import { ConfigService } from './config.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +11,8 @@ const rccUrl = 'http://localhost:3000';
 export class UsersService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private config: ConfigService
   ) { }
 
   /**
@@ -25,7 +20,13 @@ export class UsersService {
    * @param registrant - registration information
    */
   register(registrant: Registrant){
-    return this.http.post<boolean>(rccUrl + '/users', registrant, httpOptions).pipe(
+    return this.http.post(this.config.getRccUrl() + '/users/register', registrant, this.config.getHttpOptions()).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getUsers(){
+    return this.http.get(this.config.getRccUrl() + '/users/getUsers', this.config.getHttpOptions()).pipe(
       catchError(this.handleError)
     );
   }
@@ -42,6 +43,7 @@ export class UsersService {
         `body was: ${error.error}`);
     }
     // return an observable with a user-facing error message
-    return throwError('Something bad happened; please try again later.');
+    // return throwError('Something bad happened; please try again later.');
+    return throwError(error.error);
   };
 }

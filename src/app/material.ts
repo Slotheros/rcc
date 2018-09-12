@@ -3,7 +3,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule, MatIcon} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatDividerModule} from '@angular/material/divider';
-import {MatFormFieldModule, MatOptionModule, MatSelectModule, MatButtonModule, MatCheckboxModule, MatInputModule, MatSidenavModule, MatCardModule, MatExpansionModule, MatSnackBarModule, MatDialogModule} from '@angular/material';
+import {MatFormFieldModule, MatOptionModule, MatSelectModule, MatButtonModule, MatCheckboxModule, MatInputModule, MatSidenavModule, MatCardModule, MatExpansionModule, MatSnackBarModule, MatDialogModule, MAT_DIALOG_DATA} from '@angular/material';
 
 
 
