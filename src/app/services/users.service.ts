@@ -31,6 +31,20 @@ export class UsersService {
     );
   }
 
+  //need to pass array of departments with GET for query
+  // getUsersByDepartment(departments: string[]) {
+  //   return this.http.post(this.config.getRccUrl() + '/users/getUserPhone', this.config.getHttpOptions()).pipe(
+  //     catchError(this.handleError)
+  //   );
+  // }
+
+  sendAlert() {
+    console.log("CHECK");
+    return this.http.post(this.config.getRccUrl() + '/alerts/sms', null, this.config.getHttpOptions()).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.

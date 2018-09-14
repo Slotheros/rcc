@@ -19,6 +19,9 @@ const httpOptions = {
   withCredentials: true
 };
 
+//Twilio constants
+const twilioPhoneNum = "5853022896";
+
 @Injectable({
   providedIn: 'root'
 })
