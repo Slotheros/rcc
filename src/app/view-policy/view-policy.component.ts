@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
+import {AlertsService} from '../services/alerts.service';
 
 @Component({
   selector: 'rcc-view-policy',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewPolicyComponent implements OnInit {
 
-  constructor() { }
+  constructor( private alertsService: AlertsService, private authService: AuthService,
+               private router: Router) { }
 
   ngOnInit() {
+    this.authService.loggedIn().subscribe(result => {
+      console.log(result);
+    }, error => {
+      this.router.navigate(['login']);
+    });
   }
-
 }

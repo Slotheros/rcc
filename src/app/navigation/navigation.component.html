@@ -11,7 +11,7 @@
                 <a class="nav-link" href="#">Add/Delete User</a>
             </li>
             <li class="nav-item admin-option">
-                <a class="nav-link" href="#">Manage Alerts</a>
+                <a class="nav-link" href="alerts">Manage Alerts</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarPolicyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -40,14 +40,12 @@
             </li>
         </ul>
         <!--      <div class="dropdown-divider"></div>-->
-
-        <form id="logout-form" action="login.html" method="post" class="order-sm-12">
-            <button mat-raised-button color="primary" routerLink="/login">Logout</button>
-          </form>
+        <button (click)="callLogoutService()" id="mobile-logout" mat-raised-button color="primary" routerLink="/login" class="order-sm-12">Logout</button>
         <div class="dropdown-divider"></div>
 
     </div>
     <h6 class="oder-sm-1">Welcome, {{username}}</h6>
     <i class="material-icons">inbox</i>
-    <button mat-raised-button color="primary" routerLink="/login" id="desktop-logout">Logout</button>
+    <button (click)="callLogoutService()" mat-raised-button color="primary" routerLink="/login" id="desktop-logout">Logout</button>
+
 </nav>

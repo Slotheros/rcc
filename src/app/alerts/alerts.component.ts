@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../services/users.service';
 import { AlertsService } from '../services/alerts.service';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'rcc-alerts',
@@ -20,12 +22,16 @@ export class AlertsComponent implements OnInit {
   isDisabled = false;
   isDisabledGroup = false;
 
-  constructor(
-    private usersService: UsersService,
-    private alertsService: AlertsService
-  ) { }
+  constructor(private usersService: UsersService,
+    private alertsService: AlertsService, private authService: AuthService,
+    private router: Router) { }
 
   ngOnInit() {
+    this.authService.loggedIn().subscribe(result => {
+      console.log(result);
+    }, error => {
+      this.router.navigate(['login']);
+    });
   }
 
   onClickDepartment(dept) {
