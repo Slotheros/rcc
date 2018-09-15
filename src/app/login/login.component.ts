@@ -26,11 +26,11 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.authService.loggedIn().subscribe(result => {
-      console.log(result); 
-      if (result){
+      console.log(result);
+      if (result) {
         this.router.navigate(['home']);
       }
-    })
+    });
   }
 
   /**

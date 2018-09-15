@@ -10,15 +10,15 @@ import { AlertsService } from '../services/alerts.service';
 export class AlertsComponent implements OnInit {
 
 
-  allEmployees = "All Employees";
+  allEmployees = 'All Employees';
   departments = ['Administrative', 'Operations', 'Production', 'Food/Beverage', 'Sales', 'Garage'];
 
   selectedDepartments = [];
 
-  alertMessage = "";
+  alertMessage = '';
 
-  isDisabled: boolean = false;
-  isDisabledGroup: boolean = false;
+  isDisabled = false;
+  isDisabledGroup = false;
 
   constructor(
     private usersService: UsersService,
@@ -29,29 +29,29 @@ export class AlertsComponent implements OnInit {
   }
 
   onClickDepartment(dept) {
-    if(dept == this.allEmployees) {
-      if(this.isDisabledGroup == false && this.isDisabled == false) {
+    if (dept === this.allEmployees) {
+      if (this.isDisabledGroup === false && this.isDisabled === false) {
         this.isDisabledGroup = true;
         this.selectedDepartments = this.departments;
-      } else if (this.isDisabledGroup == true && this.isDisabled == false) {
+      } else if (this.isDisabledGroup === true && this.isDisabled === false) {
         this.isDisabledGroup = false;
         this.selectedDepartments = [];
       } else {
         return;
       }
     } else {
-      var index = this.selectedDepartments.indexOf(dept);
-      //department is going from checked to unchecked, no other box is checked
-      if (index > -1 && this.selectedDepartments.length == 1 && this.isDisabledGroup == false) {
+      const index = this.selectedDepartments.indexOf(dept);
+      // department is going from checked to unchecked, no other box is checked
+      if (index > -1 && this.selectedDepartments.length === 1 && this.isDisabledGroup === false) {
         this.isDisabled = false;
         this.selectedDepartments.splice(index, 1);
 
-      //department is going from checked to unchecked, there are still other departments checked
-      } else if (index > -1 && this.selectedDepartments.length > 1 && this.isDisabledGroup == false) {
+      // department is going from checked to unchecked, there are still other departments checked
+      } else if (index > -1 && this.selectedDepartments.length > 1 && this.isDisabledGroup === false) {
         this.selectedDepartments.splice(index, 1);
 
-      //department is going from unchecked to checked
-      } else if (index == -1 && this.isDisabledGroup == false) {
+      // department is going from unchecked to checked
+      } else if (index === -1 && this.isDisabledGroup === false) {
         this.isDisabled = true;
         this.selectedDepartments.push(dept);
       } else {
@@ -61,17 +61,15 @@ export class AlertsComponent implements OnInit {
   }
 
   sendMsg(msg) {
-    if(this.selectedDepartments.length > this.departments.length) {
-      console.log("ERROR: department list is incorrect")
+    if (this.selectedDepartments.length > this.departments.length) {
+      console.log('ERROR: department list is incorrect');
       return;
     }
     console.log(this.selectedDepartments);
     console.log(msg);
     // this.usersService.getUsersByDepartment(this.selectedDepartments);
-    this.alertsService.sendAlert(msg).subscribe(result => console.log("working"), error => console.log("not working"));
-
+    this.alertsService.sendAlert(msg).subscribe(result => console.log('working'), error => console.log('not working'));
   }
-
 }
 
 
