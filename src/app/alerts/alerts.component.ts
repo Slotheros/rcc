@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../services/users.service';
+import { AlertsService } from '../services/alerts.service';
 
 @Component({
   selector: 'rcc-alerts',
@@ -21,36 +22,11 @@ export class AlertsComponent implements OnInit {
 
   constructor(
     private usersService: UsersService,
+    private alertsService: AlertsService
   ) { }
 
   ngOnInit() {
   }
-
-  // onClickDepartment(dept) {
-  //   if(dept == this.allEmployees && this.isDisabledGroup == false && this.isDisabled == false) {
-  //     this.isDisabledGroup = true;
-  //     this.selectedDepartments = this.departments;
-  //   } else if (dept == this.allEmployees && this.isDisabledGroup == true && this.isDisabled == false) {
-  //     this.isDisabledGroup = false;
-  //     this.selectedDepartments = [];
-  //   } else {
-  //     var index = this.selectedDepartments.indexOf(dept);
-  //     //department is going from checked to unchecked, no other box is checked
-  //     if (index > -1 && this.selectedDepartments.length == 1 && this.isDisabledGroup == false) {
-  //       this.isDisabled = false;
-  //       this.selectedDepartments.splice(index, 1);
-
-  //     //department is going from checked to unchecked, there are still other departments checked
-  //     } else if (index > -1 && this.selectedDepartments.length > 1 && this.isDisabledGroup == false) {
-  //       this.selectedDepartments.splice(index, 1);
-
-  //     //department is going from unchecked to checked
-  //     } else if (index == -1 && this.isDisabledGroup == false && dept != this.allEmployees) {
-  //       this.isDisabled = true;
-  //       this.selectedDepartments.push(dept);
-  //     }
-  //   }
-  // }
 
   onClickDepartment(dept) {
     if(dept == this.allEmployees) {
@@ -92,7 +68,7 @@ export class AlertsComponent implements OnInit {
     console.log(this.selectedDepartments);
     console.log(msg);
     // this.usersService.getUsersByDepartment(this.selectedDepartments);
-    this.usersService.sendAlert().subscribe(result => console.log("working"), error => console.log("not working"));
+    this.alertsService.sendAlert(msg).subscribe(result => console.log("working"), error => console.log("not working"));
 
   }
 
