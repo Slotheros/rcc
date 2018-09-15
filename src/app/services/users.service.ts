@@ -13,8 +13,7 @@ export class UsersService {
 
   constructor(
     private http: HttpClient,
-    private config: ConfigService,
-    private department: Department
+    private config: ConfigService
   ) { }
 
   /**
