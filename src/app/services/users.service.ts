@@ -4,6 +4,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { ConfigService } from './config.service';
+import { Department } from '../department';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class UsersService {
 
   constructor(
     private http: HttpClient,
-    private config: ConfigService
+    private config: ConfigService,
+    private department: Department
   ) { }
 
   /**
@@ -25,18 +27,19 @@ export class UsersService {
     );
   }
 
-  getUsers(){
+  getUsers() {
     return this.http.get(this.config.getRccUrl() + '/users/getUsers', this.config.getHttpOptions()).pipe(
       catchError(this.handleError)
     );
   }
 
-  //need to pass array of departments with GET for query
-  // getUsersByDepartment(departments: string[]) {
-  //   return this.http.post(this.config.getRccUrl() + '/users/getUserPhone', this.config.getHttpOptions()).pipe(
-  //     catchError(this.handleError)
-  //   );
-  // }
+  // need to pass array of departments with GET for query
+  getUsersByDepartments(departments: Department[]) {
+    console.log('getting users');
+    return this.http.post(this.config.getRccUrl() + '/users/getUserPhone', departments, this.config.getHttpOptions()).pipe(
+      catchError(this.handleError)
+    );
+  }
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -52,5 +55,5 @@ export class UsersService {
     // return an observable with a user-facing error message
     // return throwError('Something bad happened; please try again later.');
     return throwError(error.error);
-  };
+  }
 }

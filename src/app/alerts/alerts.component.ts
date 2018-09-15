@@ -3,6 +3,7 @@ import { UsersService } from '../services/users.service';
 import { AlertsService } from '../services/alerts.service';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import {Department} from '../department';
 
 @Component({
   selector: 'rcc-alerts',
@@ -13,7 +14,13 @@ export class AlertsComponent implements OnInit {
 
 
   allEmployees = 'All Employees';
-  departments = ['Administrative', 'Operations', 'Production', 'Food/Beverage', 'Sales', 'Garage'];
+  departments: Department[] = [
+    { id: 1, name: 'Sales' },
+    { id: 2, name: 'Garage' },
+    { id: 3, name: 'Admin(HR)' },
+    { id: 4, name: 'Food & Beverage' },
+    { id: 5, name: 'Productions' }
+  ];
 
   selectedDepartments = [];
 
@@ -35,7 +42,7 @@ export class AlertsComponent implements OnInit {
   }
 
   onClickDepartment(dept) {
-    if (dept === this.allEmployees) {
+    if (dept.name === this.allEmployees) {
       if (this.isDisabledGroup === false && this.isDisabled === false) {
         this.isDisabledGroup = true;
         this.selectedDepartments = this.departments;
