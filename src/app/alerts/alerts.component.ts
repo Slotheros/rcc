@@ -28,6 +28,7 @@ export class AlertsComponent implements OnInit {
 
   isDisabled = false;
   isDisabledGroup = false;
+  isChecked = false;
 
   constructor(private usersService: UsersService,
     private alertsService: AlertsService, private authService: AuthService,
@@ -45,9 +46,11 @@ export class AlertsComponent implements OnInit {
     if (dept === this.allEmployees) {
       if (this.isDisabledGroup === false && this.isDisabled === false) {
         this.isDisabledGroup = true;
+        this.isChecked = true;
         this.selectedDepartments = this.departments;
       } else if (this.isDisabledGroup === true && this.isDisabled === false) {
         this.isDisabledGroup = false;
+        this.isChecked = false;
         this.selectedDepartments = [];
       } else {
         return;
@@ -80,8 +83,8 @@ export class AlertsComponent implements OnInit {
     }
     console.log(this.selectedDepartments);
     console.log(msg);
-    // this.usersService.getUsersByDepartment(this.selectedDepartments);
-    this.alertsService.sendAlert(msg).subscribe(result => console.log('working'), error => console.log('not working'));
+    this.usersService.getUsersByDepartments(this.selectedDepartments);
+    //this.alertsService.sendAlert(msg).subscribe(result => console.log('working'), error => console.log('not working'));
   }
 }
 

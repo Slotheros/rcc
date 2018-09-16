@@ -7,7 +7,7 @@
   <form (ngSubmit)="sendMsg(alertMessage)" id="alert-form" #registrationForm="ngForm">
     <div id="checkbox-group">
       <mat-checkbox [disabled]="isDisabled" (click)="onClickDepartment(allEmployees)">{{allEmployees}}</mat-checkbox>
-      <mat-checkbox [disabled]="isDisabledGroup" *ngFor="let department of departments" (click)="onClickDepartment(department)">{{department.name}}</mat-checkbox>
+      <mat-checkbox [checked]="isChecked" [disabled]="isDisabledGroup" *ngFor="let department of departments" (click)="onClickDepartment(department)">{{department.name}}</mat-checkbox>
     </div>
 
 
