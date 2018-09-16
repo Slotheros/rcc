@@ -42,7 +42,7 @@ export class AlertsComponent implements OnInit {
   }
 
   onClickDepartment(dept) {
-    if (dept.name === this.allEmployees) {
+    if (dept === this.allEmployees) {
       if (this.isDisabledGroup === false && this.isDisabled === false) {
         this.isDisabledGroup = true;
         this.selectedDepartments = this.departments;
