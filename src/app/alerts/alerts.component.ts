@@ -3,7 +3,8 @@ import { UsersService } from '../services/users.service';
 import { AlertsService } from '../services/alerts.service';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
-import {Department} from '../department';
+import { Department } from '../department';
+import { Message } from '../message';
 
 @Component({
   selector: 'rcc-alerts',
@@ -21,6 +22,9 @@ export class AlertsComponent implements OnInit {
     { id: 4, name: 'Food & Beverage' },
     { id: 5, name: 'Productions' }
   ];
+  message: Message;
+
+
 
   selectedDepartments = [];
 
@@ -31,8 +35,10 @@ export class AlertsComponent implements OnInit {
   isChecked = false;
 
   constructor(private usersService: UsersService,
-    private alertsService: AlertsService, private authService: AuthService,
-    private router: Router) { }
+    private alertsService: AlertsService, 
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.authService.loggedIn().subscribe(result => {
@@ -40,6 +46,11 @@ export class AlertsComponent implements OnInit {
     }, error => {
       this.router.navigate(['login']);
     });
+
+    this.message = {
+      message: undefined,
+      departments: undefined,
+    };
   }
 
   onClickDepartment(dept) {
@@ -81,10 +92,20 @@ export class AlertsComponent implements OnInit {
       console.log('ERROR: department list is incorrect');
       return;
     }
-    console.log(this.selectedDepartments);
-    console.log(msg);
-    this.usersService.getUsersByDepartments(this.selectedDepartments);
-    //this.alertsService.sendAlert(msg).subscribe(result => console.log('working'), error => console.log('not working'));
+    // console.log(this.selectedDepartments);
+    this.message.message = this.alertMessage;
+    this.message.departments = this.selectedDepartments;
+    // this.usersService.getPhoneNumbersByDepartments(this.selectedDepartments).subscribe(result => {
+    this.alertsService.sendAlert(this.message).subscribe(result => {
+      if (result) {
+        console.log("check result: " + result);
+        // this.router.navigate(['login']);
+      } else { }
+    }, error => {
+      console.log("check this error: " + error);
+      // this.errorDialogService.setErrorMsg(error.errMsg);
+      // this.errorDialogService.openDialog(this.errorDialogService.getErrorMsg());
+    });;
   }
 }
 

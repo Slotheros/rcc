@@ -3,16 +3,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { ConfigService } from './config.service';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
-
-
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/x-www-form-urlencoded',
-  }), 
-  withCredentials: true
-};
-
-let body = new URLSearchParams();
+import { Message } from '../message';
 
 @Injectable({
   providedIn: 'root'
@@ -25,9 +16,8 @@ export class AlertsService {
     private config: ConfigService
   ) { }
 
-  sendAlert(msg: string) {
-    body.set('message', msg);
-    return this.http.post(this.config.getRccUrl() + '/alerts/sms', body.toString(), httpOptions).pipe(
+  sendAlert(message: Message) {
+    return this.http.post(this.config.getRccUrl() + '/alerts/sms', message, this.config.getHttpOptions()).pipe(
       catchError(this.handleError)
     );
   }

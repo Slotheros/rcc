@@ -33,9 +33,8 @@ export class UsersService {
   }
 
   // need to pass array of departments with GET for query
-  getUsersByDepartments(departments: Department[]) {
-    console.log('getting users');
-    return this.http.post(this.config.getRccUrl() + '/users/getUserPhone', departments, this.config.getHttpOptions()).pipe(
+  getPhoneNumbersByDepartments(departments: Department[]) {
+    return this.http.post(this.config.getRccUrl() + '/users/getPhoneNumbersByDepts', departments, this.config.getHttpOptions()).pipe(
       catchError(this.handleError)
     );
   }
