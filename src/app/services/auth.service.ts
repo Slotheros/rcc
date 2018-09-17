@@ -34,6 +34,16 @@ export class AuthService {
     );
   }
 
+  /**
+   * Calls passport's logout function
+   */
+  logout() {
+    console.log('calling endpoint');
+    return this.http.get(this.config.getRccUrl() + '/auth/logout', this.config.getHttpOptions()).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.

@@ -1,40 +1,23 @@
 import { Injectable } from '@angular/core';
-import { Registrant } from '../registrant';
 import { Observable, of, throwError } from 'rxjs';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, map, tap } from 'rxjs/operators';
 import { ConfigService } from './config.service';
-import { Department } from '../department';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { catchError, map, tap } from 'rxjs/operators';
+import { Message } from '../message';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UsersService {
+
+export class AlertsService {
 
   constructor(
     private http: HttpClient,
     private config: ConfigService
   ) { }
 
-  /**
-   * Registers the user in our system.
-   * @param registrant - registration information
-   */
-  register(registrant: Registrant){
-    return this.http.post(this.config.getRccUrl() + '/users/register', registrant, this.config.getHttpOptions()).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  getUsers() {
-    return this.http.get(this.config.getRccUrl() + '/users/getUsers', this.config.getHttpOptions()).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  // need to pass array of departments with GET for query
-  getPhoneNumbersByDepartments(departments: Department[]) {
-    return this.http.post(this.config.getRccUrl() + '/users/getPhoneNumbersByDepts', departments, this.config.getHttpOptions()).pipe(
+  sendAlert(message: Message) {
+    return this.http.post(this.config.getRccUrl() + '/alerts/sms', message, this.config.getHttpOptions()).pipe(
       catchError(this.handleError)
     );
   }
@@ -53,5 +36,6 @@ export class UsersService {
     // return an observable with a user-facing error message
     // return throwError('Something bad happened; please try again later.');
     return throwError(error.error);
-  }
+  };
 }
+

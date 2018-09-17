@@ -3,15 +3,20 @@
 <div class='container'>
   <h1>Send Alerts</h1>
   <h5>Select Recipients:</h5>
-  <div id="checkbox-group">
-      <mat-checkbox *ngFor="let department of departments" (click)="onClickMe(department)">{{department}}</mat-checkbox>
-  </div>
+
+  <form (ngSubmit)="sendMsg(alertMessage)" id="alert-form" #registrationForm="ngForm">
+    <div id="checkbox-group">
+      <mat-checkbox [disabled]="isDisabled" (click)="onClickDepartment(allEmployees)">{{allEmployees}}</mat-checkbox>
+      <mat-checkbox [checked]="isChecked" [disabled]="isDisabledGroup" *ngFor="let department of departments" (click)="onClickDepartment(department)">{{department.name}}</mat-checkbox>
+    </div>
 
 
-  <form id="alert-form">
-    <label for="message">Alert Message:</label>
-    <textarea class="form-control" rows="10" id="message" name="msg" [(ngModel)]="alertMessage">{{alertMessage}}</textarea>
-    <button mat-raised-button color="primary" (click)="sendMessage(alertMessage)">Send Alert</button>
-  </form>
+    <!-- <form id="alert-form"> -->
+      <label for="message">Alert Message:</label>
+      <textarea class="form-control" rows="10" id="message" name="msg" [(ngModel)]="alertMessage">{{alertMessage}}</textarea>
+      <!-- <button mat-raised-button color="primary" (click)="sendMessage(alertMessage)">Send Alert</button> -->
+      <button mat-raised-button color="primary" type="submit">Send Alert</button>
+    <!-- </form> -->
+    </form>
 </div>
 
