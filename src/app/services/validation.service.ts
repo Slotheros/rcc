@@ -15,6 +15,7 @@ export class ValidationService {
    * @param email - user's email address
    */
   validateEmail(email: string): boolean {
+    if (email == null) { return false; }
     const regex = new RegExp('^(([^<>()\\[\\]\\\\.,;:\\s@"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]' +
       '{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$');
     const result = regex.test(email);
@@ -27,17 +28,18 @@ export class ValidationService {
    * @param password - user's password
    */
   validatePassword(password: string): boolean {
+    if (password == null) { return false; }
     const regex = new RegExp('((?=.*\\d)(?=.*[A-Z])(?=.*\\W).{8,})');
     const result = regex.test(password.trim());
     return result;
   }
-
   /**
    * Validate Name
    * Returns true if the name contains only letters, spaces, and characters ' and -
    * @param name - user's name
    */
   validateName(name: string): boolean {
+    if (name == null) { return false; }
     const regex = new RegExp('^[A-Za-z][A-Za-z\\\'\\-]+([\\ A-Za-z][A-Za-z\\\'\\-]+)*');
     const result = regex.exec(name.trim());
     // Check if there still remains invalid characters after first part of name
@@ -57,6 +59,7 @@ export class ValidationService {
    * @param phoneNumber - user's phone number
    */
   validatePhoneNumber(phoneNumber: string): boolean {
+    if (phoneNumber == null) { return false; }
     const regex = new RegExp('^(\\+\\d{1,2})?\\d{10}$');
     const result = regex.test(phoneNumber.trim());
     return result;
@@ -69,6 +72,7 @@ export class ValidationService {
    * @param pw2 - second entered password
    */
   validatePasswordMatch(pw1: string, pw2: string): boolean {
+    if (pw1 == null || pw2 == null) { return false; }
     return ((pw1 === pw2) && this.validatePassword(pw1) && this.validatePassword(pw2));
   }
 
@@ -78,6 +82,7 @@ export class ValidationService {
    * @param registrant - user's info entered on the registration page
    */
   validateRegistrant(registrant: Registrant): boolean {
+    if (registrant == null) { return false; }
     return (
       this.validateName(registrant.fName)
       && this.validateName(registrant.lName)
