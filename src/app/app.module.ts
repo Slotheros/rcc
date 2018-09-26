@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import {MatDialogModule} from "@angular/material";
 import { HttpClientModule } from '@angular/common/http';
-import { FileSelectDirective } from 'ng2-file-upload';
+import { FileUploadModule } from 'ng2-file-upload';
 
 
 import { AppComponent } from './app.component';
@@ -33,8 +33,7 @@ import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
     UserSettingsComponent,
     AlertsComponent,
     EmailHRComponent,
-    ErrorDialogComponent,
-    FileSelectDirective
+    ErrorDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +41,8 @@ import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
     BrowserAnimationsModule,
     MaterialModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FileUploadModule
   ],
   entryComponents: [ErrorDialogComponent],
   providers: [],

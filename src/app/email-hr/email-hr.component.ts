@@ -11,6 +11,8 @@ import {AuthService} from '../services/auth.service';
 export class EmailHRComponent implements OnInit {
 
   username = 'testUser1';
+  emailMessage = 'emailMessage';
+  alertMessage = 'alertMessage';
   constructor(private alertsService: AlertsService, private authService: AuthService,
               private router: Router) { }
 
@@ -20,5 +22,9 @@ export class EmailHRComponent implements OnInit {
     }, error => {
       this.router.navigate(['login']);
     });
+  }
+
+  sendMessage(msg: String){
+    console.log(msg); 
   }
 }
