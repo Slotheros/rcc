@@ -39,8 +39,15 @@ export class ValidationService {
    */
   validateName(name: string): boolean {
     const regex = new RegExp('^[A-Za-z][A-Za-z\\\'\\-]+([\\ A-Za-z][A-Za-z\\\'\\-]+)*');
-    const result = regex.test(name.trim());
-    return result;
+    const result = regex.exec(name.trim());
+    // Check if there still remains invalid characters after first part of name
+    if (result) {
+      // Removes valid portion of string
+      const nameFragment = name.replace(result[0], '');
+      // If there are still characters left over, check them for validity
+      return nameFragment === '' ? true : !!regex.exec(nameFragment.trim());
+    }
+    return !!result;
   }
 
   /**
