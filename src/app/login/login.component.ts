@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['home']);
       }
     }, error => {
-      console.log(error); 
+      console.log(error);
     });
   }
 
@@ -41,12 +41,10 @@ export class LoginComponent implements OnInit {
    */
   login() {
     this.authService.login(this.email, this.password).subscribe(result => {
-      if (result) {
-        this.hideInvalidMsg = true;
-        this.router.navigate(['home']);
-      } else {
-        this.hideInvalidMsg = false;
-      }
+      this.hideInvalidMsg = true;
+      this.router.navigate(['home']);
+    }, error => {
+      this.hideInvalidMsg = false;
     });
   }
 
