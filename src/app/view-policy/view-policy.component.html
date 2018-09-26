@@ -5,21 +5,20 @@
 
 <div class="container">
   <mat-card class="policy-title">
-    You have <strong>2</strong> policies that need to be acknowledged.
+    You have <strong>{{unackPolicies.length}}</strong> policies that need to be acknowledged.
   </mat-card>
   <mat-card>
     <mat-card-content>
-      <div class="policy">
-        <mat-checkbox>
-          <a href="#">Food Preparation Changes</a>
-        </mat-checkbox>
-        <p class="completed">Completed: No</p>
+      <h3 *ngIf="(ackPolicies == null && unackPolicies == null) || (ackPolicies.length == 0 && unackPolicies.length == 0)">You have no policies.</h3>
+      <h3 *ngIf="unackPolicies != null && unackPolicies.length > 0">Unacknowledged Policies:</h3>
+      <div class="policy unackPolicy" *ngFor="let policy of unackPolicies">
+        <a href="{{policy.url}}">{{policy.description}}</a>
+        <button class="ackBtn" mat-raised-button (click)="updatePolicyInDB(policy.id, userID);">Acknowledge</button>
       </div>
-      <div class="policy">
-        <mat-checkbox>
-          <a href="#">We've Updated our Privacy Policy</a>
-        </mat-checkbox>
-        <p class="completed">Completed: 02/27/18</p>
+      <h3 *ngIf="ackPolicies != null && ackPolicies.length > 0" class="ackPolicyTitle">Acknowledged Policies:</h3>
+      <div class="policy" *ngFor="let policy of ackPolicies">
+        <a href="{{policy.url}}">{{policy.description}}</a>
+        <p class="completed">Completed: {{policy.date}}</p>
       </div>
     </mat-card-content>
   </mat-card>

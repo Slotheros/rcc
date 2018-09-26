@@ -35,7 +35,7 @@ export class AlertsComponent implements OnInit {
   isChecked = false;
 
   constructor(private usersService: UsersService,
-    private alertsService: AlertsService, 
+    private alertsService: AlertsService,
     private authService: AuthService,
     private router: Router
   ) { }

@@ -9,9 +9,6 @@ mat-card {
   padding-left: 50px;
   padding-right: 50px;
 }
-mat-card .policy {
-  margin-top: 20px;
-}
 .policy .mat-checkbox {
   font-size: 1.5em;
   text-decoration: underline;
@@ -19,4 +16,16 @@ mat-card .policy {
 .policy .completed {
   text-align: right;
   font-style: italic;
+}
+.unackPolicy {
+  margin-bottom: 40px;
+}
+.completed {
+  margin-bottom: 0;
+}
+.ackBtn {
+  float: right;
+}
+.ackPolicyTitle {
+  margin-top: 48px;
 }
