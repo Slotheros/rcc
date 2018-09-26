@@ -84,7 +84,6 @@ export class RegistrationComponent implements OnInit {
    * @param type - a string that is used in the switch statement to select the validation function
    */
   validateField(value, type) {
-    console.log('validating a field');
     switch (type) {
       case 'fName' : this.fNameValid = this.validationService.validateName(value); break;
       case 'lName' : this.lNameValid = this.validationService.validateName(value); break;
