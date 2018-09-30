@@ -6,10 +6,10 @@ import { Policy } from '../policy';
 
 @Component({
   selector: 'rcc-view-policy',
-  templateUrl: './view-policy.component.html',
-  styleUrls: ['./view-policy.component.scss']
+  templateUrl: './policy.component.html',
+  styleUrls: ['./policy.component.scss']
 })
-export class ViewPolicyComponent implements OnInit {
+export class PolicyComponent implements OnInit {
 
   userID = 123456;
   ackPolicies = [

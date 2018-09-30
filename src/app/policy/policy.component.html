@@ -14,6 +14,10 @@
       <div class="policy unackPolicy" *ngFor="let policy of unackPolicies">
         <a href="{{policy.url}}">{{policy.description}}</a>
         <button class="ackBtn" mat-raised-button (click)="updatePolicyInDB(policy.id, userID);">Acknowledge</button>
+        <button class="ackBtn" mat-raised-button (click)="toggleEditInputs();">Edit Policy</button>
+        <div class="editPolicyWrapper">
+          <input>
+        </div>
       </div>
       <h3 *ngIf="ackPolicies != null && ackPolicies.length > 0" class="ackPolicyTitle">Acknowledged Policies:</h3>
       <div class="policy" *ngFor="let policy of ackPolicies">

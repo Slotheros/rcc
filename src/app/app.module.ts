@@ -12,7 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { HomeComponent } from './home/home.component';
 import { ViewSurveyComponent } from './view-survey/view-survey.component';
-import { ViewPolicyComponent } from './view-policy/view-policy.component';
+import { PolicyComponent } from './policy/policy.component';
 import { AppRoutingModule } from './app-routing.module';
 import { UserSettingsComponent } from './user-settings/user-settings.component';
 import { AlertsComponent } from './alerts/alerts.component';
@@ -27,7 +27,7 @@ import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
     NavigationComponent,
     HomeComponent,
     ViewSurveyComponent,
-    ViewPolicyComponent,
+    PolicyComponent,
     UserSettingsComponent,
     AlertsComponent,
     EmailHRComponent,
