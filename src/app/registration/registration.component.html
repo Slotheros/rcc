@@ -24,7 +24,7 @@
       </mat-form-field> -->
 
       <div id="phone-num-section">
-        <label>Phone Number *</label>
+        <label>Cell Phone Number *</label>
         <div id="phone-num-fields">
           <mat-form-field class="phone-field short-field first-phone-field">
             <input matInput (blur)="validateField(registrant.phoneNum, 'phone')" name="phone1" [(ngModel)]="phone1" minlength="3" maxlength="3" required>
@@ -41,6 +41,7 @@
           </mat-form-field>
         </div>
         <div class="error" *ngIf="!phoneValid">Phone Number is not valid</div>
+        <div id="disclaimer">**By registering you agree to receive alerts from the RCC via text message</div>
       </div>
 
       <mat-form-field>

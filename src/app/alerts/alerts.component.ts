@@ -5,6 +5,8 @@ import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { Department } from '../department';
 import { Message } from '../message';
+import { ErrorDialogService } from '../services/error-dialog.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'rcc-alerts',
@@ -37,7 +39,9 @@ export class AlertsComponent implements OnInit {
   constructor(private usersService: UsersService,
     private alertsService: AlertsService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private errorDialogService: ErrorDialogService,
+    public snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -98,15 +102,19 @@ export class AlertsComponent implements OnInit {
     // this.usersService.getPhoneNumbersByDepartments(this.selectedDepartments).subscribe(result => {
     this.alertsService.sendAlert(this.message).subscribe(result => {
       if (result) {
-        console.log("check result: " + result);
-        // this.router.navigate(['login']);
+        // reset values on the page
+        this.message = {
+          message: undefined,
+          departments: undefined,
+        };
+        this.selectedDepartments = [];
+        this.alertMessage = '';
+        // show a snackBar that says the alert was successfully sent
+        this.snackBar.open('Alert successfully sent', 'Close');
       } else { }
     }, error => {
-      console.log("check this error: " + error);
-      // this.errorDialogService.setErrorMsg(error.errMsg);
-      // this.errorDialogService.openDialog(this.errorDialogService.getErrorMsg());
+      this.errorDialogService.setErrorMsg(error.errMsg);
+      this.errorDialogService.openDialog(this.errorDialogService.getErrorMsg());
     });;
   }
 }
-
-

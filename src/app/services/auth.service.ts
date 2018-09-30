@@ -38,7 +38,6 @@ export class AuthService {
    * Calls passport's logout function
    */
   logout() {
-    console.log('calling endpoint');
     return this.http.get(this.config.getRccUrl() + '/auth/logout', this.config.getHttpOptions()).pipe(
       catchError(this.handleError)
     );
