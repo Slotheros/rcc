@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
 import { ValidationService } from '../services/validation.service';
+import { UsersService } from '../services/users.service'
 
 @Component({
   selector: 'rcc-login',
@@ -19,6 +20,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
+    private usersService: UsersService,
     private router: Router,
     private route: ActivatedRoute,
     public snackBar: MatSnackBar,
@@ -30,7 +32,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['home']);
       }
     }, error => {
-      console.log(error);
+      console.log(error); 
     });
   }
 
@@ -41,10 +43,14 @@ export class LoginComponent implements OnInit {
    */
   login() {
     this.authService.login(this.email, this.password).subscribe(result => {
-      this.hideInvalidMsg = true;
-      this.router.navigate(['home']);
-    }, error => {
-      this.hideInvalidMsg = false;
+      if (result) {
+        this.hideInvalidMsg = true;
+        this.usersService.setUser(result);
+        // console.log("is this the role: " + (this.usersService.getUser()));
+        this.router.navigate(['home']);
+      } else {
+        this.hideInvalidMsg = false;
+      }
     });
   }
 

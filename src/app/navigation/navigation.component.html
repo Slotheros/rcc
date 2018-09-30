@@ -7,21 +7,28 @@
             <li class="nav-item active">
                 <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item admin-option">
+            <li *ngIf="userType === SUPERUSER || userType === ADMIN" class="nav-item admin-option">
                 <a class="nav-link" href="#">Add/Delete User</a>
             </li>
-            <li class="nav-item admin-option">
+            <li *ngIf="userType === SUPERUSER || userType === ADMIN || userType === DPTHEAD" class="nav-item admin-option">
                 <a class="nav-link" href="alerts">Manage Alerts</a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarPolicyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Policies
-                </a>
+
+            <li class="nav-item admin-option">
+                <a class="nav-link" href="/policy/">Policies</a>
+            </li>
+
+            <li class="nav-item admin-option">
+                <a class="nav-link" href="/view-survey/">Surveys</a>
+            </li>
+
+
+            <!-- <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarPolicyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Policies</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="/view-policy/">View Policy</a>
-                    <a class="dropdown-item admin-option" href="#">Create Policy</a>
-                    <!--<div class="dropdown-divider"></div>-->
-                    <a class="dropdown-item admin-option" href="#">Update Policy</a>
+                    <a *ngIf="userType !== 3" class="dropdown-item admin-option" href="#">Create Policy</a>
+                    <a *ngIf="userType !== 3" class="dropdown-item admin-option" href="#">Update Policy</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -30,11 +37,10 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="/view-survey/">View Survey</a>
-                    <a class="dropdown-item admin-option" href="#">Create Survey</a>
-                    <!--<div class="dropdown-divider"></div>-->
-                    <a class="dropdown-item admin-option" href="#">Update Survey</a>
+                    <a *ngIf="userType !== 3" class="dropdown-item admin-option" href="#">Create Survey</a>
+                    <a *ngIf="userType !== 3" class="dropdown-item admin-option" href="#">Update Survey</a>
                 </div>
-            </li>
+            </li> -->
             <li class="nav-item">
                 <a class="nav-link" routerLink="/user-settings">User Settings</a>
             </li>
@@ -44,8 +50,8 @@
         <div class="dropdown-divider"></div>
 
     </div>
-    <h6 class="oder-sm-1">Welcome</h6>
-    <i class="material-icons">inbox</i>
+    <h6 class="oder-sm-1 welcome-title">Welcome, {{fName}}!</h6>
+    <i class="material-icons notification-icon">inbox</i>
     <button (click)="callLogoutService()" mat-raised-button color="primary" routerLink="/login" id="desktop-logout">Logout</button>
 
 </nav>

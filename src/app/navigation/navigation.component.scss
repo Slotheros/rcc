@@ -2,6 +2,12 @@
     display: none;
 }
 
+.notification-icon {
+    border: 1px solid black;
+    border-radius: 20%;
+    padding: 2px;
+}
+
 @media only screen and (min-width: 992px) {
 
     #mobile-logout {
@@ -9,5 +15,13 @@
     }
     #desktop-logout{
         display: block;
+    }
+
+    .welcome-title {
+        margin: 0 20px 0 0;
+    }
+
+    .notification-icon {
+        margin: 0 50px 0 0;
     }
 }

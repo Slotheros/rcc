@@ -11,6 +11,8 @@ import { Department } from '../department';
 })
 export class UsersService {
 
+  userType: number = null;
+  
   constructor(
     private http: HttpClient,
     private config: ConfigService
@@ -39,6 +41,16 @@ export class UsersService {
     );
   }
 
+  setUser(user: any) {
+    this.userType = user.usertype.id;
+    console.log("service-setUser userType: " + user.usertype.id);
+
+  }
+
+  getUser(){
+    return this.userType;
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
@@ -54,4 +66,5 @@ export class UsersService {
     // return throwError('Something bad happened; please try again later.');
     return throwError(error.error);
   }
+
 }
