@@ -3,7 +3,7 @@
   <mat-dialog-content class="edit-policy-dialog">
     <mat-form-field class="input-fullwidth">
       <mat-label>Title</mat-label>
-      <input matInput placeholder="{{policy.title}}" formControlName="title" value="{{policy.title}}">
+      <input matInput placeholder="{{policy.title}}" formControlName="title">
     </mat-form-field>
     <mat-form-field class="input-fullwidth">
       <mat-label>Description</mat-label>
@@ -13,15 +13,17 @@
       <mat-label>URL</mat-label>
       <input matInput placeholder="{{policy.url}}" formControlName="url">
     </mat-form-field>
+    <!--
     <mat-form-field class="input-fullwidth">
       <mat-label>Departments</mat-label>
       <input matInput placeholder="{{policy.departments}}" formControlName="departments">
     </mat-form-field>
+    -->
   </mat-dialog-content>
 
   <mat-dialog-actions class="dialog-actions">
-    <button class="mat-raised-button" (click)="close()">Cancel</button>
-    <button class="mat-raised-button mat-primary"(click)="save()">Save</button>
+    <button class="mat-raised-button" (click)="close()" type="button">Cancel</button>
+    <button class="mat-raised-button mat-primary"(click)="save()" type="submit">Save</button>
     <mat-label class="small-text">*You may leave fields empty to keep those values unchanged.</mat-label>
   </mat-dialog-actions>
 </form>

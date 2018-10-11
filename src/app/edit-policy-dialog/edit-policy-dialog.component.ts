@@ -12,8 +12,8 @@ import {filter} from 'rxjs/operators';
 })
 export class EditPolicyDialogComponent implements OnInit {
 
-  form: FormGroup;
   policy: Policy;
+  form: FormGroup;
 
   constructor(
     private fb: FormBuilder,
@@ -21,32 +21,24 @@ export class EditPolicyDialogComponent implements OnInit {
     private globals: Globals,
     @Inject(MAT_DIALOG_DATA) public data: Policy ) {
     this.policy = data;
+  }
 
-    this.form = fb.group({
+  // TODO: use our own validators, not required
+  ngOnInit() {
+    this.form = this.fb.group({
       title: [this.policy.title, Validators.required],
       description: [this.policy.description, Validators.required],
       url: [this.policy.url, Validators.required],
-      department: [this.policy.departments, Validators.required]
-    });
-  }
-
-  ngOnInit() {
-    this.form = this.fb.group({
-      title: '',
-      description: '',
-      url: '',
-      departments: []
+      // department: [this.policy.departments, Validators.required]
     });
   }
 
   submit(form) {
-    this.dialogRef.close(`${form.value}`);
+    this.dialogRef.close(form.getRawValue());
   }
 
   save() {
-    this.dialogRef.close(this.form.value);
-    console.log('dialog ref: ');
-    console.log(this.dialogRef.afterClosed().pipe(filter(title => title)));
+    return this.dialogRef.close(this.form.value);
   }
 
   close() {

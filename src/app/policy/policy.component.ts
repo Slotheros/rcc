@@ -3,8 +3,10 @@ import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { AlertsService } from '../services/alerts.service';
 import { Policy } from '../policy';
+import { Globals } from '../globals';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
-import {EditPolicyDialogComponent} from '../edit-policy-dialog/edit-policy-dialog.component';
+import { EditPolicyDialogComponent } from '../edit-policy-dialog/edit-policy-dialog.component';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'rcc-view-policy',
@@ -15,6 +17,8 @@ export class PolicyComponent implements OnInit {
 
   userID = 123456;
   dialogRef: MatDialogRef<EditPolicyDialogComponent>;
+  newPolicy: Policy;
+
   ackPolicies = [
     {
       id: 123,
@@ -58,7 +62,7 @@ export class PolicyComponent implements OnInit {
   ];
 
   constructor( private alertsService: AlertsService, private authService: AuthService,
-               private router: Router, private dialog: MatDialog) { }
+               private router: Router, private dialog: MatDialog, private globals: Globals) { }
 
   ngOnInit() {
     this.authService.loggedIn().subscribe(result => {
@@ -76,15 +80,28 @@ export class PolicyComponent implements OnInit {
 
   // Opens Edit Policy Dialog
   openEditPolicyDialog(policy: Policy) {
-    console.log('Editing policy: ' + policy.title);
-    console.log(policy);
+    // Reset the new policy to an empty Policy object
+    this.newPolicy = this.globals.EMPTY_POLICY;
 
+    console.log('Editing policy: ' + policy.title);
+
+    // Open dialog and keep a reference to it
     this.dialogRef = this.dialog.open(EditPolicyDialogComponent, {
       data: {
         title: policy ? policy.title : '',
         description: policy ? policy.description : '',
         url: policy ? policy.url : '',
         departments: policy ? policy.departments : ''
+      }
+    });
+
+    // After the dialog is close, handle the data from the forms
+    this.dialogRef.afterClosed().subscribe(data => {
+      if (policy) {
+        console.log('Returned from Edit Policy Form:');
+        console.log(data);
+      } else {
+        console.log('Policy is null');
       }
     });
   }
