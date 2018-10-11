@@ -19,8 +19,9 @@
     </mat-form-field>
   </mat-dialog-content>
 
-  <mat-dialog-actions>
-    <button (click)="close()">Cancel</button>
-    <button class="mat-primary"(click)="save()">Save</button>
+  <mat-dialog-actions class="dialog-actions">
+    <button class="mat-raised-button" (click)="close()">Cancel</button>
+    <button class="mat-raised-button mat-primary"(click)="save()">Save</button>
+    <mat-label class="small-text">*You may leave fields empty to keep those values unchanged.</mat-label>
   </mat-dialog-actions>
 </form>

@@ -4,24 +4,31 @@
 <h1 class="section-title">View Policy</h1>
 
 <div class="container">
-  <mat-card class="policy-title">
+  <mat-card class="policy-header">
     You have <strong>{{unackPolicies.length}}</strong> policies that need to be acknowledged.
   </mat-card>
   <mat-card>
     <mat-card-content>
+
       <h3 *ngIf="(ackPolicies == null && unackPolicies == null) || (ackPolicies.length == 0 && unackPolicies.length == 0)">You have no policies.</h3>
       <h3 *ngIf="unackPolicies != null && unackPolicies.length > 0">Unacknowledged Policies:</h3>
       <div class="policy unackPolicy" *ngFor="let policy of unackPolicies">
-        <a href="{{policy.url}}">{{policy.title}}</a>
-        <p>{{policy.description}}</p>
-        <button class="ackBtn" (click)="updatePolicyInDB(policy.id, userID);">Acknowledge</button>
-        <button class="ackBtn" mat-button-ripple (click)="openEditPolicyDialog(policy);">Edit Policy</button>
+        <div class="panel-half">
+          <a class="policy-title" href="{{policy.url}}">{{policy.title}}</a>
+          <p class="policy-description">{{policy.description}}</p>
+        </div>
+        <div class="panel-half">
+          <button class="ackBtn mat-raised-button" (click)="updatePolicyInDB(policy.id, userID);">Acknowledge</button>
+          <button class="ackBtn mat-raised-button" mat-button-ripple (click)="openEditPolicyDialog(policy);">Edit Policy</button>
+        </div>
       </div>
+
       <h3 *ngIf="ackPolicies != null && ackPolicies.length > 0" class="ackPolicyTitle">Acknowledged Policies:</h3>
       <div class="policy" *ngFor="let policy of ackPolicies">
         <a href="{{policy.url}}">{{policy.description}}</a>
         <p class="completed">Completed: {{policy.date}}</p>
       </div>
+
     </mat-card-content>
   </mat-card>
 </div>
