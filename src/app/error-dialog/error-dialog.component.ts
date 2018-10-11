@@ -10,13 +10,13 @@ import { MAT_DIALOG_DATA } from '@angular/material';
 })
 export class ErrorDialogComponent implements OnInit {
 
-  errorMsg = ""
+  errorMsg = '';
 
-  // constructor(private errorDialogService: ErrorDialogService) { 
+  // constructor(private errorDialogService: ErrorDialogService) {
   //   this.errorMsg = errorDialogService.getErrorMsg();
   // }
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { 
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
     this.errorMsg = data;
   }
 

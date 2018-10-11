@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { MatDialogModule } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
@@ -18,6 +18,8 @@ import { UserSettingsComponent } from './user-settings/user-settings.component';
 import { AlertsComponent } from './alerts/alerts.component';
 import { EmailHRComponent } from './email-hr/email-hr.component';
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
+import { EditPolicyDialogComponent } from './edit-policy-dialog/edit-policy-dialog.component';
+import { Globals } from './globals';
 
 @NgModule({
   declarations: [
@@ -31,19 +33,22 @@ import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
     UserSettingsComponent,
     AlertsComponent,
     EmailHRComponent,
-    ErrorDialogComponent
+    ErrorDialogComponent,
+    EditPolicyDialogComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     MaterialModule,
     AppRoutingModule,
     HttpClientModule,
     FileUploadModule
   ],
-  entryComponents: [ErrorDialogComponent],
-  providers: [],
+  exports: [ErrorDialogComponent, EditPolicyDialogComponent],
+  entryComponents: [ErrorDialogComponent, EditPolicyDialogComponent],
+  providers: [ Globals ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
