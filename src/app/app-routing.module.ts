@@ -8,6 +8,7 @@ import { PolicyComponent} from './policy/policy.component';
 import { UserSettingsComponent } from './user-settings/user-settings.component';
 import { AlertsComponent } from './alerts/alerts.component';
 import { EmailHRComponent } from './email-hr/email-hr.component';
+import { SelectDepartmentsComponent } from './select-departments/select-departments.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -18,7 +19,8 @@ const routes: Routes = [
   { path: 'policy', component: PolicyComponent },
   { path: 'user-settings', component: UserSettingsComponent },
   { path: 'alerts', component: AlertsComponent},
-  { path: 'email-hr', component: EmailHRComponent}
+  { path: 'email-hr', component: EmailHRComponent},
+  { path: 'select-departments', component: SelectDepartmentsComponent}
 ];
 
 @NgModule({

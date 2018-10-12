@@ -10,15 +10,15 @@ import {AuthService} from '../services/auth.service';
 })
 export class EmailHRComponent implements OnInit {
 
-  username = 'testUser1';
-  emailMessage = 'emailMessage';
-  alertMessage = 'alertMessage';
+  currentUser = null;
+  emailMessage = null;
   constructor(private alertsService: AlertsService, private authService: AuthService,
               private router: Router) { }
 
   ngOnInit() {
     this.authService.loggedIn().subscribe(result => {
       console.log(result);
+      this.currentUser = result['email'];
     }, error => {
       this.router.navigate(['login']);
     });

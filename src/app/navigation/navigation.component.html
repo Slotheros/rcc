@@ -10,18 +10,18 @@
             <li *ngIf="userType === SUPERUSER || userType === ADMIN" class="nav-item admin-option">
                 <a class="nav-link" href="#">Add/Delete User</a>
             </li>
-            <li *ngIf="userType === SUPERUSER || userType === ADMIN || userType === DPTHEAD" class="nav-item admin-option">
-                <a class="nav-link" href="alerts">Manage Alerts</a>
-            </li>
-
             <li class="nav-item admin-option">
                 <a class="nav-link" href="/policy/">Policies</a>
             </li>
-
             <li class="nav-item admin-option">
                 <a class="nav-link" href="/view-survey/">Surveys</a>
             </li>
-
+            <li *ngIf="userType === SUPERUSER || userType === ADMIN || userType === DPTHEAD" class="nav-item admin-option">
+                <a class="nav-link" href="alerts">Send Alerts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/email-hr">Email HR</a>
+            </li>
 
             <!-- <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarPolicyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Policies</a>

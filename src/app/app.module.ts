@@ -20,6 +20,7 @@ import { EmailHRComponent } from './email-hr/email-hr.component';
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 import { EditPolicyDialogComponent } from './edit-policy-dialog/edit-policy-dialog.component';
 import { Globals } from './globals';
+import { SelectDepartmentsComponent } from './select-departments/select-departments.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { Globals } from './globals';
     AlertsComponent,
     EmailHRComponent,
     ErrorDialogComponent,
-    EditPolicyDialogComponent
+    EditPolicyDialogComponent,
+    SelectDepartmentsComponent
   ],
   imports: [
     BrowserModule,

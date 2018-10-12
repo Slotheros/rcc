@@ -2,25 +2,24 @@
 
 <div class='container'>
   <h1>Send Alerts</h1>
-  <h5>Select Recipients:</h5>
 
   <form (ngSubmit)="sendMsg(alertMessage)" id="alert-form" #registrationForm="ngForm">
-    <div id="checkbox-group" *ngIf="userType === SUPERUSER || userType === ADMIN" >
+    <!-- <div id="checkbox-group" *ngIf="userType === SUPERUSER || userType === ADMIN" >
       <mat-checkbox [disabled]="isDisabled" (click)="onClickDepartment(allEmployees)">{{allEmployees}}</mat-checkbox>
       <mat-checkbox [checked]="isChecked" [disabled]="isDisabledGroup" *ngFor="let department of departments" (click)="onClickDepartment(department)">{{department.name}}</mat-checkbox>
     </div>
 
     <div id="checkbox-group" *ngIf="userType === DPTHEAD" >
       <mat-checkbox [checked]="true" [disabled]="true">{{userDeptName}}</mat-checkbox>
-    </div>
-
+    </div> -->
+    <rcc-select-departments></rcc-select-departments>
 
     <!-- <form id="alert-form"> -->
-      <label for="message">Alert Message:</label>
-      <textarea class="form-control" rows="10" id="message" name="msg" [(ngModel)]="alertMessage">{{alertMessage}}</textarea>
-      <!-- <button mat-raised-button color="primary" (click)="sendMessage(alertMessage)">Send Alert</button> -->
-      <button mat-raised-button color="primary" type="submit">Send Alert</button>
+    <label for="message">Alert Message:</label>
+    <textarea class="form-control" rows="10" id="message" name="msg" [(ngModel)]="alertMessage">{{alertMessage}}</textarea>
+    <!-- <button mat-raised-button color="primary" (click)="sendMessage(alertMessage)">Send Alert</button> -->
+    <button mat-raised-button color="primary" type="submit">Send Alert</button>
     <!-- </form> -->
-    </form>
+  </form>
 </div>
 

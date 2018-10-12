@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { UsersService } from '../services/users.service';
 import { AlertsService } from '../services/alerts.service';
 import { AuthService } from '../services/auth.service';
@@ -6,12 +6,17 @@ import { Router } from '@angular/router';
 import { Department } from '../department';
 import { Message } from '../message';
 import { Globals } from '../globals';
+import { SelectDepartmentsComponent } from '../select-departments/select-departments.component';
+import { SelectedDepartmentsService } from '../services/selected-departments.service';
+
 
 @Component({
   selector: 'rcc-alerts',
   templateUrl: './alerts.component.html',
-  styleUrls: ['./alerts.component.scss']
+  styleUrls: ['./alerts.component.scss'],
+  providers: [SelectDepartmentsComponent]
 })
+
 export class AlertsComponent implements OnInit {
 
   readonly SUPERUSER: number = 1;
@@ -19,10 +24,8 @@ export class AlertsComponent implements OnInit {
   readonly STANDARD: number = 3;
   readonly DPTHEAD: number = 4;
   
-  allEmployees = 'All Employees';
-  departments: Department[];
   message: Message;
-  selectedDepartments = [];
+  selectedDepartments: Department[] = [];
   alertMessage = '';
 
   isDisabled = false;
@@ -36,10 +39,10 @@ export class AlertsComponent implements OnInit {
     private alertsService: AlertsService,
     private authService: AuthService,
     private router: Router,
-    private globals: Globals
-  ) {
-    this.departments = globals.departments;
-  }
+    private globals: Globals,
+    private selectDepartments: SelectDepartmentsComponent,
+    private selectedDepartmentsService: SelectedDepartmentsService
+  ) {}
 
   ngOnInit() {
     this.authService.loggedIn().subscribe(result => {
@@ -47,10 +50,14 @@ export class AlertsComponent implements OnInit {
       this.userType = result['usertype']['id'];
       this.userDeptName = result['department']['name'];
       this.currentDeptObj = {id: result['department']['id'], name: result['department']['name']};
-      if (result['usertype']['id'] === 3) {
+      if (result['usertype']['id'] === this.STANDARD) {
         this.router.navigate(['login']);
-      } else if (result['usertype']['id'] === 4) {
+      } else if (result['usertype']['id'] === this.DPTHEAD) {
         this.selectedDepartments.push(this.currentDeptObj);
+        this.selectedDepartmentsService.setSelectedDepartments(this.selectedDepartments);
+        this.selectedDepartments.forEach(element => {
+          console.log("dept head " + element.name)
+        });
       }
     }, error => {
       this.router.navigate(['login']);
@@ -62,43 +69,14 @@ export class AlertsComponent implements OnInit {
     };
   }
 
-  onClickDepartment(dept) {
-    if (dept === this.allEmployees) {
-      if (this.isDisabledGroup === false && this.isDisabled === false) {
-        this.isDisabledGroup = true;
-        this.isChecked = true;
-        this.selectedDepartments = this.departments;
-      } else if (this.isDisabledGroup === true && this.isDisabled === false) {
-        this.isDisabledGroup = false;
-        this.isChecked = false;
-        this.selectedDepartments = [];
-      } else {
-        return;
-      }
-    } else {
-      const index = this.selectedDepartments.indexOf(dept);
-      // department is going from checked to unchecked, no other box is checked
-      if (index > -1 && this.selectedDepartments.length === 1 && this.isDisabledGroup === false) {
-        this.isDisabled = false;
-        this.selectedDepartments.splice(index, 1);
-
-        // department is going from checked to unchecked, there are still other departments checked
-      } else if (index > -1 && this.selectedDepartments.length > 1 && this.isDisabledGroup === false) {
-        this.selectedDepartments.splice(index, 1);
-
-        // department is going from unchecked to checked
-      } else if (index === -1 && this.isDisabledGroup === false) {
-        this.isDisabled = true;
-        this.selectedDepartments.push(dept);
-      } else {
-        return;
-      }
-    }
-  }
-
   sendMsg(msg) {
-    console.log('selectedList: ' + this.selectedDepartments);
-    if (this.selectedDepartments.length > this.departments.length) {
+    this.selectedDepartments = this.selectedDepartmentsService.getSelectedDepartments();
+    this.selectedDepartments.forEach(element => {
+      console.log('selectedList: ' + element.name);
+
+    });
+
+    if (this.selectedDepartments.length > this.globals.departments.length) {
       console.log('ERROR: department list is incorrect');
       return;
     }

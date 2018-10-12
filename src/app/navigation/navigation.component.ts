@@ -15,7 +15,6 @@ export class NavigationComponent implements OnInit {
   readonly STANDARD:number = 3;
   readonly DPTHEAD:number = 4;
 
-  admin = true;
   userType: number = null;
   fName: string = null;
   constructor(private authService: AuthService, private usersService: UsersService, private router: Router) { }

@@ -4,6 +4,10 @@ import { Policy } from '../policy';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Globals } from '../globals';
 import {filter} from 'rxjs/operators';
+import { Department } from '../department';
+import { SelectDepartmentsComponent } from '../select-departments/select-departments.component';
+import { SelectedDepartmentsService } from '../services/selected-departments.service';
+
 
 @Component({
   selector: 'rcc-edit-policy-dialog',
@@ -14,11 +18,14 @@ export class EditPolicyDialogComponent implements OnInit {
 
   policy: Policy;
   form: FormGroup;
+  selectedDepartments: Department[] = [];
+
 
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<EditPolicyDialogComponent>,
     private globals: Globals,
+    private selectedDepartmentsService: SelectedDepartmentsService,
     @Inject(MAT_DIALOG_DATA) public data: Policy ) {
     this.policy = data;
   }
@@ -33,7 +40,12 @@ export class EditPolicyDialogComponent implements OnInit {
     });
   }
 
+  getSelected() {
+    this.selectedDepartments = this.selectedDepartmentsService.getSelectedDepartments();
+  }
+
   submit(form) {
+    this.getSelected();
     this.dialogRef.close(form.getRawValue());
   }
 
