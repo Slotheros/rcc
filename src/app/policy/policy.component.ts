@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { AlertsService } from '../services/alerts.service';
+import { AcknowledgePolicyService } from '../services/acknowledge-policy.service';
 import { Policy } from '../policy';
 import { Globals } from '../globals';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
@@ -15,67 +16,93 @@ import { filter } from 'rxjs/operators';
 })
 export class PolicyComponent implements OnInit {
 
-  userID = 123456;
+  userID: number = null;
   dialogRef: MatDialogRef<EditPolicyDialogComponent>;
   newPolicy: Policy;
-
-  ackPolicies = [
-    {
-      id: 123,
-      title: 'Food Dummy Policy',
-      description: 'Dummy Policy that IS acknowledged',
-      url: 'http://www.google.com',
-      acknowledged: true,
-      date: '05/21/18',
-      departments: [1, 2]
-    },
-    {
-      id: 124,
-      title: 'Parking Dummy Policy',
-      description: 'Another Dummy Policy that is also acknowledged',
-      url: 'http://www.google.com',
-      acknowledged: true,
-      date: '09/26/18',
-      departments: [2]
-    },
-  ];
-
-  unackPolicies = [
-    {
-      id: 69,
-      title: 'Sexual Harassment Dummy Policy',
-      description: 'Dummy Policy that is UN-acknowledged',
-      url: 'http://www.google.com',
-      acknowledged: false,
-      date: null,
-      departments: [1]
-    },
-    {
-      id: 8008135,
-      title: 'Dress Code Dummy Policy',
-      description: 'Also a different Dummy Policy that is UN-acknowledged',
-      url: 'http://www.google.com',
-      acknowledged: false,
-      date: null,
-      departments: [3, 4]
-    }
-  ];
+  ackPolicies = Array<Policy>();
+  unackPolicies = Array<Policy>();
 
   constructor( private alertsService: AlertsService, private authService: AuthService,
-               private router: Router, private dialog: MatDialog, private globals: Globals) { }
+               private router: Router, private dialog: MatDialog, private globals: Globals,
+               private acknowledgePolicyService: AcknowledgePolicyService) { }
 
   ngOnInit() {
+
     this.authService.loggedIn().subscribe(result => {
-      console.log(result);
+      // Set userID to what was given from authService
+      this.userID = result['eId'];
+      console.log('Got userID: ' + this.userID);
+
     }, error => {
       this.router.navigate(['login']);
+    }, () => {
+      // After userID is found, initialize the ack and unack policy arrays
+      console.log('Searching for unack policies using eId: ' + this.userID);
+      this.acknowledgePolicyService.getUnacknowledged(this.userID).subscribe(result => {
+        for (const policy of result as Array<Object>) {
+          const depts = [];
+          if (policy['deptSales']) { depts.push({'id': 1}); }
+          if (policy['deptGarage']) { depts.push({'id': 2}); }
+          if (policy['deptAdmin']) { depts.push({'id': 3}); }
+          if (policy['deptFoodBeverage']) { depts.push({'id': 4}); }
+          if (policy['deptProduction']) { depts.push({'id': 5}); }
+
+          const p = {
+              'id': policy['policyID'],
+              'title': policy['title'],
+              'description': policy['description'],
+              'departments': depts,
+              'url': policy['url'],
+              'acknowledged': false,
+              'date': policy['date']
+            } as Policy;
+          this.unackPolicies.push(p);
+        }
+        console.log('Unack Policies:');
+        console.log(this.unackPolicies);
+      }, error => {
+        console.log('Error retrieving unack policies');
+        console.log(error);
+      });
+      console.log('Searching for ack policies using eId: ' + this.userID);
+      this.acknowledgePolicyService.getAcknowledged(this.userID).subscribe(result => {
+        for (const policy of result as Array<Object>) {
+          const depts = [];
+          if (policy['deptSales']) { depts.push({'id': 1}); }
+          if (policy['deptGarage']) { depts.push({'id': 2}); }
+          if (policy['deptAdmin']) { depts.push({'id': 3}); }
+          if (policy['deptFoodBeverage']) { depts.push({'id': 4}); }
+          if (policy['deptProduction']) { depts.push({'id': 5}); }
+
+          const p = {
+            'id': policy['policyID'],
+            'title': policy['title'],
+            'description': policy['description'],
+            'departments': depts,
+            'url': policy['url'],
+            'acknowledged': true,
+            'date': policy['date']
+          } as Policy;
+          this.ackPolicies.push(p);
+        }
+      }, error => {
+        console.log('Error retrieving ack policies');
+        console.log(error);
+      });
     });
-    // hit get policy endpoint and populate policies[]
   }
 
-  updatePolicyInDB(policyID: number, userID: number) {
+  // Acknowledge a policy using the policy ID and user ID
+  acknowledgePolicy(policyID: number, userID: number) {
     console.log('Setting policy #' + policyID + ' to acknowledged for userID ' + userID + '...');
-    return false;
+    // TODO: check if the policy was acknowledged
+    // console.log('ack?: ' + this.acknowldgePolicyService);
+
+    this.acknowledgePolicyService.acknowledgePolicy(policyID, userID).subscribe(result => { }, error => {
+      console.log('check this error: ' + error);
+      // this.errorDialogService.setErrorMsg(error.errMsg);
+      // this.errorDialogService.openDialog(this.errorDialogService.getErrorMsg());
+    });
   }
 
   // Opens Edit Policy Dialog

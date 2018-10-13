@@ -18,14 +18,15 @@
           <p class="policy-description">{{policy.description}}</p>
         </div>
         <div class="panel-half">
-          <button class="ackBtn mat-raised-button" (click)="updatePolicyInDB(policy.id, userID);">Acknowledge</button>
+          <button class="ackBtn mat-raised-button" (click)='acknowledgePolicy(policy.id, userID);'>Acknowledge</button>
           <button class="ackBtn mat-raised-button" mat-button-ripple (click)="openEditPolicyDialog(policy);">Edit Policy</button>
         </div>
       </div>
 
       <h3 *ngIf="ackPolicies != null && ackPolicies.length > 0" class="ackPolicyTitle">Acknowledged Policies:</h3>
       <div class="policy" *ngFor="let policy of ackPolicies">
-        <a href="{{policy.url}}">{{policy.description}}</a>
+        <a href="{{policy.url}}">{{policy.title}}</a>
+        <p class="policy-description">{{policy.description}}</p>
         <p class="completed">Completed: {{policy.date}}</p>
       </div>
 

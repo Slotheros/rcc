@@ -17,7 +17,7 @@ export class AuthService {
   /**
    * Checks if the user is already logged in on this session.
    */
-  loggedIn(){
+  loggedIn() {
     return this.http.get(this.config.getRccUrl() + '/auth/loggedIn', this.config.getHttpOptions()).pipe(
       catchError(this.handleError)
     );
@@ -28,7 +28,7 @@ export class AuthService {
    * @param email
    * @param password
    */
-  login(email: string, password: string){
+  login(email: string, password: string) {
     return this.http.post(this.config.getRccUrl() + '/auth/login', {email: email, password: password}, this.config.getHttpOptions()).pipe(
       catchError(this.handleError)
     );
@@ -57,5 +57,5 @@ export class AuthService {
     // return an observable with a user-facing error message
     // return throwError('Something bad happened; please try again later.');
     return throwError(error.error);
-  };
+  }
 }
