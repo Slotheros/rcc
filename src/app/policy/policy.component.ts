@@ -16,11 +16,18 @@ import { filter } from 'rxjs/operators';
 })
 export class PolicyComponent implements OnInit {
 
+
   userID: number = null;
   dialogRef: MatDialogRef<EditPolicyDialogComponent>;
   newPolicy: Policy;
   ackPolicies = Array<Policy>();
   unackPolicies = Array<Policy>();
+  userType: number = null;
+
+  readonly SUPERUSER:number = 1;
+  readonly ADMIN:number = 2;
+  readonly STANDARD:number = 3;
+  readonly DPTHEAD:number = 4;
 
   constructor( private alertsService: AlertsService, private authService: AuthService,
                private router: Router, private dialog: MatDialog, private globals: Globals,
@@ -31,8 +38,7 @@ export class PolicyComponent implements OnInit {
     this.authService.loggedIn().subscribe(result => {
       // Set userID to what was given from authService
       this.userID = result['eId'];
-      console.log('Got userID: ' + this.userID);
-
+      this.userType = result['usertype']['id'];
     }, error => {
       this.router.navigate(['login']);
     }, () => {
