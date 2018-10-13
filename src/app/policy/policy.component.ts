@@ -15,9 +15,15 @@ import { filter } from 'rxjs/operators';
 })
 export class PolicyComponent implements OnInit {
 
+  readonly SUPERUSER:number = 1;
+  readonly ADMIN:number = 2;
+  readonly STANDARD:number = 3;
+  readonly DPTHEAD:number = 4;
+  
   userID = 123456;
   dialogRef: MatDialogRef<EditPolicyDialogComponent>;
   newPolicy: Policy;
+  userType: number = null;
 
   ackPolicies = [
     {
@@ -67,6 +73,7 @@ export class PolicyComponent implements OnInit {
   ngOnInit() {
     this.authService.loggedIn().subscribe(result => {
       console.log(result);
+      this.userType = result['usertype']['id'];
     }, error => {
       this.router.navigate(['login']);
     });
