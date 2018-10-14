@@ -21,6 +21,7 @@ export class PolicyComponent implements OnInit {
   editPolicy: Policy = this.globals.EMPTY_POLICY;
   ackPolicies = Array<Policy>();
   unackPolicies = Array<Policy>();
+  allPolicies = Array<Policy>(); // used for admin purposes
   userType: number = null;
 
   readonly SUPERUSER: number = 1;
@@ -49,6 +50,37 @@ export class PolicyComponent implements OnInit {
   updatePolicyArrays() {
     this.ackPolicies = Array<Policy>();
     this.unackPolicies = Array<Policy>();
+    this.allPolicies = Array<Policy>();
+
+    // If the user is an admin, get all of the policies
+    if (this.userType === this.SUPERUSER || this.userType === this.ADMIN || this.userType === this.DPTHEAD) {
+      this.acknowledgePolicyService.getAllPolicies(this.userID).subscribe(result => {
+        for (const policy of result as Array<Object>) {
+          const depts = [];
+          if (policy['deptSales']) { depts.push({'id': 1}); }
+          if (policy['deptGarage']) { depts.push({'id': 2}); }
+          if (policy['deptAdmin']) { depts.push({'id': 3}); }
+          if (policy['deptFoodBeverage']) { depts.push({'id': 4}); }
+          if (policy['deptProduction']) { depts.push({'id': 5}); }
+
+          const p = {
+            'id': policy['policyID'],
+            'title': policy['title'],
+            'description': policy['description'],
+            'departments': depts,
+            'url': policy['url'],
+            'acknowledged': false,
+            'date': policy['date'].substr(0, 10)
+          } as Policy;
+          this.allPolicies.push(p);
+        }
+      }, error => {
+        console.log('Error retrieving unack policies');
+        console.log(error);
+      });
+    }
+
+    // Get all of the unacknowledged policies
     this.acknowledgePolicyService.getUnacknowledged(this.userID).subscribe(result => {
       for (const policy of result as Array<Object>) {
         const depts = [];
@@ -73,6 +105,8 @@ export class PolicyComponent implements OnInit {
       console.log('Error retrieving unack policies');
       console.log(error);
     });
+
+    // Get all of the acknowledged policies
     this.acknowledgePolicyService.getAcknowledged(this.userID).subscribe(result => {
       for (const policy of result as Array<Object>) {
         const depts = [];

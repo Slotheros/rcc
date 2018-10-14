@@ -10,12 +10,27 @@
     </mat-card-title>
   </mat-card>
 
+  <mat-accordion *ngIf="userType === SUPERUSER || userType === ADMIN || userType === DPTHEAD">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title class="policy-header">
+          <h3 class="ackPolicyTitle">List of All Policies:</h3>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="policy" *ngFor="let policy of allPolicies">
+        <a href="{{policy.url}}">{{policy.title}}</a>
+        <p class="policy-description">{{policy.description}}</p>
+        <p class="completed">Completed: {{policy.date}}</p>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
   <mat-accordion>
     <mat-expansion-panel [expanded]="true">
       <mat-expansion-panel-header>
         <mat-panel-title class="policy-header">
-        <h3 *ngIf="(ackPolicies == null && unackPolicies == null) || (ackPolicies.length == 0 && unackPolicies.length == 0)">You have no policies.</h3>
-        <h3 *ngIf="unackPolicies != null && unackPolicies.length > 0">Unacknowledged Policies:</h3>
+          <h3 class="ackPolicyTitle">Unacknowledged Policies:</h3>
         </mat-panel-title>
       </mat-expansion-panel-header>
 
@@ -36,7 +51,7 @@
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title class="policy-header">
-        <h3 *ngIf="ackPolicies != null && ackPolicies.length > 0" class="ackPolicyTitle">Acknowledged Policies:</h3>
+        <h3 class="ackPolicyTitle">Acknowledged Policies:</h3>
         </mat-panel-title>
       </mat-expansion-panel-header>
 
