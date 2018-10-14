@@ -41,8 +41,12 @@
         </div>
         <div class="panel-half">
           <button class="ackBtn mat-raised-button mat-primary" (click)='acknowledgePolicy(policy.id, userID);'>Acknowledge</button>
-          <button *ngIf="userType === SUPERUSER || userType === ADMIN || userType === DPTHEAD" class="ackBtn mat-raised-button" mat-button-ripple (click)="openEditPolicyDialog(policy);">Edit</button>
-          <button *ngIf="userType === SUPERUSER || userType === ADMIN || userType === DPTHEAD" class="ackBtn mat-raised-button mat-error" mat-button-ripple (click)="deletePolicy(policy);">Delete</button>
+          <button *ngIf="userType === SUPERUSER || userType === ADMIN || userType === DPTHEAD" class="ackBtn mat-raised-button" mat-button-ripple (click)="openEditPolicyDialog(policy);">
+            <i class="material-icons">edit</i>
+          </button>
+          <button *ngIf="userType === SUPERUSER || userType === ADMIN || userType === DPTHEAD" class="ackBtn mat-raised-button mat-error" mat-button-ripple (click)="deletePolicy(policy);">
+            <i class="material-icons">delete</i>
+          </button>
         </div>
       </div>
     </mat-expansion-panel>
