@@ -141,8 +141,15 @@ export class PolicyComponent implements OnInit {
 
   // Delete a policy, using the policy ID
   deletePolicy(policy: Policy) {
-    this.acknowledgePolicyService.deletePolicy({policyId: policy.id}).subscribe(
-      result => { this.updatePolicyArrays(); }, error => { console.log('check this error: ' + error); });
+    // Can only delete if you are an admin
+    if (this.userType === this.SUPERUSER || this.userType === this.ADMIN || this.userType === this.DPTHEAD) {
+      this.acknowledgePolicyService.deletePolicy({policyId: policy.id}).subscribe(
+        result => {
+          this.updatePolicyArrays();
+        }, error => {
+          console.log('check this error: ' + error);
+        });
+    }
   }
 
   // opens the edit dialog box for creating a policy
