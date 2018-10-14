@@ -1,47 +1,72 @@
-.policy-header {
-  font-size: 1.5em;
-}
 .section-title {
-  text-align: center;
-  margin-bottom: 40px;
+  text-align: left;
+  margin-left: 15px;
 }
-mat-card {
-  padding-left: 50px;
-  padding-right: 50px;
+
+.mat-card {
+  margin-bottom: 20px;
 }
-.policy .mat-checkbox {
-  font-size: 1.5em;
-  text-decoration: underline;
-}
-.policy .completed {
-  text-align: right;
-  font-style: italic;
-}
-.unackPolicy {
-  margin-bottom: 24px;
-}
-.completed {
-  margin-bottom: 0;
-}
-.ackBtn {
-  float: right;
-}
-.ackPolicyTitle {
-  margin-top: 48px;
-}
-.policy-description {
-  margin-bottom: 0;
-}
+
 .panel-half {
   display: inline-block;
-  width: 50%;
+  width: 100%;
   margin: 0;
 }
+
 .panel-half button {
-  margin-left: 10px;
-  margin-top: 10px;
+  margin: 0px 20px 25px 0px;
+}
+
+.ackPolicyTitle {
+  margin-top: 20px;
 }
 button.create-policy {
   display: block;
   margin: 0 auto 50px auto;
+}
+
+@media only screen and (min-width: 992px) {
+  .policy-header {
+    font-size: 1.5em;
+  }
+  .section-title {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  mat-card {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+  .policy .mat-checkbox {
+    font-size: 1.5em;
+    text-decoration: underline;
+  }
+  .policy .completed {
+    text-align: right;
+    font-style: italic;
+  }
+  .unackPolicy {
+    margin-bottom: 24px;
+  }
+  .completed {
+    margin-bottom: 0;
+  }
+  .ackBtn {
+    float: right;
+  }
+  .ackPolicyTitle {
+    margin-top: 48px;
+  }
+  .policy-description {
+    margin-bottom: 0;
+  }
+  .panel-half {
+    display: inline-block;
+    width: 50%;
+    margin: 0;
+  }
+  .panel-half button {
+    margin-left: 10px;
+    margin-top: 10px;
+  }
 }
