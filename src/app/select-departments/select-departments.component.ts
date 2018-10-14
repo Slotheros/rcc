@@ -37,7 +37,7 @@ export class SelectDepartmentsComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private globals: Globals,
-    private selectedDepartmentsService: SelectedDepartmentsService) { 
+    private selectedDepartmentsService: SelectedDepartmentsService) {
       this.departments = globals.departments;
     }
 
@@ -87,7 +87,7 @@ export class SelectDepartmentsComponent implements OnInit {
       } else {
         return;
       }
-    }    
+    }
     this.selectedDepartmentsService.setSelectedDepartments(this.selectedDepartments);
   }
 }

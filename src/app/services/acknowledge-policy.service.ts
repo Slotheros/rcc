@@ -35,20 +35,17 @@ export class AcknowledgePolicyService {
   // Service used to acknowledge a policy given a user ID and policy ID
   acknowledgePolicy(policyID: number, userID: number) {
     const data = { policyId: policyID, eId: userID };
-    console.log('hitting ack endpoint with pID: ' + data['policyId'] + ' and eID: ' + data['eId']);
     return this.http.post(this.config.getRccUrl() + '/policies/acknowledge', data, this.config.getHttpOptions()).pipe(
       catchError(this.handleError)
     );
   }
 
-  /*
-  isAcknowledged(userID: number, policyID) {
-    const policies = this.http.post(this.config.getRccUrl() + '/policy/getAcknowledged/' + userID, this.config.getHttpOptions()).pipe(
+  // Service used to create a new policy as an admin
+  createPolicy(data: Object) {
+    return this.http.post(this.config.getRccUrl() + '/policies/create', data, this.config.getHttpOptions()).pipe(
       catchError(this.handleError)
     );
-
-    const isAck = policies.filter(policies => student.subject == 'math' && student.score >= 70);
-  }*/
+  }
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

@@ -19,15 +19,16 @@ export class PolicyComponent implements OnInit {
 
   userID: number = null;
   dialogRef: MatDialogRef<EditPolicyDialogComponent>;
-  newPolicy: Policy;
+  newPolicy: Policy = this.globals.EMPTY_POLICY;
+  editPolicy: Policy = this.globals.EMPTY_POLICY;
   ackPolicies = Array<Policy>();
   unackPolicies = Array<Policy>();
   userType: number = null;
 
-  readonly SUPERUSER:number = 1;
-  readonly ADMIN:number = 2;
-  readonly STANDARD:number = 3;
-  readonly DPTHEAD:number = 4;
+  readonly SUPERUSER: number = 1;
+  readonly ADMIN: number = 2;
+  readonly STANDARD: number = 3;
+  readonly DPTHEAD: number = 4;
 
   constructor( private alertsService: AlertsService, private authService: AuthService,
                private router: Router, private dialog: MatDialog, private globals: Globals,
@@ -43,78 +44,102 @@ export class PolicyComponent implements OnInit {
       this.router.navigate(['login']);
     }, () => {
       // After userID is found, initialize the ack and unack policy arrays
-      console.log('Searching for unack policies using eId: ' + this.userID);
-      this.acknowledgePolicyService.getUnacknowledged(this.userID).subscribe(result => {
-        for (const policy of result as Array<Object>) {
-          const depts = [];
-          if (policy['deptSales']) { depts.push({'id': 1}); }
-          if (policy['deptGarage']) { depts.push({'id': 2}); }
-          if (policy['deptAdmin']) { depts.push({'id': 3}); }
-          if (policy['deptFoodBeverage']) { depts.push({'id': 4}); }
-          if (policy['deptProduction']) { depts.push({'id': 5}); }
+      this.updatePolicyArrays();
+    });
+  }
 
-          const p = {
-              'id': policy['policyID'],
-              'title': policy['title'],
-              'description': policy['description'],
-              'departments': depts,
-              'url': policy['url'],
-              'acknowledged': false,
-              'date': policy['date']
-            } as Policy;
-          this.unackPolicies.push(p);
-        }
-        console.log('Unack Policies:');
-        console.log(this.unackPolicies);
-      }, error => {
-        console.log('Error retrieving unack policies');
-        console.log(error);
-      });
-      console.log('Searching for ack policies using eId: ' + this.userID);
-      this.acknowledgePolicyService.getAcknowledged(this.userID).subscribe(result => {
-        for (const policy of result as Array<Object>) {
-          const depts = [];
-          if (policy['deptSales']) { depts.push({'id': 1}); }
-          if (policy['deptGarage']) { depts.push({'id': 2}); }
-          if (policy['deptAdmin']) { depts.push({'id': 3}); }
-          if (policy['deptFoodBeverage']) { depts.push({'id': 4}); }
-          if (policy['deptProduction']) { depts.push({'id': 5}); }
+  updatePolicyArrays() {
+    this.ackPolicies = Array<Policy>();
+    this.unackPolicies = Array<Policy>();
+    this.acknowledgePolicyService.getUnacknowledged(this.userID).subscribe(result => {
+      for (const policy of result as Array<Object>) {
+        const depts = [];
+        if (policy['deptSales']) { depts.push({'id': 1}); }
+        if (policy['deptGarage']) { depts.push({'id': 2}); }
+        if (policy['deptAdmin']) { depts.push({'id': 3}); }
+        if (policy['deptFoodBeverage']) { depts.push({'id': 4}); }
+        if (policy['deptProduction']) { depts.push({'id': 5}); }
 
-          const p = {
-            'id': policy['policyID'],
-            'title': policy['title'],
-            'description': policy['description'],
-            'departments': depts,
-            'url': policy['url'],
-            'acknowledged': true,
-            'date': policy['date']
-          } as Policy;
-          this.ackPolicies.push(p);
-        }
-      }, error => {
-        console.log('Error retrieving ack policies');
-        console.log(error);
-      });
+        const p = {
+          'id': policy['policyID'],
+          'title': policy['title'],
+          'description': policy['description'],
+          'departments': depts,
+          'url': policy['url'],
+          'acknowledged': false,
+          'date': policy['date'].substr(0, 10)
+        } as Policy;
+        this.unackPolicies.push(p);
+      }
+    }, error => {
+      console.log('Error retrieving unack policies');
+      console.log(error);
+    });
+    this.acknowledgePolicyService.getAcknowledged(this.userID).subscribe(result => {
+      for (const policy of result as Array<Object>) {
+        const depts = [];
+        if (policy['deptSales']) { depts.push({'id': 1}); }
+        if (policy['deptGarage']) { depts.push({'id': 2}); }
+        if (policy['deptAdmin']) { depts.push({'id': 3}); }
+        if (policy['deptFoodBeverage']) { depts.push({'id': 4}); }
+        if (policy['deptProduction']) { depts.push({'id': 5}); }
+
+        const p = {
+          'id': policy['policyID'],
+          'title': policy['title'],
+          'description': policy['description'],
+          'departments': depts,
+          'url': policy['url'],
+          'acknowledged': true,
+          'date': policy['date'].substr(0, 10)
+        } as Policy;
+        this.ackPolicies.push(p);
+      }
+    }, error => {
+      console.log('Error retrieving ack policies');
+      console.log(error);
     });
   }
 
   // Acknowledge a policy using the policy ID and user ID
   acknowledgePolicy(policyID: number, userID: number) {
-    console.log('Setting policy #' + policyID + ' to acknowledged for userID ' + userID + '...');
-    // TODO: check if the policy was acknowledged
-    // console.log('ack?: ' + this.acknowldgePolicyService);
+    this.acknowledgePolicyService.acknowledgePolicy(policyID, userID).subscribe(
+      result => { this.updatePolicyArrays(); }, error => { console.log('check this error: ' + error); });
+  }
 
-    this.acknowledgePolicyService.acknowledgePolicy(policyID, userID).subscribe(result => { }, error => {
-      console.log('check this error: ' + error);
-      // this.errorDialogService.setErrorMsg(error.errMsg);
-      // this.errorDialogService.openDialog(this.errorDialogService.getErrorMsg());
+  openCreatePolicyDialog() {
+    // Reset the new policy to an empty Policy object
+    console.log('Editing policy: ' + this.newPolicy.title);
+
+    // Open dialog and keep a reference to it
+    this.dialogRef = this.dialog.open(EditPolicyDialogComponent, {
+      data: {
+        title: this.newPolicy.title,
+        description: this.newPolicy.description,
+        url: this.newPolicy.url,
+        departments: this.newPolicy.departments
+      }
+    });
+
+    // After the dialog is close, handle the data from the forms
+    this.dialogRef.afterClosed().subscribe(data => {
+      if (data) {
+        console.log('Returned from Create Policy Form:');
+        console.log(data);
+        this.acknowledgePolicyService.createPolicy(data).subscribe(result => {
+          console.log('Added new policy to the DB!'); }, error => {
+          console.log('Failure adding new policy to the DB.');
+        });
+      } else {
+        console.log('Policy is null');
+      }
     });
   }
 
   // Opens Edit Policy Dialog
   openEditPolicyDialog(policy: Policy) {
     // Reset the new policy to an empty Policy object
-    this.newPolicy = this.globals.EMPTY_POLICY;
+    this.editPolicy = this.globals.EMPTY_POLICY;
 
     console.log('Editing policy: ' + policy.title);
 

@@ -20,7 +20,6 @@ export class EditPolicyDialogComponent implements OnInit {
   form: FormGroup;
   selectedDepartments: Department[] = [];
 
-
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<EditPolicyDialogComponent>,
@@ -36,21 +35,22 @@ export class EditPolicyDialogComponent implements OnInit {
       title: [this.policy.title, Validators.required],
       description: [this.policy.description, Validators.required],
       url: [this.policy.url, Validators.required],
-      // department: [this.policy.departments, Validators.required]
     });
   }
 
   getSelected() {
     this.selectedDepartments = this.selectedDepartmentsService.getSelectedDepartments();
+    return this.selectedDepartments;
   }
 
   submit(form) {
-    this.getSelected();
-    this.dialogRef.close(form.getRawValue());
+    const data = this.form.getRawValue();
+    data['depts'] = this.getSelected();
+    return this.dialogRef.close(data);
   }
 
   save() {
-    return this.dialogRef.close(this.form.value);
+    // return this.dialogRef.close(this.form.value);
   }
 
   close() {

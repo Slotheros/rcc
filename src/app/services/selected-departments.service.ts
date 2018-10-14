@@ -22,13 +22,14 @@ export class SelectedDepartmentsService {
     private config: ConfigService
   ) { }
 
-
-  setSelectedDepartments(depts){
+  setSelectedDepartments(depts) {
     this.selectedDepartments = [];
     this.selectedDepartments = depts;
+
   }
 
-  getSelectedDepartments(){
-    return this.selectedDepartments;}
+  getSelectedDepartments() {
+    return this.selectedDepartments;
+  }
 
 }

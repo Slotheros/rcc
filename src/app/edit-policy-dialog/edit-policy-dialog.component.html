@@ -1,7 +1,6 @@
 <form [formGroup]="form" (ngSubmit)="submit(form)" class="edit-policy-form">
   <h2 mat-dialog-title>Edit Policy: <strong>{{policy.title}}</strong></h2>
   <rcc-select-departments></rcc-select-departments>
-
   <mat-dialog-content class="edit-policy-dialog">
     <mat-form-field class="input-fullwidth">
       <mat-label>Title</mat-label>
@@ -15,12 +14,6 @@
       <mat-label>URL</mat-label>
       <input matInput placeholder="{{policy.url}}" formControlName="url">
     </mat-form-field>
-    <!--
-    <mat-form-field class="input-fullwidth">
-      <mat-label>Departments</mat-label>
-      <input matInput placeholder="{{policy.departments}}" formControlName="departments">
-    </mat-form-field>
-    -->
   </mat-dialog-content>
 
   <mat-dialog-actions class="dialog-actions">
