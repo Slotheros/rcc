@@ -5,7 +5,7 @@ import { AlertsService } from '../services/alerts.service';
 import { AcknowledgePolicyService } from '../services/acknowledge-policy.service';
 import { Policy } from '../policy';
 import { Globals } from '../globals';
-import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
+import { MatDialog, MatDialogConfig, MatDialogRef, MatExpansionPanel } from '@angular/material';
 import { EditPolicyDialogComponent } from '../edit-policy-dialog/edit-policy-dialog.component';
 import { filter } from 'rxjs/operators';
 
@@ -15,8 +15,6 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./policy.component.scss']
 })
 export class PolicyComponent implements OnInit {
-
-
   userID: number = null;
   dialogRef: MatDialogRef<EditPolicyDialogComponent>;
   newPolicy: Policy = this.globals.EMPTY_POLICY;
@@ -124,10 +122,9 @@ export class PolicyComponent implements OnInit {
     // After the dialog is close, handle the data from the forms
     this.dialogRef.afterClosed().subscribe(data => {
       if (data) {
-        console.log('Returned from Create Policy Form:');
-        console.log(data);
         this.acknowledgePolicyService.createPolicy(data).subscribe(result => {
-          console.log('Added new policy to the DB!'); }, error => {
+          // update policies array to show the changes
+          this.updatePolicyArrays(); }, error => {
           console.log('Failure adding new policy to the DB.');
         });
       } else {
@@ -156,8 +153,19 @@ export class PolicyComponent implements OnInit {
     // After the dialog is close, handle the data from the forms
     this.dialogRef.afterClosed().subscribe(data => {
       if (policy) {
-        console.log('Returned from Edit Policy Form:');
-        console.log(data);
+        if (data) {
+          data['policyId'] = policy.id;
+          console.log('Sending to backend:');
+          console.log(data);
+          this.acknowledgePolicyService.updatePolicy(data).subscribe(result => {
+            // update policies array to show the changes
+            this.updatePolicyArrays(); }, error => {
+            console.log('Failure to change policy to the DB.');
+            console.log(error);
+          });
+        } else {
+          console.log('Edit cancelled');
+        }
       } else {
         console.log('Policy is null');
       }

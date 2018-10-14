@@ -47,6 +47,13 @@ export class AcknowledgePolicyService {
     );
   }
 
+  // Service used to change the values of an existing policy as an admin
+  updatePolicy(data: Object) {
+    return this.http.post(this.config.getRccUrl() + '/policies/update', data, this.config.getHttpOptions()).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.

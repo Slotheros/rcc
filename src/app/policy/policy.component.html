@@ -4,14 +4,21 @@
 <h1 class="section-title">View Policy</h1>
 <button *ngIf="userType === SUPERUSER || userType === ADMIN || userType === DPTHEAD" class="mat-raised-button mat-primary create-policy" mat-button-ripple (click)="openCreatePolicyDialog();">Create New Policy</button>
 <div class="container">
-  <mat-card class="policy-header">
-    You have <strong>{{unackPolicies.length}}</strong> policies that need to be acknowledged.
-  </mat-card>
   <mat-card>
-    <mat-card-content>
+    <mat-card-title>
+      You have <strong>{{unackPolicies.length}}</strong> {{unackPolicies.length == 1 ? 'policy' : 'policies'}} that need to be acknowledged.
+    </mat-card-title>
+  </mat-card>
 
-      <h3 *ngIf="(ackPolicies == null && unackPolicies == null) || (ackPolicies.length == 0 && unackPolicies.length == 0)">You have no policies.</h3>
-      <h3 *ngIf="unackPolicies != null && unackPolicies.length > 0">Unacknowledged Policies:</h3>
+  <mat-accordion>
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title class="policy-header">
+        <h3 *ngIf="(ackPolicies == null && unackPolicies == null) || (ackPolicies.length == 0 && unackPolicies.length == 0)">You have no policies.</h3>
+        <h3 *ngIf="unackPolicies != null && unackPolicies.length > 0">Unacknowledged Policies:</h3>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
       <div class="policy unackPolicy" *ngFor="let policy of unackPolicies">
         <div class="panel-half">
           <a class="policy-title" href="{{policy.url}}">{{policy.title}}</a>
@@ -22,14 +29,22 @@
           <button *ngIf="userType === SUPERUSER || userType === ADMIN || userType === DPTHEAD" class="ackBtn mat-raised-button" mat-button-ripple (click)="openEditPolicyDialog(policy);">Edit Policy</button>
         </div>
       </div>
+    </mat-expansion-panel>
+  </mat-accordion>
 
-      <h3 *ngIf="ackPolicies != null && ackPolicies.length > 0" class="ackPolicyTitle">Acknowledged Policies:</h3>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title class="policy-header">
+        <h3 *ngIf="ackPolicies != null && ackPolicies.length > 0" class="ackPolicyTitle">Acknowledged Policies:</h3>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
       <div class="policy" *ngFor="let policy of ackPolicies">
         <a href="{{policy.url}}">{{policy.title}}</a>
         <p class="policy-description">{{policy.description}}</p>
         <p class="completed">Completed: {{policy.date}}</p>
       </div>
-
-    </mat-card-content>
-  </mat-card>
+    </mat-expansion-panel>
+  </mat-accordion>
 </div>
