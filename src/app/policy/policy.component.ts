@@ -54,7 +54,7 @@ export class PolicyComponent implements OnInit {
 
     // If the user is an admin, get all of the policies
     if (this.userType === this.SUPERUSER || this.userType === this.ADMIN || this.userType === this.DPTHEAD) {
-      this.acknowledgePolicyService.getAllPolicies(this.userID).subscribe(result => {
+      this.acknowledgePolicyService.getAllPolicies().subscribe(result => {
         for (const policy of result as Array<Object>) {
           const depts = [];
           if (policy['deptSales']) { depts.push({'id': 1}); }

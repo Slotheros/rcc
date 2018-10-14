@@ -18,8 +18,9 @@ export class AcknowledgePolicyService {
   ) { }
 
   // Service used to get all acknowledged policies given a user ID
-  getAllPolicies(userID: number) {
-    return this.http.get(this.config.getRccUrl() + '/policies/getAll/' + userID, this.config.getHttpOptions()).pipe(
+  getAllPolicies() {
+    console.log('Getting all policies...');
+    return this.http.get(this.config.getRccUrl() + '/policies/getAll/', this.config.getHttpOptions()).pipe(
       catchError(this.handleError)
     );
   }
