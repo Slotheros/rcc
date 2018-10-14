@@ -61,6 +61,14 @@ export class AcknowledgePolicyService {
     );
   }
 
+  // Service used to delete a policy as an admin
+  deletePolicy(data: Object) {
+    return this.http.post(this.config.getRccUrl() + '/policies/delete', data, this.config.getHttpOptions()).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.

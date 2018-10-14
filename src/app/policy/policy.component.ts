@@ -139,6 +139,13 @@ export class PolicyComponent implements OnInit {
       result => { this.updatePolicyArrays(); }, error => { console.log('check this error: ' + error); });
   }
 
+  // Delete a policy, using the policy ID
+  deletePolicy(policy: Policy) {
+    this.acknowledgePolicyService.deletePolicy({policyId: policy.id}).subscribe(
+      result => { this.updatePolicyArrays(); }, error => { console.log('check this error: ' + error); });
+  }
+
+  // opens the edit dialog box for creating a policy
   openCreatePolicyDialog() {
     // Reset the new policy to an empty Policy object
     console.log('Editing policy: ' + this.newPolicy.title);

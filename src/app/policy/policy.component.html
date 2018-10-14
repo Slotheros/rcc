@@ -21,7 +21,7 @@
       <div class="policy" *ngFor="let policy of allPolicies">
         <a href="{{policy.url}}">{{policy.title}}</a>
         <p class="policy-description">{{policy.description}}</p>
-        <p class="completed">Completed: {{policy.date}}</p>
+        <p class="completed">Created: {{policy.date}}</p>
       </div>
     </mat-expansion-panel>
   </mat-accordion>
@@ -41,7 +41,8 @@
         </div>
         <div class="panel-half">
           <button class="ackBtn mat-raised-button mat-primary" (click)='acknowledgePolicy(policy.id, userID);'>Acknowledge</button>
-          <button *ngIf="userType === SUPERUSER || userType === ADMIN || userType === DPTHEAD" class="ackBtn mat-raised-button" mat-button-ripple (click)="openEditPolicyDialog(policy);">Edit Policy</button>
+          <button *ngIf="userType === SUPERUSER || userType === ADMIN || userType === DPTHEAD" class="ackBtn mat-raised-button" mat-button-ripple (click)="openEditPolicyDialog(policy);">Edit</button>
+          <button *ngIf="userType === SUPERUSER || userType === ADMIN || userType === DPTHEAD" class="ackBtn mat-raised-button mat-error" mat-button-ripple (click)="deletePolicy(policy);">Delete</button>
         </div>
       </div>
     </mat-expansion-panel>
@@ -58,7 +59,7 @@
       <div class="policy" *ngFor="let policy of ackPolicies">
         <a href="{{policy.url}}">{{policy.title}}</a>
         <p class="policy-description">{{policy.description}}</p>
-        <p class="completed">Completed: {{policy.date}}</p>
+        <p class="completed">Created: {{policy.date}}</p>
       </div>
     </mat-expansion-panel>
   </mat-accordion>
