@@ -3,7 +3,9 @@
   flex-direction: column;
   margin-bottom: 40px;
 }
-
+.section-title {
+  margin-top: 40px;
+}
 .container > * {
   margin: 0 auto;
   width: 80%;
@@ -57,7 +59,7 @@ h1 {
 }
 
 #disclaimer {
-  font-size: 10pt; 
+  font-size: 10pt;
 }
 
 .phone-field {
