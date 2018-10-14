@@ -47,6 +47,8 @@ export class PolicyComponent implements OnInit {
     });
   }
 
+  // Calls for all policies relevant to that user whenever a change in policies occurs
+  // HTML values are updated automatically when this function is called
   updatePolicyArrays() {
     this.ackPolicies = Array<Policy>();
     this.unackPolicies = Array<Policy>();
@@ -75,7 +77,7 @@ export class PolicyComponent implements OnInit {
           this.allPolicies.push(p);
         }
       }, error => {
-        console.log('Error retrieving unack policies');
+        console.log('Error retrieving unacknowl policies');
         console.log(error);
       });
     }

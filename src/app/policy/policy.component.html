@@ -19,9 +19,20 @@
       </mat-expansion-panel-header>
 
       <div class="policy" *ngFor="let policy of allPolicies">
-        <a href="{{policy.url}}">{{policy.title}}</a>
-        <p class="policy-description">{{policy.description}}</p>
-        <p class="completed">Created: {{policy.date}}</p>
+        <div class="panel-half">
+          <a class="policy-title" href="{{policy.url}}">{{policy.title}}</a>
+          <p class="policy-description">{{policy.description}}</p>
+        </div>
+        <div class="panel-half">
+          <button class="ackBtn mat-raised-button mat-primary" (click)='acknowledgePolicy(policy.id, userID);'>Acknowledge</button>
+          <button *ngIf="userType === SUPERUSER || userType === ADMIN || userType === DPTHEAD" class="ackBtn mat-raised-button" mat-button-ripple (click)="openEditPolicyDialog(policy);">
+            <span class="mobile-icon-text">Edit </span><i class="material-icons">edit</i>
+          </button>
+          <button *ngIf="userType === SUPERUSER || userType === ADMIN || userType === DPTHEAD" class="ackBtn mat-raised-button mat-error" mat-button-ripple (click)="deletePolicy(policy);">
+            <span class="mobile-icon-text">Delete </span><i class="material-icons">delete</i>
+          </button>
+        </div>
+        <hr *ngIf="unackPolicies.length > 1">
       </div>
     </mat-expansion-panel>
   </mat-accordion>
@@ -41,12 +52,6 @@
         </div>
         <div class="panel-half">
           <button class="ackBtn mat-raised-button mat-primary" (click)='acknowledgePolicy(policy.id, userID);'>Acknowledge</button>
-          <button *ngIf="userType === SUPERUSER || userType === ADMIN || userType === DPTHEAD" class="ackBtn mat-raised-button" mat-button-ripple (click)="openEditPolicyDialog(policy);">
-            <span class="mobile-icon-text">Edit </span><i class="material-icons">edit</i>
-          </button>
-          <button *ngIf="userType === SUPERUSER || userType === ADMIN || userType === DPTHEAD" class="ackBtn mat-raised-button mat-error" mat-button-ripple (click)="deletePolicy(policy);">
-              <span class="mobile-icon-text">Delete </span><i class="material-icons">delete</i>
-          </button>
         </div>
         <hr *ngIf="unackPolicies.length > 1">
       </div>
