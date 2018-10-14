@@ -14,17 +14,41 @@
   margin: 0px 20px 25px 0px;
 }
 .ackPolicyTitle {
-  margin-top: 20px;
+  margin-top: 0px;
 }
 button.create-policy {
   display: block;
   margin: 0 auto 50px auto;
 }
 
+button {
+  width: 100%;
+}
+
+#create-button {
+  width: auto;
+}
+
+//center icon in button
+i {
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+
 @media only screen and (min-width: 992px) {
   .policy-header {
     font-size: 1.5em;
   }
+
+  .mobile-icon-text {
+    display: none;
+  }
+
+  button {
+    width: auto;
+  }
+  
   .section-title {
     text-align: center;
     margin-bottom: 40px;

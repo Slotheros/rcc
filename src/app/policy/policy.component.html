@@ -2,7 +2,7 @@
 <br/>
 
 <h1 class="section-title">View Policy</h1>
-<button *ngIf="userType === SUPERUSER || userType === ADMIN || userType === DPTHEAD" class="mat-raised-button mat-primary create-policy" mat-button-ripple (click)="openCreatePolicyDialog();">Create New Policy</button>
+<button id="create-button" *ngIf="userType === SUPERUSER || userType === ADMIN || userType === DPTHEAD" class="mat-raised-button mat-primary create-policy" mat-button-ripple (click)="openCreatePolicyDialog();">Create New Policy</button>
 <div class="container">
   <mat-card>
     <mat-card-title>
@@ -42,12 +42,13 @@
         <div class="panel-half">
           <button class="ackBtn mat-raised-button mat-primary" (click)='acknowledgePolicy(policy.id, userID);'>Acknowledge</button>
           <button *ngIf="userType === SUPERUSER || userType === ADMIN || userType === DPTHEAD" class="ackBtn mat-raised-button" mat-button-ripple (click)="openEditPolicyDialog(policy);">
-            <i class="material-icons">edit</i>
+            <span class="mobile-icon-text">Edit </span><i class="material-icons">edit</i>
           </button>
           <button *ngIf="userType === SUPERUSER || userType === ADMIN || userType === DPTHEAD" class="ackBtn mat-raised-button mat-error" mat-button-ripple (click)="deletePolicy(policy);">
-            <i class="material-icons">delete</i>
+              <span class="mobile-icon-text">Delete </span><i class="material-icons">delete</i>
           </button>
         </div>
+        <hr *ngIf="unackPolicies.length > 1">
       </div>
     </mat-expansion-panel>
   </mat-accordion>
