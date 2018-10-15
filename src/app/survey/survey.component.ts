@@ -136,6 +136,7 @@ export class SurveyComponent implements OnInit {
 
   // Acknowledge a survey using the survey ID and user ID
   acknowledgeSurvey(surveyID: number, userID: number) {
+    console.log('acking survey!');
     this.surveyService.acknowledgeSurvey(surveyID, userID).subscribe(
       result => { this.updateSurveyArrays(); }, error => { console.log('check this error: ' + error); });
   }

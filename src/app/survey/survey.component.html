@@ -14,7 +14,7 @@
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title class="survey-header">
-          <h3 class="ackSurveyTitle">List of All Surveys:</h3>
+          <h3 class="ackSurveyTitle">List of All Surveys</h3>
         </mat-panel-title>
       </mat-expansion-panel-header>
 
@@ -40,17 +40,14 @@
     <mat-expansion-panel [expanded]="true">
       <mat-expansion-panel-header>
         <mat-panel-title class="survey-header">
-          <h3 class="ackSurveyTitle">Unacknowledged Surveys:</h3>
+          <h3 class="ackSurveyTitle">Uncompleted Surveys</h3>
         </mat-panel-title>
       </mat-expansion-panel-header>
 
       <div class="survey unackSurvey" *ngFor="let survey of unackSurveys">
         <div class="panel-half">
-          <a matTooltip="{{survey.url}}" target="_blank" class="survey-title" href="{{survey.url}}">{{survey.title}}</a>
+          <a matTooltip="{{survey.url}}" target="_blank" class="survey-title" href="{{survey.url}}" (click)='acknowledgeSurvey(survey.id, userID);'>{{survey.title}}</a>
           <p class="survey-description">{{survey.description}}</p>
-        </div>
-        <div class="panel-half">
-          <button class="ackBtn mat-raised-button mat-primary" (click)='acknowledgeSurvey(survey.id, userID);'>Acknowledge</button>
         </div>
         <hr *ngIf="unackSurveys.length > 1">
       </div>
@@ -61,7 +58,7 @@
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title class="survey-header">
-          <h3 class="ackSurveyTitle">Acknowledged Surveys:</h3>
+          <h3 class="ackSurveyTitle">Completed Surveys</h3>
         </mat-panel-title>
       </mat-expansion-panel-header>
 
