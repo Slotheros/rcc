@@ -46,6 +46,12 @@ export class EditPolicyDialogComponent implements OnInit {
   submit(form) {
     const data = this.form.getRawValue();
     data['depts'] = this.getSelected();
+    if (
+      data['url'].substr(0, 7) !== 'http://'
+      && data['url'].substr(0, 8) !== 'https://'
+      && data['url'] !== '') {
+      data['url'] = 'http://' + data['url'];
+    }
     return this.dialogRef.close(data);
   }
 
