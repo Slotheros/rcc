@@ -20,7 +20,7 @@
 
       <div class="policy" *ngFor="let policy of allPolicies">
         <div class="panel-half">
-          <a class="policy-title" href="{{policy.url}}">{{policy.title}}</a>
+          <a matTooltip="{{policy.url}}" target="_blank" class="policy-title" href="{{policy.url}}">{{policy.title}}</a>
           <p class="policy-description">{{policy.description}}</p>
         </div>
         <div class="panel-half">
@@ -47,7 +47,7 @@
 
       <div class="policy unackPolicy" *ngFor="let policy of unackPolicies">
         <div class="panel-half">
-          <a class="policy-title" href="{{policy.url}}">{{policy.title}}</a>
+          <a matTooltip="{{policy.url}}" target="_blank" class="policy-title" href="{{policy.url}}">{{policy.title}}</a>
           <p class="policy-description">{{policy.description}}</p>
         </div>
         <div class="panel-half">
@@ -67,7 +67,7 @@
       </mat-expansion-panel-header>
 
       <div class="policy" *ngFor="let policy of ackPolicies">
-        <a href="{{policy.url}}">{{policy.title}}</a>
+        <a matTooltip="{{policy.url}}" target="_blank" href="{{policy.url}}">{{policy.title}}</a>
         <p class="policy-description">{{policy.description}}</p>
         <p class="completed">Created: {{policy.date}}</p>
       </div>
