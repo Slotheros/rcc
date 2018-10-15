@@ -69,9 +69,7 @@ export class RegistrationComponent implements OnInit {
       return;
     }
     this.usersService.register(this.registrant).subscribe(result => {
-      if (result) {
-        this.router.navigate(['login']);
-      } else { }
+      this.router.navigate(['login']);
     }, error => {
       this.errorDialogService.setErrorMsg(error.errMsg);
       this.errorDialogService.openDialog(this.errorDialogService.getErrorMsg());

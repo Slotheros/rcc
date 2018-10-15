@@ -8,6 +8,9 @@ import { Message } from '../message';
 import { Globals } from '../globals';
 import { SelectDepartmentsComponent } from '../select-departments/select-departments.component';
 import { SelectedDepartmentsService } from '../services/selected-departments.service';
+import { ErrorDialogService } from '../services/error-dialog.service';
+import { MatSnackBar } from '@angular/material';
+
 
 
 @Component({
@@ -23,7 +26,7 @@ export class AlertsComponent implements OnInit {
   readonly ADMIN: number = 2;
   readonly STANDARD: number = 3;
   readonly DPTHEAD: number = 4;
-  
+
   message: Message;
   selectedDepartments: Department[] = [];
   alertMessage = '';
@@ -41,8 +44,9 @@ export class AlertsComponent implements OnInit {
     private router: Router,
     private globals: Globals,
     private selectDepartments: SelectDepartmentsComponent,
-    private selectedDepartmentsService: SelectedDepartmentsService
-  ) {}
+    private selectedDepartmentsService: SelectedDepartmentsService,
+    private errorDialogService: ErrorDialogService,
+    public snackBar: MatSnackBar) {}
 
   ngOnInit() {
     this.authService.loggedIn().subscribe(result => {
@@ -86,15 +90,19 @@ export class AlertsComponent implements OnInit {
     // this.usersService.getPhoneNumbersByDepartments(this.selectedDepartments).subscribe(result => {
     this.alertsService.sendAlert(this.message).subscribe(result => {
       if (result) {
-        console.log('check result: ' + result);
-        // this.router.navigate(['login']);
-      } else { }
+        // reset values on the page
+        this.message = {
+          message: undefined,
+          departments: undefined,
+        };
+        this.selectedDepartments = [];
+        this.alertMessage = '';
+        // show a snackBar that says the alert was successfully sent
+        this.snackBar.open('Alert successfully sent', 'Close');
+      }
     }, error => {
-      console.log('check this error: ' + error);
-      // this.errorDialogService.setErrorMsg(error.errMsg);
-      // this.errorDialogService.openDialog(this.errorDialogService.getErrorMsg());
+      this.errorDialogService.setErrorMsg(error.errMsg);
+      this.errorDialogService.openDialog(this.errorDialogService.getErrorMsg());
     });
   }
 }
-
-
