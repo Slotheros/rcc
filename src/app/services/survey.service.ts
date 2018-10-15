@@ -18,7 +18,6 @@ export class SurveyService {
 
   // Service used to get all acknowledged surveys given a user ID
   getAllSurveys() {
-    console.log('Getting all surveys...');
     return this.http.get(this.config.getRccUrl() + '/surveys/getAll/', this.config.getHttpOptions()).pipe(
       catchError(this.handleError)
     );
