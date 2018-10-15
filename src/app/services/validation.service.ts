@@ -16,6 +16,7 @@ export class ValidationService {
    */
   validateEmail(email: string): boolean {
     if (email == null) { return false; }
+    email = email.trim();
     const regex = new RegExp('^(([^<>()\\[\\]\\\\.,;:\\s@"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]' +
       '{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$');
     const result = regex.test(email);
@@ -30,7 +31,7 @@ export class ValidationService {
   validatePassword(password: string): boolean {
     if (password == null) { return false; }
     const regex = new RegExp('((?=.*\\d)(?=.*[A-Z])(?=.*\\W).{8,})');
-    const result = regex.test(password.trim());
+    const result = regex.test(password);
     return result;
   }
   /**
@@ -40,8 +41,9 @@ export class ValidationService {
    */
   validateName(name: string): boolean {
     if (name == null) { return false; }
+    name = name.trim();
     const regex = new RegExp('^[A-Za-z][A-Za-z\\\'\\-]+([\\ A-Za-z][A-Za-z\\\'\\-]+)*');
-    const result = regex.exec(name.trim());
+    const result = regex.exec(name);
     // Check if there still remains invalid characters after first part of name
     if (result) {
       // Removes valid portion of string
@@ -60,8 +62,9 @@ export class ValidationService {
    */
   validatePhoneNumber(phoneNumber: string): boolean {
     if (phoneNumber == null) { return false; }
+    phoneNumber = phoneNumber.trim();
     const regex = new RegExp('^(\\+\\d{1,2})?\\d{10}$');
-    const result = regex.test(phoneNumber.trim());
+    const result = regex.test(phoneNumber);
     return result;
   }
 

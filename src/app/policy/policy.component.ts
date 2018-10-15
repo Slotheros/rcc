@@ -7,7 +7,6 @@ import { Policy } from '../policy';
 import { Globals } from '../globals';
 import { MatDialog, MatDialogConfig, MatDialogRef, MatExpansionPanel } from '@angular/material';
 import { EditPolicyDialogComponent } from '../edit-policy-dialog/edit-policy-dialog.component';
-import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'rcc-view-policy',
@@ -34,7 +33,7 @@ export class PolicyComponent implements OnInit {
                private acknowledgePolicyService: AcknowledgePolicyService) { }
 
   ngOnInit() {
-
+    // authenticate the user
     this.authService.loggedIn().subscribe(result => {
       // Set userID to what was given from authService
       this.userID = result['eId'];

@@ -32,9 +32,9 @@ export class EditPolicyDialogComponent implements OnInit {
   // TODO: use our own validators, not required
   ngOnInit() {
     this.form = this.fb.group({
-      title: [this.policy.title, Validators.required],
-      description: [this.policy.description, Validators.required],
-      url: [this.policy.url, Validators.required],
+      title: [this.policy.title.trim(), Validators.required],
+      description: [this.policy.description.trim(), Validators.required],
+      url: [this.policy.url.trim(), Validators.required],
     });
   }
 
