@@ -19,7 +19,6 @@ export class PolicyService {
 
   // Service used to get all acknowledged policies given a user ID
   getAllPolicies() {
-    console.log('Getting all policies...');
     return this.http.get(this.config.getRccUrl() + '/policies/getAll/', this.config.getHttpOptions()).pipe(
       catchError(this.handleError)
     );
