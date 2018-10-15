@@ -10,16 +10,17 @@ import { MaterialModule } from './material';
 import { LoginComponent } from './login/login.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { HomeComponent } from './home/home.component';
-import { ViewSurveyComponent } from './view-survey/view-survey.component';
 import { PolicyComponent } from './policy/policy.component';
 import { AppRoutingModule } from './app-routing.module';
 import { UserSettingsComponent } from './user-settings/user-settings.component';
 import { AlertsComponent } from './alerts/alerts.component';
 import { EmailHRComponent } from './email-hr/email-hr.component';
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
-import { EditPolicyDialogComponent } from './edit-policy-dialog/edit-policy-dialog.component';
+import { PolicyDialogComponent } from './policy-dialog/policy-dialog.component';
 import { Globals } from './globals';
 import { SelectDepartmentsComponent } from './select-departments/select-departments.component';
+import { SurveyComponent } from './survey/survey.component';
+import { SurveyDialogComponent } from './survey-dialog/survey-dialog.component';
 
 @NgModule({
   declarations: [
@@ -28,14 +29,15 @@ import { SelectDepartmentsComponent } from './select-departments/select-departme
     LoginComponent,
     NavigationComponent,
     HomeComponent,
-    ViewSurveyComponent,
     PolicyComponent,
     UserSettingsComponent,
     AlertsComponent,
     EmailHRComponent,
     ErrorDialogComponent,
-    EditPolicyDialogComponent,
-    SelectDepartmentsComponent
+    PolicyDialogComponent,
+    SelectDepartmentsComponent,
+    SurveyComponent,
+    SurveyDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -47,8 +49,8 @@ import { SelectDepartmentsComponent } from './select-departments/select-departme
     HttpClientModule,
     FileUploadModule
   ],
-  exports: [ErrorDialogComponent, EditPolicyDialogComponent],
-  entryComponents: [ErrorDialogComponent, EditPolicyDialogComponent],
+  exports: [ErrorDialogComponent, PolicyDialogComponent, SurveyDialogComponent],
+  entryComponents: [ErrorDialogComponent, PolicyDialogComponent, SurveyDialogComponent],
   providers: [ Globals ],
   bootstrap: [AppComponent]
 })

@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { Policy } from '../policy';
+import { Survey } from '../survey';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Globals } from '../globals';
 import {filter} from 'rxjs/operators';
@@ -10,31 +10,31 @@ import { SelectedDepartmentsService } from '../services/selected-departments.ser
 
 
 @Component({
-  selector: 'rcc-edit-policy-dialog',
-  templateUrl: './edit-policy-dialog.component.html',
-  styleUrls: ['./edit-policy-dialog.component.scss']
+  selector: 'rcc-edit-survey-dialog',
+  templateUrl: './survey-dialog.component.html',
+  styleUrls: ['./survey-dialog.component.scss']
 })
-export class EditPolicyDialogComponent implements OnInit {
+export class SurveyDialogComponent implements OnInit {
 
-  policy: Policy;
+  survey: Survey;
   form: FormGroup;
   selectedDepartments: Department[] = [];
 
   constructor(
     private fb: FormBuilder,
-    private dialogRef: MatDialogRef<EditPolicyDialogComponent>,
+    private dialogRef: MatDialogRef<SurveyDialogComponent>,
     private globals: Globals,
     private selectedDepartmentsService: SelectedDepartmentsService,
-    @Inject(MAT_DIALOG_DATA) public data: Policy ) {
-    this.policy = data;
+    @Inject(MAT_DIALOG_DATA) public data: Survey ) {
+    this.survey = data;
   }
 
   // TODO: use our own validators, not required
   ngOnInit() {
     this.form = this.fb.group({
-      title: [this.policy.title.trim(), Validators.required],
-      description: [this.policy.description.trim(), Validators.required],
-      url: [this.policy.url.trim(), Validators.required],
+      title: [this.survey.title, Validators.required],
+      description: [this.survey.description, Validators.required],
+      url: [this.survey.url, Validators.required],
     });
   }
 

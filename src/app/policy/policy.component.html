@@ -24,7 +24,6 @@
           <p class="policy-description">{{policy.description}}</p>
         </div>
         <div class="panel-half">
-          <button class="ackBtn mat-raised-button mat-primary" (click)='acknowledgePolicy(policy.id, userID);'>Acknowledge</button>
           <button *ngIf="userType === SUPERUSER || userType === ADMIN || userType === DPTHEAD" class="ackBtn mat-raised-button" mat-button-ripple (click)="openEditPolicyDialog(policy);">
             <span class="mobile-icon-text">Edit </span><i class="material-icons">edit</i>
           </button>

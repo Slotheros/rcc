@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import {  FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import { UsersService } from '../services/users.service';
 import { Policy } from '../policy';
-import { AcknowledgePolicyService } from '../services/acknowledge-policy.service';
+import { PolicyService } from '../services/policy.service';
 
 
 
@@ -25,9 +25,9 @@ export class HomeComponent implements OnInit {
   unackPolicies = Array<Policy>();
 
   constructor(private authService: AuthService,
-    private router: Router, 
+    private router: Router,
     private usersService: UsersService,
-    private acknowledgePolicyService: AcknowledgePolicyService) {
+    private acknowledgePolicyService: PolicyService) {
     this.uploader.onCompleteItem = (item:any, response:any, status:any, headers:any) => {
       console.log("ImageUpload:uploaded:", item, status, response);
     };

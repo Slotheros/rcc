@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { AlertsService } from '../services/alerts.service';
-import { AcknowledgePolicyService } from '../services/acknowledge-policy.service';
+import { PolicyService } from '../services/policy.service';
 import { Policy } from '../policy';
 import { Globals } from '../globals';
 import { MatDialog, MatDialogConfig, MatDialogRef, MatExpansionPanel } from '@angular/material';
-import { EditPolicyDialogComponent } from '../edit-policy-dialog/edit-policy-dialog.component';
+import { PolicyDialogComponent } from '../policy-dialog/policy-dialog.component';
 
 @Component({
   selector: 'rcc-view-policy',
@@ -15,7 +15,7 @@ import { EditPolicyDialogComponent } from '../edit-policy-dialog/edit-policy-dia
 })
 export class PolicyComponent implements OnInit {
   userID: number = null;
-  dialogRef: MatDialogRef<EditPolicyDialogComponent>;
+  dialogRef: MatDialogRef<PolicyDialogComponent>;
   newPolicy: Policy = this.globals.EMPTY_POLICY;
   editPolicy: Policy = this.globals.EMPTY_POLICY;
   ackPolicies = Array<Policy>();
@@ -30,7 +30,7 @@ export class PolicyComponent implements OnInit {
 
   constructor( private alertsService: AlertsService, private authService: AuthService,
                private router: Router, private dialog: MatDialog, private globals: Globals,
-               private acknowledgePolicyService: AcknowledgePolicyService) { }
+               private acknowledgePolicyService: PolicyService) { }
 
   ngOnInit() {
     // authenticate the user
@@ -159,7 +159,7 @@ export class PolicyComponent implements OnInit {
     console.log('Editing policy: ' + this.newPolicy.title);
 
     // Open dialog and keep a reference to it
-    this.dialogRef = this.dialog.open(EditPolicyDialogComponent, {
+    this.dialogRef = this.dialog.open(PolicyDialogComponent, {
       data: {
         title: this.newPolicy.title,
         description: this.newPolicy.description,
@@ -190,7 +190,7 @@ export class PolicyComponent implements OnInit {
     console.log('Editing policy: ' + policy.title);
 
     // Open dialog and keep a reference to it
-    this.dialogRef = this.dialog.open(EditPolicyDialogComponent, {
+    this.dialogRef = this.dialog.open(PolicyDialogComponent, {
       data: {
         title: policy ? policy.title : '',
         description: policy ? policy.description : '',

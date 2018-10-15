@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditPolicyDialogComponent } from './edit-policy-dialog.component';
+import { SurveyDialogComponent } from './survey-dialog.component';
 
-describe('EditPolicyDialogComponent', () => {
-  let component: EditPolicyDialogComponent;
-  let fixture: ComponentFixture<EditPolicyDialogComponent>;
+describe('SurveyDialogComponent', () => {
+  let component: SurveyDialogComponent;
+  let fixture: ComponentFixture<SurveyDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditPolicyDialogComponent ]
+      declarations: [ SurveyDialogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EditPolicyDialogComponent);
+    fixture = TestBed.createComponent(SurveyDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

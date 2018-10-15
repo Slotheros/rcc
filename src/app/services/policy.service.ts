@@ -4,13 +4,13 @@ import { ConfigService } from './config.service';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Policy } from '../policy';
-import {hostReportError} from 'rxjs/internal-compatibility';
+import { hostReportError } from 'rxjs/internal-compatibility';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class AcknowledgePolicyService {
+export class PolicyService {
 
   constructor(
     private http: HttpClient,
