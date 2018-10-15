@@ -5,7 +5,8 @@ import {  FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import { UsersService } from '../services/users.service';
 import { Policy } from '../policy';
 import { PolicyService } from '../services/policy.service';
-
+import { Survey } from '../survey';
+import { SurveyService } from '../services/survey.service';
 
 
 const URL = 'http://localhost:3000/users/csvCompare';
@@ -23,11 +24,14 @@ export class HomeComponent implements OnInit {
   newPolicy: Policy;
   ackPolicies = Array<Policy>();
   unackPolicies = Array<Policy>();
+  ackSurveys = Array<Survey>();
+  unackSurveys = Array<Survey>();
 
   constructor(private authService: AuthService,
     private router: Router,
     private usersService: UsersService,
-    private acknowledgePolicyService: PolicyService) {
+    private acknowledgePolicyService: PolicyService,
+    private surveyService: SurveyService) {
     this.uploader.onCompleteItem = (item:any, response:any, status:any, headers:any) => {
       console.log("ImageUpload:uploaded:", item, status, response);
     };
@@ -71,6 +75,31 @@ export class HomeComponent implements OnInit {
         console.log('Error retrieving unack policies');
         console.log(error);
       });
+      this.surveyService.getUnacknowledged(this.userID).subscribe(result => {
+        for (const survey of result as Array<Object>) {
+          const depts = [];
+          if (survey['deptSales']) { depts.push({'id': 1}); }
+          if (survey['deptGarage']) { depts.push({'id': 2}); }
+          if (survey['deptAdmin']) { depts.push({'id': 3}); }
+          if (survey['deptFoodBeverage']) { depts.push({'id': 4}); }
+          if (survey['deptProduction']) { depts.push({'id': 5}); }
+  
+          const p = {
+            'id': survey['surveyID'],
+            'title': survey['title'],
+            'description': survey['description'],
+            'departments': depts,
+            'url': survey['url'],
+            'acknowledged': false,
+            'date': survey['date'].substr(0, 10)
+          } as Survey;
+          this.unackSurveys.push(p);
+        }
+      }, error => {
+        console.log('Error retrieving unack surveys');
+        console.log(error);
+      });
+
     });
   }
 }

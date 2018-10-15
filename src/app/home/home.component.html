@@ -9,9 +9,9 @@
       <mat-card-title>Reminders</mat-card-title>
       <hr>
       <mat-card-content>
-        <a href="/policy/"><h6>You have <strong class="">{{unackPolicies.length}}</strong> policies that need to be acknowledged.</h6></a>
+        <a href="/policy/"><h6><i class="material-icons orange600" *ngIf="unackPolicies.length > 0">notification_important</i>You have <strong class="">{{unackPolicies.length}}</strong> policies that need to be acknowledged.</h6></a>
         <hr>
-        <a href="/view-survey/"><h6>You have <strong class="">2</strong> surveys that need to be acknowledged.</h6></a>
+        <a href="/survey/"><h6><i class="material-icons orange600" *ngIf="unackSurveys.length > 0">notification_important</i>You have <strong class="">{{unackSurveys.length}}</strong> surveys that need to be acknowledged.</h6></a>
       </mat-card-content>
     </mat-card>
 
