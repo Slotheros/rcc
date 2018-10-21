@@ -19,6 +19,9 @@
             <li *ngIf="userType === SUPERUSER || userType === ADMIN || userType === DPTHEAD" class="nav-item admin-option">
                 <a class="nav-link" href="alerts">Send Alerts</a>
             </li>
+            <li *ngIf="userType === SUPERUSER || userType === ADMIN" class="nav-item admin-option">
+              <a class="nav-link" href="csv-compare">CSV Compare</a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" routerLink="/email-hr">Email HR</a>
             </li>
