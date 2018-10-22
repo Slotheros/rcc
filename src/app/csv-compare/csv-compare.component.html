@@ -22,19 +22,21 @@
 
       <!-- Last Name Column -->
       <ng-container matColumnDef="lname">
-        <th mat-header-cell *matHeaderCellDef> First Name </th>
+        <th mat-header-cell *matHeaderCellDef> Last Name </th>
         <td mat-cell *matCellDef="let element"> {{element.lname}} </td>
       </ng-container>
 
       <!-- Phone Column -->
       <ng-container matColumnDef="phone">
-        <th mat-header-cell *matHeaderCellDef> First Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+        <th mat-header-cell *matHeaderCellDef> Phone Number </th>
+        <td mat-cell *matCellDef="let element">
+          ({{element.phone.toString().substr(0, 3)}}) - {{element.phone.toString().substr(2,3)}} - {{element.phone.toString().substr(6,4)}}
+        </td>
       </ng-container>
 
       <!-- Email Column -->
       <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef> First Name </th>
+        <th mat-header-cell *matHeaderCellDef> Email Address </th>
         <td mat-cell *matCellDef="let element"> {{element.email}} </td>
       </ng-container>
 
@@ -60,19 +62,19 @@
 
       <!-- Last Name Column -->
       <ng-container matColumnDef="lname">
-        <th mat-header-cell *matHeaderCellDef> First Name </th>
+        <th mat-header-cell *matHeaderCellDef> Last Name </th>
         <td mat-cell *matCellDef="let element"> {{element.lname}} </td>
       </ng-container>
 
       <!-- Phone Column -->
       <ng-container matColumnDef="phone">
-        <th mat-header-cell *matHeaderCellDef> First Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+        <th mat-header-cell *matHeaderCellDef> Phone Number </th>
+        <td mat-cell *matCellDef="let element"> ({{element.phone.toString().substr(0, 3)}}) - {{element.phone.toString().substr(2,3)}} - {{element.phone.toString().substr(6,4)}} </td>
       </ng-container>
 
       <!-- Email Column -->
       <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef> First Name </th>
+        <th mat-header-cell *matHeaderCellDef> Email Address </th>
         <td mat-cell *matCellDef="let element"> {{element.email}} </td>
       </ng-container>
 
