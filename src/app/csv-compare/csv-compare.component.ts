@@ -17,7 +17,9 @@ export class CsvCompareComponent implements OnInit {
 
   userID: number = null;
   userType: number = null;
-  public uploader: FileUploader = new FileUploader({url: URL, itemAlias: 'csvCompare'});
+  public uploader: FileUploader = new FileUploader(
+    {url: URL,
+            itemAlias: 'csvCompare'});
   newEmployees: Array<Employee>;
   existingEmployees: Array<Employee>;
   displayedColumns = ['name', 'phone', 'email'];
@@ -55,7 +57,6 @@ export class CsvCompareComponent implements OnInit {
       this.router.navigate(['login']);
     }, () => {
       // Do Nothing
-      this.displayedColumns = ['name', 'phone', 'email'];
     });
   }
 
@@ -66,20 +67,34 @@ export class CsvCompareComponent implements OnInit {
 
     // format and assign new employees
     for (const entry of response[0]) {
-      const employee: Employee = this.EMPTY_EMPLOYEE;
+      const employee: Employee = Object.create(this.EMPTY_EMPLOYEE);
       employee.name = entry['Name'];
       employee.email = entry['Personal eMail'];
       employee.phone = entry['Home Cell'];
-      this.newEmployees.push(employee);
+      this.newEmployees.push(Object.create(employee));
     }
 
     // format and assign existing employees
     for (const entry of response[1]) {
-      const employee: Employee = this.EMPTY_EMPLOYEE;
+      const employee: Employee = Object.create(this.EMPTY_EMPLOYEE);
       employee.name = entry['lname'] + ', ' + entry['fname'];
       employee.email = entry['email'];
       employee.phone = entry['phone'];
       this.existingEmployees.push(employee);
+    }
+  }
+
+  uploadFile() {
+    if (this.uploader.getNotUploadedItems()[0].some.name) {
+      const name = this.uploader.getNotUploadedItems()[this.uploader.getNotUploadedItems().length - 1].some.name;
+      if (name.substr(name.length - 4, 4) === '.csv') {
+        console.log('file is a csv');
+        this.uploader.uploadItem();
+      } else {
+        console.log('wrong file type');
+      }
+    } else {
+      console.log('no file?');
     }
   }
 }
