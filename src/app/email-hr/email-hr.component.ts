@@ -53,14 +53,12 @@ export class EmailHRComponent implements OnInit {
           email: undefined,
         };
         this.emailMessage = '';
-        this.currentUser = '';
         // show a snackBar that says the alert was successfully sent
-        this.snackBar.open('Alert successfully sent', 'Close');
+        this.snackBar.open('Email successfully sent', 'Close');
       }
     }, error => {
-      console.log("CHECK: " + error.errMsg);
-      // this.errorDialogService.setErrorMsg(error.errMsg);
-      // this.errorDialogService.openDialog(this.errorDialogService.getErrorMsg());
+      this.errorDialogService.setErrorMsg(error.errMsg);
+      this.errorDialogService.openDialog(this.errorDialogService.getErrorMsg());
     });
   }
 }
