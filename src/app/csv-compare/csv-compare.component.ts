@@ -89,7 +89,7 @@ export class CsvCompareComponent implements OnInit {
       const name = this.uploader.getNotUploadedItems()[this.uploader.getNotUploadedItems().length - 1].some.name;
       if (name.substr(name.length - 4, 4) === '.csv') {
         console.log('file is a csv');
-        this.uploader.uploadItem();
+        this.uploader.uploadAll();
       } else {
         console.log('wrong file type');
       }
