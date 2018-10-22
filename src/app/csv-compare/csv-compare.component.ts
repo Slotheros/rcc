@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { Employee } from '../employee';
+import { MatTableModule, MatTableDataSource } from '@angular/material';
+
 
 @Component({
   selector: 'rcc-csv-compare',
@@ -11,6 +14,11 @@ export class CsvCompareComponent implements OnInit {
 
   userID: number = null;
   userType: number = null;
+  newEmployees: Array<Employee>;
+  existingEmployees: Array<Employee>;
+  newDataSource;
+  existingDataSource;
+  displayedColumns: string[];
 
   constructor(private authService: AuthService,
               private router: Router) { }
@@ -25,8 +33,39 @@ export class CsvCompareComponent implements OnInit {
       this.router.navigate(['login']);
     }, () => {
       // After userID is found, get the csv array
-      // TODO: get init array values here
+      this.newEmployees = [
+        {
+          fname: 'Ryan',
+          lname: 'Bower',
+          phone: 2678858748,
+          email: 'ryan@gmail.com',
+          active: false
+        } as Employee
+        ];
+      this.existingEmployees = [
+        {
+          fname: 'Louie',
+          lname: 'Trapani',
+          phone: 1724902837,
+          email: 'louie@gmail.com',
+          active: true
+        } as Employee,
+        {
+          fname: 'Rana',
+          lname: 'Vem',
+          phone: 3678492643,
+          email: 'rana@gmail.com',
+          active: false
+        } as Employee
+        ];
+      this.getEmployees();
     });
   }
 
+  getEmployees() {
+     // TODO: get init array values here
+     this.newDataSource = (this.newEmployees);
+     this.existingDataSource = (this.existingEmployees);
+     this.displayedColumns = ['fname', 'lname', 'phone', 'email'];
+  }
 }

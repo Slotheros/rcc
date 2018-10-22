@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { MatTableModule } from '@angular/material';
 import { CsvCompareComponent } from './csv-compare.component';
 
 describe('CsvCompareComponent', () => {
