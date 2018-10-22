@@ -101,6 +101,7 @@ export class AlertsComponent implements OnInit {
         this.snackBar.open('Alert successfully sent', 'Close');
       }
     }, error => {
+      console.log("TRYING");
       this.errorDialogService.setErrorMsg(error.errMsg);
       this.errorDialogService.openDialog(this.errorDialogService.getErrorMsg());
     });
