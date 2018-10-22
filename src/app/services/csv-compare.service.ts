@@ -16,16 +16,9 @@ export class CsvCompareService {
     private config: ConfigService
   ) { }
 
-  // Service used to get the new employees added from the imported CSV file
-  getNewEmployees() {
-    return this.http.get(this.config.getRccUrl() + '/csv/getNew/', this.config.getHttpOptions()).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  // Service used to get the employees already in the DB, also in the imported CSV file
-  getExistingEmployees() {
-    return this.http.get(this.config.getRccUrl() + '/csv/getExisting/', this.config.getHttpOptions()).pipe(
+  // Service used to get the employees from the imported CSV file
+  getEmployees() {
+    return this.http.get(this.config.getRccUrl() + '/users/csvCompare/', this.config.getHttpOptions()).pipe(
       catchError(this.handleError)
     );
   }

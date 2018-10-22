@@ -18,9 +18,9 @@ const URL = 'http://localhost:3000/users/csvCompare';
 })
 export class HomeComponent implements OnInit {
 
-  userID:number = null;
-  userType:number = null;
-  public uploader:FileUploader = new FileUploader({url: URL, itemAlias: 'csvCompare'});
+  userID: number = null;
+  userType: number = null;
+  public uploader: FileUploader = new FileUploader({url: URL, itemAlias: 'csvCompare'});
   newPolicy: Policy;
   ackPolicies = Array<Policy>();
   unackPolicies = Array<Policy>();
@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
     private acknowledgePolicyService: PolicyService,
     private surveyService: SurveyService) {
     this.uploader.onCompleteItem = (item:any, response:any, status:any, headers:any) => {
-      console.log("ImageUpload:uploaded:", item, status, response);
+      console.log('ImageUpload:uploaded:', item, status, response);
     };
   }
 
@@ -83,7 +83,7 @@ export class HomeComponent implements OnInit {
           if (survey['deptAdmin']) { depts.push({'id': 3}); }
           if (survey['deptFoodBeverage']) { depts.push({'id': 4}); }
           if (survey['deptProduction']) { depts.push({'id': 5}); }
-  
+
           const p = {
             'id': survey['surveyID'],
             'title': survey['title'],

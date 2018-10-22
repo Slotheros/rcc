@@ -4,7 +4,9 @@ import { Router } from '@angular/router';
 import { Employee } from '../employee';
 import { MatTableModule, MatTableDataSource } from '@angular/material';
 import {CsvCompareService} from '../services/csv-compare.service';
+import {FileUploader} from 'ng2-file-upload/ng2-file-upload';
 
+const URL = 'http://localhost:3000/users/csvCompare';
 
 @Component({
   selector: 'rcc-csv-compare',
@@ -15,15 +17,33 @@ export class CsvCompareComponent implements OnInit {
 
   userID: number = null;
   userType: number = null;
+  public uploader: FileUploader = new FileUploader({url: URL, itemAlias: 'csvCompare'});
   newEmployees: Array<Employee>;
   existingEmployees: Array<Employee>;
-  newDataSource;
-  existingDataSource;
-  displayedColumns: string[];
+  displayedColumns = ['name', 'phone', 'email'];
+  expandNewEmployees = false;
+
+  private EMPTY_EMPLOYEE = {
+    name: null,
+    phone: null,
+    email: null,
+    active: null
+  } as Employee;
 
   constructor(private authService: AuthService,
               private router: Router,
-              private csvService: CsvCompareService) { }
+              private csvService: CsvCompareService) {
+    this.uploader.onSuccessItem = (item: any, response: any, status: any, headers: any) => {
+      // set the employee array values
+      this.setEmployees(JSON.parse(response));
+      // expand new employees panel
+      this.expandNewEmployees = true;
+      // console.log('ImageUpload:uploaded:', item, status, response);
+    };
+    this.uploader.onErrorItem = (item: any, response: any, status: any, headers: any) => {
+      console.log('Error during Upload:', item, status, response);
+    };
+  }
 
   ngOnInit() {
     // authenticate the user
@@ -34,50 +54,32 @@ export class CsvCompareComponent implements OnInit {
     }, error => {
       this.router.navigate(['login']);
     }, () => {
-      // After userID is found, get the csv array
-      this.newEmployees = [
-        {
-          fname: 'Ryan',
-          lname: 'Bower',
-          phone: 2678858748,
-          email: 'ryan@gmail.com',
-          active: false
-        } as Employee
-        ];
-      this.existingEmployees = [
-        {
-          fname: 'Louie',
-          lname: 'Trapani',
-          phone: 1724902837,
-          email: 'louie@gmail.com',
-          active: true
-        } as Employee,
-        {
-          fname: 'Rana',
-          lname: 'Vem',
-          phone: 3678492643,
-          email: 'rana@gmail.com',
-          active: false
-        } as Employee
-        ];
-      this.getEmployees();
+      // Do Nothing
+      this.displayedColumns = ['name', 'phone', 'email'];
     });
   }
 
-  getEmployees() {
-     // TODO: get init array values here
-     this.csvService.getNewEmployees().pipe().subscribe(result => {
-       this.newEmployees = result as Array<Employee>;
-     }, error => {
-       console.log('Error retrieving new employees');
-       console.log(error);
-     });
-     this.csvService.getExistingEmployees().pipe().subscribe(result => {
-       this.existingEmployees = result as Array<Employee>;
-     }, error => {
-       console.log('Error retrieving new employees');
-       console.log(error);
-     });
-     this.displayedColumns = ['fname', 'lname', 'phone', 'email'];
+  setEmployees(response) {
+    // reset employee arrays
+    this.newEmployees = [];
+    this.existingEmployees = [];
+
+    // format and assign new employees
+    for (const entry of response[0]) {
+      const employee: Employee = this.EMPTY_EMPLOYEE;
+      employee.name = entry['Name'];
+      employee.email = entry['Personal eMail'];
+      employee.phone = entry['Home Cell'];
+      this.newEmployees.push(employee);
+    }
+
+    // format and assign existing employees
+    for (const entry of response[1]) {
+      const employee: Employee = this.EMPTY_EMPLOYEE;
+      employee.name = entry['lname'] + ', ' + entry['fname'];
+      employee.email = entry['email'];
+      employee.phone = entry['phone'];
+      this.existingEmployees.push(employee);
+    }
   }
 }
