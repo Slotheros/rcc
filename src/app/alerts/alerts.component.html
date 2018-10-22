@@ -4,16 +4,7 @@
   <h1>Send Alerts</h1>
 
   <form (ngSubmit)="sendMsg(alertMessage)" id="alert-form" #registrationForm="ngForm">
-    <!-- <div id="checkbox-group" *ngIf="userType === SUPERUSER || userType === ADMIN" >
-      <mat-checkbox [disabled]="isDisabled" (click)="onClickDepartment(allEmployees)">{{allEmployees}}</mat-checkbox>
-      <mat-checkbox [checked]="isChecked" [disabled]="isDisabledGroup" *ngFor="let department of departments" (click)="onClickDepartment(department)">{{department.name}}</mat-checkbox>
-    </div>
-
-    <div id="checkbox-group" *ngIf="userType === DPTHEAD" >
-      <mat-checkbox [checked]="true" [disabled]="true">{{userDeptName}}</mat-checkbox>
-    </div> -->
     <rcc-select-departments></rcc-select-departments>
-
     <!-- <form id="alert-form"> -->
     <label for="message">Alert Message:</label>
     <textarea class="form-control" rows="10" id="message" name="msg" [(ngModel)]="alertMessage">{{alertMessage}}</textarea>

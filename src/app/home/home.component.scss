@@ -27,7 +27,15 @@ a:hover {
 }
 
 .material-icons {
-  font-size: 32px;
+  font-size: 24px;
+}
+
+.mat-card-content a {
+  font-size: 8pt;
+}
+
+.notifications mat-card {
+  padding: 25px;
 }
 
 .material-icons.orange600 { color: #FB8C00; }
@@ -64,6 +72,15 @@ i {
   .notifications mat-card-subtitle {
     margin-bottom: 4px;
   }
+
+  .material-icons {
+    font-size: 32px;
+  }
+
+  .mat-card-content a {
+    font-size: 12pt;
+  }
+
   ul a {
     color: black;
   }
