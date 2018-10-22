@@ -3,6 +3,7 @@ import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { Employee } from '../employee';
 import { MatTableModule, MatTableDataSource } from '@angular/material';
+import {CsvCompareService} from '../services/csv-compare.service';
 
 
 @Component({
@@ -21,7 +22,8 @@ export class CsvCompareComponent implements OnInit {
   displayedColumns: string[];
 
   constructor(private authService: AuthService,
-              private router: Router) { }
+              private router: Router,
+              private csvService: CsvCompareService) { }
 
   ngOnInit() {
     // authenticate the user
@@ -64,8 +66,18 @@ export class CsvCompareComponent implements OnInit {
 
   getEmployees() {
      // TODO: get init array values here
-     this.newDataSource = (this.newEmployees);
-     this.existingDataSource = (this.existingEmployees);
+     this.csvService.getNewEmployees().pipe().subscribe(result => {
+       this.newEmployees = result as Array<Employee>;
+     }, error => {
+       console.log('Error retrieving new employees');
+       console.log(error);
+     });
+     this.csvService.getExistingEmployees().pipe().subscribe(result => {
+       this.existingEmployees = result as Array<Employee>;
+     }, error => {
+       console.log('Error retrieving new employees');
+       console.log(error);
+     });
      this.displayedColumns = ['fname', 'lname', 'phone', 'email'];
   }
 }
