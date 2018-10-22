@@ -1,15 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
-import {  FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import { UsersService } from '../services/users.service';
 import { Policy } from '../policy';
 import { PolicyService } from '../services/policy.service';
 import { Survey } from '../survey';
 import { SurveyService } from '../services/survey.service';
-
-
-const URL = 'http://localhost:3000/users/csvCompare';
 
 @Component({
   selector: 'rcc-home',
@@ -18,9 +14,8 @@ const URL = 'http://localhost:3000/users/csvCompare';
 })
 export class HomeComponent implements OnInit {
 
-  userID:number = null;
-  userType:number = null;
-  public uploader:FileUploader = new FileUploader({url: URL, itemAlias: 'csvCompare'});
+  userID: number = null;
+  userType: number = null;
   newPolicy: Policy;
   ackPolicies = Array<Policy>();
   unackPolicies = Array<Policy>();
@@ -31,11 +26,7 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private usersService: UsersService,
     private acknowledgePolicyService: PolicyService,
-    private surveyService: SurveyService) {
-    this.uploader.onCompleteItem = (item:any, response:any, status:any, headers:any) => {
-      console.log("ImageUpload:uploaded:", item, status, response);
-    };
-  }
+    private surveyService: SurveyService) { }
 
   ngOnInit() {
     this.authService.loggedIn().subscribe(result => {
@@ -83,7 +74,7 @@ export class HomeComponent implements OnInit {
           if (survey['deptAdmin']) { depts.push({'id': 3}); }
           if (survey['deptFoodBeverage']) { depts.push({'id': 4}); }
           if (survey['deptProduction']) { depts.push({'id': 5}); }
-  
+
           const p = {
             'id': survey['surveyID'],
             'title': survey['title'],
