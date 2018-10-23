@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['home']);
       }
     }, error => {
-      console.log(error); 
+      console.log(error);
     });
   }
 
@@ -48,9 +48,9 @@ export class LoginComponent implements OnInit {
         this.usersService.setUser(result);
         // console.log("is this the role: " + (this.usersService.getUser()));
         this.router.navigate(['home']);
-      } else {
-        this.hideInvalidMsg = false;
       }
+    }, error => {
+        this.hideInvalidMsg = false;
     });
   }
 
