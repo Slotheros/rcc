@@ -25,7 +25,6 @@ export class SelectedDepartmentsService {
   setSelectedDepartments(depts) {
     this.selectedDepartments = [];
     this.selectedDepartments = depts;
-
   }
 
   getSelectedDepartments() {

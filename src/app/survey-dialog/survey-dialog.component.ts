@@ -7,6 +7,8 @@ import {filter} from 'rxjs/operators';
 import { Department } from '../department';
 import { SelectDepartmentsComponent } from '../select-departments/select-departments.component';
 import { SelectedDepartmentsService } from '../services/selected-departments.service';
+import {Router} from '@angular/router';
+import {AuthService} from '../services/auth.service';
 
 
 @Component({
@@ -16,15 +18,25 @@ import { SelectedDepartmentsService } from '../services/selected-departments.ser
 })
 export class SurveyDialogComponent implements OnInit {
 
+  readonly SUPERUSER: number = 1;
+  readonly ADMIN: number = 2;
+  readonly STANDARD: number = 3;
+  readonly DPTHEAD: number = 4;
+
   survey: Survey;
   form: FormGroup;
   selectedDepartments: Department[] = [];
+  userType: number = null;
+  userDeptName: string = null;
+  currentDeptObj = null;
 
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<SurveyDialogComponent>,
     private globals: Globals,
     private selectedDepartmentsService: SelectedDepartmentsService,
+    private authService: AuthService,
+    private router: Router,
     @Inject(MAT_DIALOG_DATA) public data: Survey ) {
     this.survey = data;
   }
@@ -35,6 +47,21 @@ export class SurveyDialogComponent implements OnInit {
       title: [this.survey.title, Validators.required],
       description: [this.survey.description, Validators.required],
       url: [this.survey.url, Validators.required],
+    });
+
+    this.authService.loggedIn().subscribe(result => {
+      console.log(result);
+      this.userType = result['usertype']['id'];
+      this.userDeptName = result['department']['name'];
+      this.currentDeptObj = {id: result['department']['id'], name: result['department']['name']};
+      if (result['usertype']['id'] === this.STANDARD) {
+        this.router.navigate(['login']);
+      } else if (result['usertype']['id'] === this.DPTHEAD) {
+        this.selectedDepartments.push(this.currentDeptObj);
+        this.selectedDepartmentsService.setSelectedDepartments(this.selectedDepartments);
+      }
+    }, error => {
+      this.router.navigate(['login']);
     });
   }
 
