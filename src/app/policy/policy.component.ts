@@ -22,6 +22,7 @@ export class PolicyComponent implements OnInit {
   unackPolicies = Array<Policy>();
   allPolicies = Array<Policy>(); // used for admin purposes
   userType: number = null;
+  userDeptId: number = null;
 
   readonly SUPERUSER: number = 1;
   readonly ADMIN: number = 2;
@@ -38,6 +39,7 @@ export class PolicyComponent implements OnInit {
       // Set userID to what was given from authService
       this.userID = result['eId'];
       this.userType = result['usertype']['id'];
+      this.userDeptId = result['department']['id'];
     }, error => {
       this.router.navigate(['login']);
     }, () => {
@@ -54,8 +56,33 @@ export class PolicyComponent implements OnInit {
     this.allPolicies = Array<Policy>();
 
     // If the user is an admin, get all of the policies
-    if (this.userType === this.SUPERUSER || this.userType === this.ADMIN || this.userType === this.DPTHEAD) {
+    if (this.userType === this.SUPERUSER || this.userType === this.ADMIN) {
       this.acknowledgePolicyService.getAllPolicies().subscribe(result => {
+        for (const policy of result as Array<Object>) {
+          const depts = [];
+          if (policy['deptSales']) { depts.push({'id': 1}); }
+          if (policy['deptGarage']) { depts.push({'id': 2}); }
+          if (policy['deptAdmin']) { depts.push({'id': 3}); }
+          if (policy['deptFoodBeverage']) { depts.push({'id': 4}); }
+          if (policy['deptProduction']) { depts.push({'id': 5}); }
+
+          const p = {
+            'id': policy['policyID'],
+            'title': policy['title'],
+            'description': policy['description'],
+            'departments': depts,
+            'url': policy['url'],
+            'acknowledged': false,
+            'date': policy['date'].substr(0, 10)
+          } as Policy;
+          this.allPolicies.push(p);
+        }
+      }, error => {
+        console.log('Error retrieving unacknowl policies');
+        console.log(error);
+      });
+    } else if (this.userType === this.DPTHEAD) {
+      this.acknowledgePolicyService.getAllPoliciesForDept(this.userDeptId).subscribe(result => {
         for (const policy of result as Array<Object>) {
           const depts = [];
           if (policy['deptSales']) { depts.push({'id': 1}); }

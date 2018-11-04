@@ -24,6 +24,12 @@ export class PolicyService {
     );
   }
 
+  getAllPoliciesForDept(departmentID: number) {
+    return this.http.get(this.config.getRccUrl() + '/policies/getAllForDept/' + departmentID, this.config.getHttpOptions()).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   // Service used to get all acknowledged policies given a user ID
   getAcknowledged(userID: number) {
     return this.http.get(this.config.getRccUrl() + '/policies/getAcknowledged/' + userID, this.config.getHttpOptions()).pipe(
