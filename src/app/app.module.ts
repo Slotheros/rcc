@@ -22,6 +22,8 @@ import { SelectDepartmentsComponent } from './select-departments/select-departme
 import { SurveyComponent } from './survey/survey.component';
 import { SurveyDialogComponent } from './survey-dialog/survey-dialog.component';
 import { CsvCompareComponent } from './csv-compare/csv-compare.component';
+import { ManageUsersComponent } from './manage-users/manage-users.component';
+import { UserSettingsDialogComponent } from './user-settings-dialog/user-settings-dialog.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { CsvCompareComponent } from './csv-compare/csv-compare.component';
     SelectDepartmentsComponent,
     SurveyComponent,
     SurveyDialogComponent,
-    CsvCompareComponent
+    CsvCompareComponent,
+    ManageUsersComponent,
+    UserSettingsDialogComponent
   ],
   imports: [
     BrowserModule,

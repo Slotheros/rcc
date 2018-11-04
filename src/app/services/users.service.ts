@@ -43,11 +43,11 @@ export class UsersService {
 
   setUser(user: any) {
     this.userType = user.usertype.id;
-    console.log("service-setUser userType: " + user.usertype.id);
+    console.log('service-setUser userType: ' + user.usertype.id);
 
   }
 
-  getUser(){
+  getUser() {
     return this.userType;
   }
 
@@ -61,7 +61,7 @@ export class UsersService {
       console.error(
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error}`);
-        console.log(error); 
+        console.log(error);
     }
     // return an observable with a user-facing error message
     // return throwError('Something bad happened; please try again later.');
