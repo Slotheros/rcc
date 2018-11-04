@@ -2,11 +2,11 @@
   {{data.title}}<br />
   <mat-divider></mat-divider>
 </h1>
-<p>Employees that have not acknowledged this policy:</p>
+<p>{{employees.length > 0 ? 'Employees that have not acknowledged ' + data.title + ':' : data.title + ' has been acknowledged by all Employees.'}}</p>
 
 <mat-dialog-content class="mat-typography">
 
-  <table mat-table [dataSource]= "employees">
+  <table *ngIf="employees.length > 0" mat-table [dataSource]= "employees">
     <!-- Errors seen below are a problem with the IDE, not the code :-) -->
     <!-- Name Column -->
     <ng-container matColumnDef="name">

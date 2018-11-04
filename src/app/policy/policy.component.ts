@@ -3,11 +3,13 @@ import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { AlertsService } from '../services/alerts.service';
 import { PolicyService } from '../services/policy.service';
+import { UsersService } from '../services/users.service';
 import { Policy } from '../policy';
 import { Globals } from '../globals';
 import { MatDialog, MatDialogConfig, MatDialogRef, MatExpansionPanel } from '@angular/material';
 import { PolicyDialogComponent } from '../policy-dialog/policy-dialog.component';
-import {AckListDialogComponent} from '../ack-list-dialog/ack-list-dialog.component';
+import { AckListDialogComponent } from '../ack-list-dialog/ack-list-dialog.component';
+import {Employee} from '../employee';
 
 @Component({
   selector: 'rcc-view-policy',
@@ -29,7 +31,7 @@ export class PolicyComponent implements OnInit {
   readonly STANDARD: number = 3;
   readonly DPTHEAD: number = 4;
 
-  constructor( private alertsService: AlertsService, private authService: AuthService,
+  constructor( private alertsService: AlertsService, private authService: AuthService, private usersService: UsersService,
                private router: Router, private dialog: MatDialog, private globals: Globals,
                private acknowledgePolicyService: PolicyService) { }
 
@@ -228,15 +230,23 @@ export class PolicyComponent implements OnInit {
 
   // opens the list of employees that have not acknowledged that policy
   openListUnackDialog(policy) {
-    // Reset the new policy to an empty Policy object
-    console.log('Showing unacked policies for: ' + policy.title);
+    let employees = Array<Employee>();
+    this.usersService.getUnackedByPolicyID(policy.id).subscribe(result => {
+      // populate employees array with data returned from backend call
+      console.log('result: ');
+      console.log(result);
+      employees = result as Array<Employee>;
 
-    // Open dialog and keep a reference to it
-    this.dialog.open(AckListDialogComponent, {
-      data: {
-        id: policy.id,
-        title: policy.title
-      }
+      // Open dialog and keep a reference to it
+      this.dialog.open(AckListDialogComponent, {
+        data: {
+          title: policy.title,
+          employees: employees
+        }
+      });
+    }, error => {
+      console.log('Failure to retrieve list of employees.');
+      console.log(error);
     });
   }
 }

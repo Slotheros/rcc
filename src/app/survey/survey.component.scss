@@ -24,13 +24,18 @@ button.create-survey {
   display: block;
   margin: 0 auto 50px auto;
 }
-
 button {
   width: 100%;
 }
-
 #create-button {
   width: auto;
+}
+.num-acknowledged-text {
+  display: inline-block;
+}
+.num-acknowledged-text:hover {
+  cursor: pointer;
+  color: grey;
 }
 
 

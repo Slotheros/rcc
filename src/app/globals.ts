@@ -24,4 +24,16 @@ export class Globals {
     numHavePolicy: null
   };
 
+  EMPTY_SURVEY = {
+    id: null,
+    title: '',
+    description: null,
+    departments: null,
+    url: null,
+    acknowledged: null,
+    date: null,
+    numHaveAcked: null,
+    numHaveSurvey: null
+  };
+
 }

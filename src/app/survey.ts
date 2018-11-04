@@ -7,4 +7,6 @@ export interface Survey {
   url: string;
   acknowledged: boolean;
   date: string;
+  numHaveAcked: number;
+  numHaveSurvey: number;
 }
