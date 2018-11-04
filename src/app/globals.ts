@@ -9,7 +9,7 @@ export class Globals {
     { id: 2, name: 'Garage' },
     { id: 3, name: 'Admin(HR)' },
     { id: 4, name: 'Food & Beverage' },
-    { id: 5, name: 'Productions' }
+    { id: 5, name: 'Production' }
   ];
 
   EMPTY_POLICY = {

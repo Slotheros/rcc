@@ -7,7 +7,7 @@ const departments: Department[] = [
   { id: 2, name: 'Garage' },
   { id: 3, name: 'Admin(HR)' },
   { id: 4, name: 'Food & Beverage' },
-  { id: 5, name: 'Productions' }
+  { id: 5, name: 'Production' }
 ];
 
 const rccUrl: string = "http://localhost:3000";
