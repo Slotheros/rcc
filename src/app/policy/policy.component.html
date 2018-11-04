@@ -22,6 +22,7 @@
         <div class="panel-half">
           <a matTooltip="{{policy.url}}" target="_blank" class="policy-title" href="{{policy.url}}">{{policy.title}}</a>
           <p class="policy-description">{{policy.description}}</p>
+          <p class="num-acknowledged-text" matTooltip="click to see list" (click)="openListUnackDialog(policy)"><strong>{{policy.numHaveAcked}}</strong> / <strong>{{policy.numHavePolicy}}</strong> have acknowledged</p>
         </div>
         <div class="panel-half">
           <button *ngIf="userType === SUPERUSER || userType === ADMIN || userType === DPTHEAD" class="ackBtn mat-raised-button" mat-button-ripple (click)="openEditPolicyDialog(policy);">

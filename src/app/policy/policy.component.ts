@@ -7,6 +7,7 @@ import { Policy } from '../policy';
 import { Globals } from '../globals';
 import { MatDialog, MatDialogConfig, MatDialogRef, MatExpansionPanel } from '@angular/material';
 import { PolicyDialogComponent } from '../policy-dialog/policy-dialog.component';
+import {AckListDialogComponent} from '../ack-list-dialog/ack-list-dialog.component';
 
 @Component({
   selector: 'rcc-view-policy',
@@ -71,10 +72,14 @@ export class PolicyComponent implements OnInit {
             'departments': depts,
             'url': policy['url'],
             'acknowledged': false,
-            'date': policy['date'].substr(0, 10)
+            'date': policy['date'].substr(0, 10),
+            'numHaveAcked': policy['acks'],
+            'numHavePolicy': policy['total']
           } as Policy;
           this.allPolicies.push(p);
         }
+        console.log('get all policies:');
+        console.log(this.allPolicies);
       }, error => {
         console.log('Error retrieving unacknowl policies');
         console.log(error);
@@ -156,7 +161,7 @@ export class PolicyComponent implements OnInit {
   // opens the edit dialog box for creating a policy
   openCreatePolicyDialog() {
     // Reset the new policy to an empty Policy object
-    console.log('Editing policy: ' + this.newPolicy.title);
+    console.log('Creating policy: ' + this.newPolicy.title);
 
     // Open dialog and keep a reference to it
     this.dialogRef = this.dialog.open(PolicyDialogComponent, {
@@ -185,7 +190,7 @@ export class PolicyComponent implements OnInit {
   // Opens Edit Policy Dialog
   openEditPolicyDialog(policy: Policy) {
     // Reset the new policy to an empty Policy object
-    this.editPolicy = this.globals.EMPTY_POLICY;
+    this.editPolicy = this.globals.EMPTY_POLICY as Policy;
 
     console.log('Editing policy: ' + policy.title);
 
@@ -217,6 +222,20 @@ export class PolicyComponent implements OnInit {
         }
       } else {
         console.log('Policy is null');
+      }
+    });
+  }
+
+  // opens the list of employees that have not acknowledged that policy
+  openListUnackDialog(policy) {
+    // Reset the new policy to an empty Policy object
+    console.log('Showing unacked policies for: ' + policy.title);
+
+    // Open dialog and keep a reference to it
+    this.dialog.open(AckListDialogComponent, {
+      data: {
+        id: policy.id,
+        title: policy.title
       }
     });
   }

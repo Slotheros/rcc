@@ -23,9 +23,15 @@ button.create-policy {
 button {
   width: 100%;
 }
-
 #create-button {
   width: auto;
+}
+.num-acknowledged-text {
+  display: inline-block;
+}
+.num-acknowledged-text:hover {
+  cursor: pointer;
+  color: grey;
 }
 
 

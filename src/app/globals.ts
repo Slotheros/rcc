@@ -19,7 +19,9 @@ export class Globals {
     departments: null,
     url: null,
     acknowledged: null,
-    date: null
+    date: null,
+    numHaveAcked: null,
+    numHavePolicy: null
   };
 
 }

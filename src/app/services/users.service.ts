@@ -51,6 +51,20 @@ export class UsersService {
     return this.userType;
   }
 
+  // Service used to get all unacknowledged policies given a policy id
+  getUnackedByPolicyID(policyID: number) {
+    return this.http.get(this.config.getRccUrl() + '/policies/getUnackEmployees/' + policyID, this.config.getHttpOptions()).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  // Service used to get all unacknowledged surveys given a policy id
+  getUnackedBySurveyID(surveyID: number) {
+    return this.http.get(this.config.getRccUrl() + '/surveys/getUnackEmployees/' + surveyID, this.config.getHttpOptions()).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.

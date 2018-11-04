@@ -37,7 +37,7 @@ export class PolicyDialogComponent implements OnInit {
     private selectedDepartmentsService: SelectedDepartmentsService,
     private authService: AuthService,
     private router: Router,
-    @Inject(MAT_DIALOG_DATA) public data: Policy ) {
+    @Inject(MAT_DIALOG_DATA) public data ) {
     this.policy = data;
   }
 
