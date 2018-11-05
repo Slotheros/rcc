@@ -30,16 +30,12 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.authService.loggedIn().subscribe(result => {
-      console.log(result);
       this.userID = result['eId'];
       this.userType = result['usertype']['id'];
-      // console.log("who is logged in var: " + UsersService.userType);
-      // console.log("who is logged in method: " + UsersService.getUser);
     }, error => {
       this.router.navigate(['login']);
     }, () => {
       // After userID is found, initialize the ack and unack policy arrays
-      console.log('Searching for unack policies using eId: ' + this.userID);
       this.acknowledgePolicyService.getUnacknowledged(this.userID).subscribe(result => {
         for (const policy of result as Array<Object>) {
           const depts = [];
@@ -60,8 +56,6 @@ export class HomeComponent implements OnInit {
             } as Policy;
           this.unackPolicies.push(p);
         }
-        console.log('Unack Policies:');
-        console.log(this.unackPolicies);
       }, error => {
         console.log('Error retrieving unack policies');
         console.log(error);

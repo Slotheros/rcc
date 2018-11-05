@@ -231,8 +231,6 @@ export class SurveyComponent implements OnInit {
     let employees = Array<Employee>();
     this.usersService.getUnackedBySurveyID(survey.id).subscribe(result => {
       // populate employees array with data returned from backend call
-      console.log('result: ');
-      console.log(result);
       employees = result as Array<Employee>;
 
       // Open dialog and keep a reference to it

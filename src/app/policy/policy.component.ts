@@ -80,8 +80,6 @@ export class PolicyComponent implements OnInit {
           } as Policy;
           this.allPolicies.push(p);
         }
-        console.log('get all policies:');
-        console.log(this.allPolicies);
       }, error => {
         console.log('Error retrieving unacknowl policies');
         console.log(error);
@@ -163,7 +161,6 @@ export class PolicyComponent implements OnInit {
   // opens the edit dialog box for creating a policy
   openCreatePolicyDialog() {
     // Reset the new policy to an empty Policy object
-    console.log('Creating policy: ' + this.newPolicy.title);
 
     // Open dialog and keep a reference to it
     this.dialogRef = this.dialog.open(PolicyDialogComponent, {
@@ -194,8 +191,6 @@ export class PolicyComponent implements OnInit {
     // Reset the new policy to an empty Policy object
     this.editPolicy = this.globals.EMPTY_POLICY as Policy;
 
-    console.log('Editing policy: ' + policy.title);
-
     // Open dialog and keep a reference to it
     this.dialogRef = this.dialog.open(PolicyDialogComponent, {
       data: {
@@ -211,8 +206,6 @@ export class PolicyComponent implements OnInit {
       if (policy) {
         if (data) {
           data['policyId'] = policy.id;
-          console.log('Sending to backend:');
-          console.log(data);
           this.acknowledgePolicyService.updatePolicy(data).subscribe(result => {
             // update policies array to show the changes
             this.updatePolicyArrays(); }, error => {
@@ -233,8 +226,6 @@ export class PolicyComponent implements OnInit {
     let employees = Array<Employee>();
     this.usersService.getUnackedByPolicyID(policy.id).subscribe(result => {
       // populate employees array with data returned from backend call
-      console.log('result: ');
-      console.log(result);
       employees = result as Array<Employee>;
 
       // Open dialog and keep a reference to it

@@ -66,8 +66,6 @@ export class PolicyDialogComponent implements OnInit {
 
   getSelected() {
     this.selectedDepartments = this.selectedDepartmentsService.getSelectedDepartments();
-    console.log('selected depts:');
-    console.log(this.selectedDepartmentsService.getSelectedDepartments());
     return this.selectedDepartments;
   }
 
