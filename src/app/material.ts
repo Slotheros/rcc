@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { MatToolbarModule, MatIconModule, MatIcon, MatMenuModule, MatDividerModule,
   MatFormFieldModule, MatOptionModule, MatSelectModule, MatButtonModule, MatCheckboxModule,
   MatInputModule, MatSidenavModule, MatCardModule, MatExpansionModule, MatSnackBarModule,
-  MatDialogModule, MAT_DIALOG_DATA, MatTooltipModule, MatTableModule } from '@angular/material';
+  MatDialogModule, MAT_DIALOG_DATA, MatTooltipModule, MatTableModule, MatSlideToggle } from '@angular/material';
 import {CdkTableModule} from '@angular/cdk/table';
 
 @NgModule({
