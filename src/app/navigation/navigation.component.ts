@@ -17,7 +17,7 @@ export class NavigationComponent implements OnInit {
 
   userType: number = null;
   fName: string = null;
-  constructor(private authService: AuthService, private usersService: UsersService, private router: Router) { }
+  constructor(private authService: AuthService, private usersService: UsersService, public router: Router) { }
 
   ngOnInit() {
     this.authService.loggedIn().subscribe(result => {
