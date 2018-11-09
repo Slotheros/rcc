@@ -57,8 +57,10 @@ import { AckListDialogComponent } from './ack-list-dialog/ack-list-dialog.compon
     HttpClientModule,
     FileUploadModule
   ],
-  exports: [ErrorDialogComponent, PolicyDialogComponent, SurveyDialogComponent, AckListDialogComponent],
-  entryComponents: [ErrorDialogComponent, PolicyDialogComponent, SurveyDialogComponent, AckListDialogComponent],
+  exports: [ErrorDialogComponent, PolicyDialogComponent, SurveyDialogComponent,
+    AckListDialogComponent, UserSettingsDialogComponent],
+  entryComponents: [ErrorDialogComponent, PolicyDialogComponent, SurveyDialogComponent,
+    AckListDialogComponent, UserSettingsDialogComponent],
   providers: [ Globals ],
   bootstrap: [AppComponent]
 })

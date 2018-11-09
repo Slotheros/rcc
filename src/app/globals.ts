@@ -36,4 +36,13 @@ export class Globals {
     numHaveSurvey: null
   };
 
+  EMPTY_USER = {
+    fName: null,
+    lName: null,
+    email: null,
+    phoneNum: null,
+    department: null,
+    status: null
+  };
+
 }

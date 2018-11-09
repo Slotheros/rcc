@@ -17,7 +17,7 @@ import {UserSettingsDialogComponent} from '../user-settings-dialog/user-settings
 })
 export class ManageUsersComponent implements OnInit {
 
-  newUserSettings: Registrant;
+  newUserSettings = this.globals.EMPTY_USER;
   dialogRef: MatDialogRef<UserSettingsDialogComponent>;
   userID: number = null;
   userType: number = null;
@@ -96,11 +96,15 @@ export class ManageUsersComponent implements OnInit {
     // After the dialog is close, handle the data from the forms
     this.dialogRef.afterClosed().subscribe(data => {
       if (data) {
+        console.log('Creating user with this data:');
+        console.log(data);
+        /*
         this.usersService.register(data).subscribe(result => {
           // update employees list to show the changes
           this.populateEmployees(); }, error => {
           console.log('Failure adding new user to the DB.');
         });
+        */
       } else {
         console.log('User is null');
       }
