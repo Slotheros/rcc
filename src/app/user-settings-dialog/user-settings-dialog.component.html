@@ -1,3 +1,28 @@
-<p>
-  user-settings-dialog works!
-</p>
+<form [formGroup]="form" (ngSubmit)="submit(form)" class="user-settings-form">
+  <h2 mat-dialog-title>{{user.email === '' ? 'Create New User' : 'Editing User: '}}<strong>{{user.fName}}</strong></h2>
+  <rcc-select-departments></rcc-select-departments>
+  <mat-dialog-content class="edit-policy-dialog">
+    <mat-form-field class="input-fullwidth">
+      <mat-label>First Name</mat-label>
+      <input matInput placeholder="{{user.fName}}" formControlName="fName">
+    </mat-form-field>
+    <mat-form-field class="input-fullwidth">
+      <mat-label>Last Name</mat-label>
+      <input matInput placeholder="{{user.lName}}" formControlName="lName">
+    </mat-form-field>
+    <mat-form-field class="input-fullwidth">
+      <mat-label>Email Address</mat-label>
+      <input matInput placeholder="{{user.email}}" formControlName="email">
+    </mat-form-field>
+    <mat-form-field class="input-fullwidth">
+      <mat-label>Phone Number</mat-label>
+      <input matInput placeholder="{{user.phoneNum}}" formControlName="phoneNum">
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="dialog-actions">
+    <button class="mat-raised-button" (click)="close()" type="button">Cancel</button>
+    <button class="mat-raised-button mat-primary" type="submit">Save</button>
+    <mat-label class="small-text">*You may leave fields empty to keep those values unchanged.</mat-label>
+  </mat-dialog-actions>
+</form>

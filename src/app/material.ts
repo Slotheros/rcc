@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
-import { MatToolbarModule, MatIconModule, MatIcon, MatMenuModule, MatDividerModule,
+import {
+  MatToolbarModule, MatIconModule, MatIcon, MatMenuModule, MatDividerModule,
   MatFormFieldModule, MatOptionModule, MatSelectModule, MatButtonModule, MatCheckboxModule,
   MatInputModule, MatSidenavModule, MatCardModule, MatExpansionModule, MatSnackBarModule,
-  MatDialogModule, MAT_DIALOG_DATA, MatTooltipModule, MatTableModule, MatSlideToggle } from '@angular/material';
+  MatDialogModule, MAT_DIALOG_DATA, MatTooltipModule, MatTableModule, MatSlideToggle, MatSlideToggleModule
+} from '@angular/material';
 import {CdkTableModule} from '@angular/cdk/table';
 
 @NgModule({
@@ -11,12 +13,12 @@ import {CdkTableModule} from '@angular/cdk/table';
         MatMenuModule, MatFormFieldModule, MatOptionModule, MatSelectModule,
         MatInputModule, MatSidenavModule, MatCardModule, MatExpansionModule,
         MatSnackBarModule, MatDialogModule, MatDividerModule, MatTooltipModule,
-        MatTableModule],
+        MatTableModule, MatSlideToggleModule],
     exports:
         [CdkTableModule, MatButtonModule, MatCheckboxModule, MatToolbarModule, MatIconModule,
         MatMenuModule, MatFormFieldModule, MatOptionModule, MatSelectModule,
         MatInputModule, MatSidenavModule, MatCardModule, MatExpansionModule,
         MatSnackBarModule, MatDialogModule, MatDividerModule, MatTooltipModule,
-        MatTableModule]
+        MatTableModule, MatSlideToggleModule]
 })
 export class MaterialModule { }

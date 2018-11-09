@@ -72,17 +72,15 @@ export class PolicyDialogComponent implements OnInit {
   submit(form) {
     const data = this.form.getRawValue();
     data['depts'] = this.getSelected();
+
+    // append http to beginning of link if it is not there
     if (
       data['url'].substr(0, 7) !== 'http://'
       && data['url'].substr(0, 8) !== 'https://'
       && data['url'] !== '') {
-      data['url'] = 'http://' + data['url'];
+        data['url'] = 'http://' + data['url'];
     }
     return this.dialogRef.close(data);
-  }
-
-  save() {
-    // return this.dialogRef.close(this.form.value);
   }
 
   close() {
