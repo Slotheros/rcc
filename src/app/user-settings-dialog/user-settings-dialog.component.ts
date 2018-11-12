@@ -1,13 +1,13 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { Registrant } from '../registrant';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Globals } from '../globals';
 import { Department } from '../department';
-import { SelectDepartmentsComponent } from '../select-departments/select-departments.component';
 import { SelectedDepartmentsService } from '../services/selected-departments.service';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { ManageUserSettings } from '../manageUserSettings';
+import {Registrant} from '../registrant';
 
 @Component({
   selector: 'rcc-user-settings-dialog',
@@ -21,6 +21,7 @@ export class UserSettingsDialogComponent implements OnInit {
   readonly STANDARD: number = 3;
   readonly DPTHEAD: number = 4;
 
+  userSettings: ManageUserSettings;
   user: Registrant;
   form: FormGroup;
   selectedDepartments: Department[] = [];
@@ -42,11 +43,8 @@ export class UserSettingsDialogComponent implements OnInit {
   // TODO: use our own validators, not required
   ngOnInit() {
     this.form = this.fb.group({
-      fName: [this.user.fName, Validators.required],
-      lName: [this.user.lName, Validators.required],
-      email: [this.user.email, Validators.required],
-      phoneNum: [this.user.phoneNum, Validators.required],
-      department: [this.user.department, Validators.required],
+      department: [this.userSettings.department, Validators.required],
+      userType: [this.userSettings.userType, Validators.required]
     });
 
     this.authService.loggedIn().subscribe(result => {
@@ -65,14 +63,8 @@ export class UserSettingsDialogComponent implements OnInit {
     });
   }
 
-  getSelected() {
-    this.selectedDepartments = this.selectedDepartmentsService.getSelectedDepartments();
-    return this.selectedDepartments;
-  }
-
   submit(form) {
     const data = this.form.getRawValue();
-    data['depts'] = this.getSelected();
     return this.dialogRef.close(data);
   }
 

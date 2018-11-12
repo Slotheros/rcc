@@ -9,6 +9,7 @@ import {Policy} from '../policy';
 import {Registrant} from '../registrant';
 import {Validators} from '@angular/forms';
 import {UserSettingsDialogComponent} from '../user-settings-dialog/user-settings-dialog.component';
+import {ManageUserSettings} from '../manageUserSettings';
 
 @Component({
   selector: 'rcc-manage-users',
@@ -17,11 +18,13 @@ import {UserSettingsDialogComponent} from '../user-settings-dialog/user-settings
 })
 export class ManageUsersComponent implements OnInit {
 
-  newUserSettings = this.globals.EMPTY_USER;
+  editUserSettings = this.globals.EMPTY_MANAGE_USER_SETTINGS as ManageUserSettings;
+  userDepartments = this.globals.departments;
+  userTypes = this.globals.userTypes;
   dialogRef: MatDialogRef<UserSettingsDialogComponent>;
   userID: number = null;
   userType: number = null;
-  displayedColumns = ['name', 'phone', 'email', 'active', 'settings'];
+  displayedColumns = ['name', 'email', 'department', 'userType', 'active'];
   employees: Array<Registrant> = [];
 
   readonly SUPERUSER: number = 1;
@@ -41,7 +44,7 @@ export class ManageUsersComponent implements OnInit {
       // Set userID to what was given from authService
       this.userID = result['eId'];
       this.userType = result['usertype']['id'];
-      this.populateEmployees();
+      this.updateEmployees();
     }, error => {
       this.router.navigate(['login']);
     }, () => {
@@ -50,14 +53,13 @@ export class ManageUsersComponent implements OnInit {
   }
 
   // calls the backend for a list of all employees
-  populateEmployees() {
+  updateEmployees() {
     // empty the employees table
     this.employees = Array<Registrant>();
 
     // If the user is an admin, get all of the employees
     if (this.userType === this.SUPERUSER || this.userType === this.ADMIN) {
       this.usersService.getUsers().subscribe(result => {
-
         for (const employee of result as Array<Object>) {
           const e = {
             'fName': employee['fname'],
@@ -66,7 +68,9 @@ export class ManageUsersComponent implements OnInit {
             'phoneNum': employee['phone'],
             'department': employee['departmentID'],
             'password': employee['password'],
-            'status': employee['status'] === 1
+            'status': employee['status'] === 1,
+            'userID': employee['eID'],
+            'userType': employee['usertypeID']
           } as Registrant;
           this.employees.push(e);
         }
@@ -80,6 +84,81 @@ export class ManageUsersComponent implements OnInit {
     }
   }
 
+  // Updates the database to match the editted user settings
+  updateManagedUser() {
+    // update the department
+    this.usersService.updateManagedUserDepartment(this.editUserSettings).subscribe(result => {
+      // do nothing
+    }, error => {
+      console.log('Failure to update the user\'s department.');
+      console.log(error);
+    });
+
+    // update the user type
+    this.usersService.updateManagedUserType(this.editUserSettings).subscribe(result => {
+      // do nothing
+    }, error => {
+      console.log('Failure to update the user\'s type.');
+      console.log(error);
+    });
+
+    // update the user's active status
+    this.updateUserStatus(this.editUserSettings.active, this.editUserSettings.userID);
+
+    // update the employee list
+    this.updateEmployees();
+  }
+
+  updateDepartment(dept, userID) {
+    // set the form's option's id to be the new department
+    this.editUserSettings.department = dept;
+    this.editUserSettings.userID = userID;
+
+    // update the department
+    this.usersService.updateManagedUserDepartment(this.editUserSettings).subscribe(result => {
+      // update the employee list
+      this.updateEmployees();
+    }, error => {
+      console.log('Failure to update the user\'s department.');
+      console.log(error);
+    });
+  }
+
+  updateUserType(type, userID) {
+    // set the form's option's id to be the new usertype
+    this.editUserSettings.userType = type;
+    this.editUserSettings.userID = userID;
+
+    // update the user type
+    this.usersService.updateManagedUserType(this.editUserSettings).subscribe(result => {
+      // update the employee list
+      this.updateEmployees();
+    }, error => {
+      console.log('Failure to update the user\'s type.');
+      console.log(error);
+    });
+  }
+
+  // Updates the database to match the editted user status
+  updateUserStatus(active: boolean, userID: number) {
+    console.log('Setting user status to ' + active + '...');
+
+    const data  = {
+      active: active,
+      userID: userID
+    } as ManageUserSettings;
+
+    this.usersService.updateManagedUserStatus(data).subscribe(result => {
+      // update the employee list
+      this.updateEmployees();
+    }, error => {
+      console.log('Failure to update the user\'s status.');
+      console.log(error);
+    });
+  }
+
+  // partially implemented functionality, but feature is not in the project charter
+  /*
   // opens a dialog box that allows a new user to be created by an admin
   openCreateUserDialog() {
     // Open dialog and keep a reference to it
@@ -98,13 +177,13 @@ export class ManageUsersComponent implements OnInit {
       if (data) {
         console.log('Creating user with this data:');
         console.log(data);
-        /*
+
         this.usersService.register(data).subscribe(result => {
           // update employees list to show the changes
           this.populateEmployees(); }, error => {
           console.log('Failure adding new user to the DB.');
         });
-        */
+
       } else {
         console.log('User is null');
       }
@@ -112,47 +191,37 @@ export class ManageUsersComponent implements OnInit {
   }
 
   // opens a dialog box that allows a user's settings to be changed by an admin
-  openEditUserDialog(user: Registrant) {
+  openEditUserDialog(user) {
     console.log('Opening settings for user ' + user.fName + ' ' + user.lName + '...');
-/*
-    // Reset the new policy to an empty Policy object
-    this.editPolicy = this.globals.EMPTY_POLICY as Policy;
+
+     // Reset the new policy to an empty Policy object
+    this.editUserSettings = this.globals.EMPTY_MANAGE_USER_SETTINGS;
 
     // Open dialog and keep a reference to it
-    this.dialogRef = this.dialog.open(PolicyDialogComponent, {
+    this.dialogRef = this.dialog.open(UserSettingsDialogComponent, {
       data: {
-        title: policy ? policy.title : '',
-        description: policy ? policy.description : '',
-        url: policy ? policy.url : '',
-        departments: policy ? policy.departments : ''
+        departments: user ? user.department : '',
+        usertype: user ? user.userType : '',
+        active: user ? user.status : false
       }
     });
 
     // After the dialog is close, handle the data from the forms
     this.dialogRef.afterClosed().subscribe(data => {
-      if (policy) {
+      if (user) {
         if (data) {
-          data['policyId'] = policy.id;
-          this.acknowledgePolicyService.updatePolicy(data).subscribe(result => {
-            // update policies array to show the changes
-            this.updatePolicyArrays(); }, error => {
-            console.log('Failure to change policy to the DB.');
-            console.log(error);
-          });
+          this.editUserSettings.userID = data['userID'];
+          this.editUserSettings.department = data['department'];
+          this.editUserSettings = data['userType'];
+          this.updateManagedUser();
         } else {
           console.log('Edit cancelled');
         }
       } else {
-        console.log('Policy is null');
+        console.log('User is null');
       }
-    });*/
+    });
   }
-
-  // opens a dialog box that allows a new user to be created by an admin
-  toggleUserStatus(status: boolean) {
-    // TODO
-    console.log('Setting user status to ' + !status + '...');
-    // this.usersService.setStatus(!status);
-  }
+  */
 
 }
