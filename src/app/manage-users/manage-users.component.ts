@@ -125,18 +125,20 @@ export class ManageUsersComponent implements OnInit {
   }
 
   updateUserType(type, userID) {
-    // set the form's option's id to be the new usertype
-    this.editUserSettings.userType = type;
-    this.editUserSettings.userID = userID;
+    if (this.userType === this.SUPERUSER) {
+      // set the form's option's id to be the new usertype
+      this.editUserSettings.userType = type;
+      this.editUserSettings.userID = userID;
 
-    // update the user type
-    this.usersService.updateManagedUserType(this.editUserSettings).subscribe(result => {
-      // update the employee list
-      this.updateEmployees();
-    }, error => {
-      console.log('Failure to update the user\'s type.');
-      console.log(error);
-    });
+      // update the user type
+      this.usersService.updateManagedUserType(this.editUserSettings).subscribe(result => {
+        // update the employee list
+        this.updateEmployees();
+      }, error => {
+        console.log('Failure to update the user\'s type.');
+        console.log(error);
+      });
+    }
   }
 
   // Updates the database to match the editted user status
