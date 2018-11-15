@@ -15,18 +15,28 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 export class SelectedDepartmentsService {
 
+  // variables
   selectedDepartments: Department[];
 
+  // constructor
   constructor(
     private http: HttpClient,
     private config: ConfigService
   ) { }
 
+  /**
+   * setSelectedDepartments sets the selectedDepartments array to the 
+   * passed in departments list
+   * @param depts - an array of departments
+   */
   setSelectedDepartments(depts) {
     this.selectedDepartments = [];
     this.selectedDepartments = depts;
   }
 
+  /**
+   * getSelectedDepartments returns the selectedDepartments array
+   */
   getSelectedDepartments() {
     return this.selectedDepartments;
   }

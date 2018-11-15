@@ -12,10 +12,6 @@ export class ErrorDialogComponent implements OnInit {
 
   errorMsg = '';
 
-  // constructor(private errorDialogService: ErrorDialogService) {
-  //   this.errorMsg = errorDialogService.getErrorMsg();
-  // }
-
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
     this.errorMsg = data;
   }

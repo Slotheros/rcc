@@ -17,16 +17,24 @@ import { ErrorDialogService } from '../services/error-dialog.service';
 
 export class EmailHRComponent implements OnInit {
 
+  // variables
   email: Email;
   currentUser = null;
   emailMessage = null;
-  constructor(private alertsService: AlertsService, 
-              private authService: AuthService,
-              private router: Router, 
-              private emailService: EmailService,
-              private errorDialogService: ErrorDialogService,
-              public snackBar: MatSnackBar) { }
 
+  // constructor
+  constructor(private alertsService: AlertsService, 
+    private authService: AuthService,
+    private router: Router, 
+    private emailService: EmailService,
+    private errorDialogService: ErrorDialogService,
+    public snackBar: MatSnackBar) {}
+  
+  
+  /**
+   * ngOnInit checkes that user is logged in an permitted to view this specific
+   * page or else they will be routed to the login page.
+   */            
   ngOnInit() {
     this.authService.loggedIn().subscribe(result => {
       console.log(result);
@@ -41,12 +49,17 @@ export class EmailHRComponent implements OnInit {
     };
   }
 
+  /**
+   * SendMessage will put the users email address and user inputted email message
+   * into an email object. It will then call the emailService to make the request
+   * to the backend to send the email.
+   * @param msg - a string that contains the email message inputted by the user
+   */
   sendMessage(msg: String){
     this.email.message = this.emailMessage;
     this.email.email = this.currentUser;
     this.emailService.sendEmail(this.email).subscribe(result => {
       if (result) {
-        console.log("HERE");
         // reset values on the page
         this.email = {
           message: undefined,

@@ -25,6 +25,7 @@ import { CsvCompareComponent } from './csv-compare/csv-compare.component';
 import { ManageUsersComponent } from './manage-users/manage-users.component';
 import { UserSettingsDialogComponent } from './user-settings-dialog/user-settings-dialog.component';
 import { AckListDialogComponent } from './ack-list-dialog/ack-list-dialog.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { AckListDialogComponent } from './ack-list-dialog/ack-list-dialog.compon
     CsvCompareComponent,
     ManageUsersComponent,
     UserSettingsDialogComponent,
-    AckListDialogComponent
+    AckListDialogComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,

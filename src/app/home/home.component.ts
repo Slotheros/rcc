@@ -14,6 +14,7 @@ import { SurveyService } from '../services/survey.service';
 })
 export class HomeComponent implements OnInit {
 
+  //variables
   userID: number = null;
   userType: number = null;
   newPolicy: Policy;
@@ -22,12 +23,19 @@ export class HomeComponent implements OnInit {
   ackSurveys = Array<Survey>();
   unackSurveys = Array<Survey>();
 
+  // constructor
   constructor(private authService: AuthService,
     private router: Router,
     private usersService: UsersService,
     private acknowledgePolicyService: PolicyService,
     private surveyService: SurveyService) { }
 
+  /**
+   * ngOnInit checkes that user is logged in an permitted to view this specific
+   * page or else they will be routed to the login page. it then gets all of the 
+   * unacknowledged policy and surveys for that specific user so that the notifications
+   * can be displayed on their home page.
+   */
   ngOnInit() {
     this.authService.loggedIn().subscribe(result => {
       this.userID = result['eId'];

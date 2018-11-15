@@ -11,6 +11,7 @@ import { SelectDepartmentsComponent } from './select-departments/select-departme
 import {SurveyComponent} from './survey/survey.component';
 import {CsvCompareComponent} from './csv-compare/csv-compare.component';
 import {ManageUsersComponent} from './manage-users/manage-users.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -24,7 +25,8 @@ const routes: Routes = [
   { path: 'csv', component: CsvCompareComponent},
   { path: 'email-hr', component: EmailHRComponent},
   { path: 'user-settings', component: UserSettingsComponent },
-  { path: 'select-departments', component: SelectDepartmentsComponent}
+  { path: 'select-departments', component: SelectDepartmentsComponent},
+  { path: 'forgot-password', component: ForgotPasswordComponent }
 ];
 
 @NgModule({

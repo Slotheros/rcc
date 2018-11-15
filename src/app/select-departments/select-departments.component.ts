@@ -15,15 +15,16 @@ import { SelectedDepartmentsService } from '../services/selected-departments.ser
 })
 export class SelectDepartmentsComponent implements OnInit {
 
+  // constants for user types
   readonly SUPERUSER: number = 1;
   readonly ADMIN: number = 2;
   readonly STANDARD: number = 3;
   readonly DPTHEAD: number = 4;
 
+  // variables
   allEmployees = 'All Employees';
   departments: Department[];
   selectedDepartments = [];
-
   isDisabled = false;
   isDisabledGroup = false;
   isChecked = false;
@@ -31,6 +32,7 @@ export class SelectDepartmentsComponent implements OnInit {
   userDeptName = null;
   currentDeptObj = null;
 
+  // constructor
   constructor(
     private usersService: UsersService,
     private alertsService: AlertsService,
@@ -41,6 +43,12 @@ export class SelectDepartmentsComponent implements OnInit {
       this.departments = globals.departments;
     }
 
+  
+  /**
+   * ngOnInit checkes that user is logged in an permitted to view this specific
+   * page or else they will be routed to the login page. It then initializes 
+   * the user variables with the information from the returned user object.
+   */
   ngOnInit() {
     this.authService.loggedIn().subscribe(result => {
       this.userType = result['usertype']['id'];
@@ -56,6 +64,13 @@ export class SelectDepartmentsComponent implements OnInit {
     });
   }
 
+  /**
+   * onClickDepartment handles the logic from the user checking different
+   * checkboxes on the UI. Based on the users selections it will disable certain
+   * boxes from being clicked and then add those that were selected to an array
+   * to be returned for later use.
+   * @param dept - a selected department name
+   */
   onClickDepartment(dept) {
     if (dept === this.allEmployees) {
       if (this.isDisabledGroup === false && this.isDisabled === false) {
