@@ -78,7 +78,7 @@ a:hover {
 
 /* Icons */
 //center icon in button
-.notifications i {
+.notifications i, i.material-icons {
   display: inline-flex;
   vertical-align: middle;
 }
@@ -147,6 +147,9 @@ button#send-text {
 .num-acknowledged-text:hover {
   cursor: pointer;
   color: grey;
+}
+.policy-description, .survey-description {
+  margin-bottom: 0px;
 }
 
 /* Policy and Survey Dialogs */
