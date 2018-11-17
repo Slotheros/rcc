@@ -25,6 +25,7 @@ export class SurveyComponent implements OnInit {
   unackSurveys = Array<Survey>();
   allSurveys = Array<Survey>(); // used for admin purposes
   userType: number = null;
+  userDeptId: number = null;
 
   readonly SUPERUSER: number = 1;
   readonly ADMIN: number = 2;
@@ -57,7 +58,7 @@ export class SurveyComponent implements OnInit {
     this.allSurveys = Array<Survey>();
 
     // If the user is an admin, get all of the surveys
-    if (this.userType === this.SUPERUSER || this.userType === this.ADMIN || this.userType === this.DPTHEAD) {
+    if (this.userType === this.SUPERUSER || this.userType === this.ADMIN) {
       this.surveyService.getAllSurveys().subscribe(result => {
         for (const survey of result as Array<Object>) {
           const depts = [];
@@ -77,6 +78,31 @@ export class SurveyComponent implements OnInit {
             'date': survey['date'].substr(0, 10),
             'numHaveAcked': survey['acks'],
             'numHaveSurvey': survey['total']
+          } as Survey;
+          this.allSurveys.push(p);
+        }
+      }, error => {
+        console.log('Error retrieving unacknowl surveys');
+        console.log(error);
+      });
+    } else if (this.userType === this.DPTHEAD) {
+      this.surveyService.getAllSurveysForDept(this.userDeptId).subscribe(result => {
+        for (const survey of result as Array<Object>) {
+          const depts = [];
+          if (survey['deptSales']) { depts.push({'id': 1}); }
+          if (survey['deptGarage']) { depts.push({'id': 2}); }
+          if (survey['deptAdmin']) { depts.push({'id': 3}); }
+          if (survey['deptFoodBeverage']) { depts.push({'id': 4}); }
+          if (survey['deptProduction']) { depts.push({'id': 5}); }
+
+          const p = {
+            'id': survey['surveyID'],
+            'title': survey['title'],
+            'description': survey['description'],
+            'departments': depts,
+            'url': survey['url'],
+            'acknowledged': false,
+            'date': survey['date'].substr(0, 10)
           } as Survey;
           this.allSurveys.push(p);
         }

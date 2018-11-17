@@ -23,6 +23,12 @@ export class SurveyService {
     );
   }
 
+  getAllSurveysForDept(surveyID: number) {
+    return this.http.get(this.config.getRccUrl() + '/surveys/getAllForDept/' + surveyID, this.config.getHttpOptions()).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   // Service used to get all acknowledged surveys given a user ID
   getAcknowledged(userID: number) {
     return this.http.get(this.config.getRccUrl() + '/surveys/getAcknowledged/' + userID, this.config.getHttpOptions()).pipe(
