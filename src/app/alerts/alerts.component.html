@@ -3,14 +3,11 @@
 <div class="container">
   <h1 class="page-title">Send Alerts</h1>
 
-  <form (ngSubmit)="sendMsg(alertMessage)" id="alert-form" #registrationForm="ngForm">
+  <form (ngSubmit)="sendMsg(alertMessage)" class="send-text-form" id="alert-form" #registrationForm="ngForm">
     <rcc-select-departments></rcc-select-departments>
-    <!-- <form id="alert-form"> -->
     <label for="message">Alert Message:</label>
     <textarea class="form-control" rows="10" id="message" name="msg" [(ngModel)]="alertMessage">{{alertMessage}}</textarea>
-    <!-- <button mat-raised-button color="primary" (click)="sendMessage(alertMessage)">Send Alert</button> -->
-    <button mat-raised-button id="send-alert" color="primary" type="submit">Send Alert</button>
-    <!-- </form> -->
+    <button mat-raised-button id="send-text" color="primary" type="submit">Send Alert</button>
   </form>
 </div>
 

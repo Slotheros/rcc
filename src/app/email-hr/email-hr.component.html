@@ -7,6 +7,6 @@
     <h6>rantill@rrcc.com</h6>
     <label>From:  {{currentUser}}</label>
     <textarea class="form-control" rows="10" id="email" name="msg" [(ngModel)]="emailMessage">{{emailMessage}}</textarea>
-    <button mat-raised-button color="primary" (click)="sendMessage(emailMessage)">Send Email</button>
+    <button id="send-text" mat-raised-button color="primary" (click)="sendMessage(emailMessage)">Send Email</button>
   </form>
 </div>

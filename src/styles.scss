@@ -10,24 +10,34 @@
   margin-bottom: 40px;
 }
 
+/* Errors */
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-42 { font-size: 42px; }
+.error-color {
+  color: red;
+}
+.mat-typography {
+  margin-top: 10px;
+}
+
 /* Departments Checkboxes */
 #checkbox-group > * {
   margin: 0 5px;
 }
 
-/* Alerts Form */
-#alert-form {
-  min-width: 150px;
-  max-width: 1200px;
-  width: 100%;
-}
-#alert-message-textarea {
-  width: 100%;
-  height: 500px;
-}
-button#send-alert {
+/* Send Text Form */
+button#send-text {
   width: 100%;
   margin-top: 20px;
+}
+
+/* CSV buttons */
+.uploader {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
 }
 
 /* Employee Tables */
