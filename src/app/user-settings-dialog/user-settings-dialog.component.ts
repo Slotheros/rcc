@@ -48,7 +48,6 @@ export class UserSettingsDialogComponent implements OnInit {
     });
 
     this.authService.loggedIn().subscribe(result => {
-      console.log(result);
       this.userType = result['usertype']['id'];
       this.userDeptName = result['department']['name'];
       this.currentDeptObj = {id: result['department']['id'], name: result['department']['name']};

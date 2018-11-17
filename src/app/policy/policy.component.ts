@@ -83,8 +83,7 @@ export class PolicyComponent implements OnInit {
           this.allPolicies.push(p);
         }
       }, error => {
-        console.log('Error retrieving unacknowl policies');
-        console.log(error);
+        // error handling
       });
     } else if (this.userType === this.DPTHEAD) {
       this.acknowledgePolicyService.getAllPoliciesForDept(this.userDeptId).subscribe(result => {
@@ -108,8 +107,7 @@ export class PolicyComponent implements OnInit {
           this.allPolicies.push(p);
         }
       }, error => {
-        console.log('Error retrieving unacknowl policies');
-        console.log(error);
+        // error handling
       });
     }
 
@@ -135,8 +133,7 @@ export class PolicyComponent implements OnInit {
         this.unackPolicies.push(p);
       }
     }, error => {
-      console.log('Error retrieving unack policies');
-      console.log(error);
+      // error handling
     });
 
     // Get all of the acknowledged policies
@@ -161,15 +158,14 @@ export class PolicyComponent implements OnInit {
         this.ackPolicies.push(p);
       }
     }, error => {
-      console.log('Error retrieving ack policies');
-      console.log(error);
+      // error handling
     });
   }
 
   // Acknowledge a policy using the policy ID and user ID
   acknowledgePolicy(policyID: number, userID: number) {
     this.acknowledgePolicyService.acknowledgePolicy(policyID, userID).subscribe(
-      result => { this.updatePolicyArrays(); }, error => { console.log('check this error: ' + error); });
+      result => { this.updatePolicyArrays(); }, error => {  });
   }
 
   // Delete a policy, using the policy ID
@@ -180,7 +176,7 @@ export class PolicyComponent implements OnInit {
         result => {
           this.updatePolicyArrays();
         }, error => {
-          console.log('check this error: ' + error);
+          // error handling
         });
     }
   }
@@ -205,10 +201,10 @@ export class PolicyComponent implements OnInit {
         this.acknowledgePolicyService.createPolicy(data).subscribe(result => {
           // update policies array to show the changes
           this.updatePolicyArrays(); }, error => {
-          console.log('Failure adding new policy to the DB.');
+          // error handling
         });
       } else {
-        console.log('Policy is null');
+        // error handling
       }
     });
   }
@@ -236,14 +232,13 @@ export class PolicyComponent implements OnInit {
           this.acknowledgePolicyService.updatePolicy(data).subscribe(result => {
             // update policies array to show the changes
             this.updatePolicyArrays(); }, error => {
-            console.log('Failure to change policy to the DB.');
-            console.log(error);
+            // error handling
           });
         } else {
-          console.log('Edit cancelled');
+          // error handling
         }
       } else {
-        console.log('Policy is null');
+        // error handling
       }
     });
   }
@@ -263,8 +258,7 @@ export class PolicyComponent implements OnInit {
         }
       });
     }, error => {
-      console.log('Failure to retrieve list of employees.');
-      console.log(error);
+      // error handling
     });
   }
 }

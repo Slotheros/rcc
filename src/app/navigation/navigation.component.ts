@@ -42,9 +42,7 @@ export class NavigationComponent implements OnInit {
    * authService's logout function to kill their current session.
    */
   callLogoutService() {
-    console.log('calling logout service');
-    this.authService.logout().subscribe(result => console.log('working'), error => console.log('not working'));
-
+    this.authService.logout();
   }
 
 }

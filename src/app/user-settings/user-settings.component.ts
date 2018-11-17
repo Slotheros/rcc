@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../services/auth.service';
-import { Department } from '../department'; 
+import { Department } from '../department';
 import { ConfigService } from '../services/config.service';
 import {AlertsService} from '../services/alerts.service';
 import { Router } from '@angular/router';
@@ -32,7 +32,7 @@ export class UserSettingsComponent implements OnInit {
   updatedUserInfo = {};
   updatedPassword = {};
 
-  
+
   constructor(private alertsService: AlertsService,
       private authService: AuthService,
       private configService: ConfigService,
@@ -48,12 +48,12 @@ export class UserSettingsComponent implements OnInit {
       this.email = result['email'];
       this.phone = result['phone'];
 
-      this.updatedPassword = { 
-        eId: result['eId'], 
+      this.updatedPassword = {
+        eId: result['eId'],
         password: undefined,
         email: undefined
         };
-      
+
       this.updatedUser = {
         eId: this.eId,
         fName: undefined,
@@ -81,10 +81,9 @@ export class UserSettingsComponent implements OnInit {
     this.usersService.updateUser(this.updatedUser).subscribe(result => {
       this.callLogoutService();
     }, error => {
-      console.log("Error");
-
+      // error handling
     });
-  
+
   }
 
 
@@ -94,13 +93,13 @@ export class UserSettingsComponent implements OnInit {
    * function in hte usersService
    */
   callLogoutService() {
-    this.authService.logout().subscribe(result => console.log('working'), error => console.log('not working'));
+    this.authService.logout();
     this.router.navigate(['/login']);
   }
 
   /**
-   * updateUserPassword will allow the user the change their password. It takes the 
-   * new password and calls the updatePassword function in the usersService with the 
+   * updateUserPassword will allow the user the change their password. It takes the
+   * new password and calls the updatePassword function in the usersService with the
    * updated password passed.
    */
   updateUserPassword() {
@@ -109,8 +108,7 @@ export class UserSettingsComponent implements OnInit {
       this.callLogoutService();
 
     }, error => {
-      console.log("Error");
-
+      // error handling
     });
   }
 

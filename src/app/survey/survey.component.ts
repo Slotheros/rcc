@@ -82,8 +82,7 @@ export class SurveyComponent implements OnInit {
           this.allSurveys.push(p);
         }
       }, error => {
-        console.log('Error retrieving unacknowl surveys');
-        console.log(error);
+        // error handling
       });
     } else if (this.userType === this.DPTHEAD) {
       this.surveyService.getAllSurveysForDept(this.userDeptId).subscribe(result => {
@@ -107,8 +106,7 @@ export class SurveyComponent implements OnInit {
           this.allSurveys.push(p);
         }
       }, error => {
-        console.log('Error retrieving unacknowl surveys');
-        console.log(error);
+        // error handling
       });
     }
 
@@ -134,8 +132,7 @@ export class SurveyComponent implements OnInit {
         this.unackSurveys.push(p);
       }
     }, error => {
-      console.log('Error retrieving unack surveys');
-      console.log(error);
+      // error handling
     });
 
     // Get all of the acknowledged surveys
@@ -160,15 +157,14 @@ export class SurveyComponent implements OnInit {
         this.ackSurveys.push(p);
       }
     }, error => {
-      console.log('Error retrieving ack surveys');
-      console.log(error);
+      // error handling
     });
   }
 
   // Acknowledge a survey using the survey ID and user ID
   acknowledgeSurvey(surveyID: number, userID: number) {
     this.surveyService.acknowledgeSurvey(surveyID, userID).subscribe(
-      result => { this.updateSurveyArrays(); }, error => { console.log('check this error: ' + error); });
+      result => { this.updateSurveyArrays(); }, error => { });
   }
 
   // Delete a survey, using the survey ID
@@ -179,16 +175,13 @@ export class SurveyComponent implements OnInit {
         result => {
           this.updateSurveyArrays();
         }, error => {
-          console.log('check this error: ' + error);
+          // error handling
         });
     }
   }
 
   // opens the edit dialog box for creating a survey
   openCreateSurveyDialog() {
-    // Reset the new survey to an empty Survey object
-    console.log('Editing survey: ' + this.newSurvey.title);
-
     // Open dialog and keep a reference to it
     this.dialogRef = this.dialog.open(SurveyDialogComponent, {
       data: {
@@ -205,10 +198,10 @@ export class SurveyComponent implements OnInit {
         this.surveyService.createSurvey(data).subscribe(result => {
           // update surveys array to show the changes
           this.updateSurveyArrays(); }, error => {
-          console.log('Failure adding new survey to the DB.');
+          // error handling
         });
       } else {
-        console.log('Survey is null');
+        // error handling
       }
     });
   }
@@ -217,8 +210,6 @@ export class SurveyComponent implements OnInit {
   openEditSurveyDialog(survey: Survey) {
     // Reset the new survey to an empty Survey object
     this.editSurvey = this.globals.EMPTY_SURVEY;
-
-    console.log('Editing survey: ' + survey.title);
 
     // Open dialog and keep a reference to it
     this.dialogRef = this.dialog.open(SurveyDialogComponent, {
@@ -235,19 +226,16 @@ export class SurveyComponent implements OnInit {
       if (survey) {
         if (data) {
           data['surveyId'] = survey.id;
-          console.log('Sending to backend:');
-          console.log(data);
           this.surveyService.updateSurvey(data).subscribe(result => {
             // update surveys array to show the changes
             this.updateSurveyArrays(); }, error => {
-            console.log('Failure to change survey to the DB.');
-            console.log(error);
+            // error handling
           });
         } else {
-          console.log('Edit cancelled');
+          // error handling
         }
       } else {
-        console.log('Survey is null');
+        // error handling
       }
     });
   }
@@ -267,8 +255,7 @@ export class SurveyComponent implements OnInit {
         }
       });
     }, error => {
-      console.log('Failure to retrieve the list of employees.');
-      console.log(error);
+      // error handling
     });
   }
 }
