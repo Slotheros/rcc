@@ -93,7 +93,7 @@ export class UserSettingsComponent implements OnInit {
    * function in hte usersService
    */
   callLogoutService() {
-    this.authService.logout();
+    this.authService.logout().subscribe(result => {}, error => {});
     this.router.navigate(['/login']);
   }
 

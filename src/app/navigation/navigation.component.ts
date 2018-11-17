@@ -42,7 +42,7 @@ export class NavigationComponent implements OnInit {
    * authService's logout function to kill their current session.
    */
   callLogoutService() {
-    this.authService.logout();
+    this.authService.logout().subscribe(result => {}, error => {});
   }
 
 }

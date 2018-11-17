@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     public snackBar: MatSnackBar,
     private validationService: ValidationService) { }
 
-  
+
   /**
    * ngOnInit checkes if the user is currently loggedIn and if they
    * are, redirects them back to the home page.
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['home']);
       }
     }, error => {
-      console.log(error);
+      // error handling
     });
   }
 
