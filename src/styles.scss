@@ -3,11 +3,51 @@
 
 /* Global Styles */
 
+/* --- General Styles --- */
 /* Page Headers */
 .page-title {
   text-align: center;
   margin-top: 20px;
   margin-bottom: 40px;
+}
+
+/* Cards */
+.mat-card {
+  margin: 0;
+  padding: 0;
+}
+.mat-card-title {
+  margin-left: 10px;
+}
+.mat-card h6 {
+  font-size: 1.2em;
+  margin: 0px 0px 20px 20px;
+  font-weight: 400;
+}
+a, a:visited, a:active {
+  color: black;
+}
+a:hover {
+  text-decoration: none;
+}
+
+/* Create Buttons */
+.create-button-wrapper #create-button {
+  display: flex;
+  align-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Departments Checkboxes */
+#checkbox-group > * {
+  margin: 0 5px;
+}
+@media only screen and (max-width: 600px) {
+  #checkbox-group > * {
+    margin: 0 5px;
+    display: block;
+  }
 }
 
 /* Errors */
@@ -22,9 +62,11 @@
   margin-top: 10px;
 }
 
-/* Departments Checkboxes */
-#checkbox-group > * {
-  margin: 0 5px;
+/* Icons */
+//center icon in button
+.notifications i {
+  display: inline-flex;
+  vertical-align: middle;
 }
 
 /* Send Text Form */
@@ -33,6 +75,7 @@ button#send-text {
   margin-top: 20px;
 }
 
+/* --- Page-Specific --- */
 /* CSV buttons */
 .uploader {
   display: flex;
@@ -41,3 +84,56 @@ button#send-text {
 }
 
 /* Employee Tables */
+
+/* Home */
+.notifications .material-icons {
+  font-size: 24px;
+}
+.notifications .mat-card-content a {
+  font-size: 8pt;
+}
+.notifications mat-card {
+  padding: 25px;
+}
+.material-icons.orange600 { color: #FB8C00; }
+
+/* Policies and Surveys */
+.ackTitle {
+  margin-top: 0px;
+}
+.panel-half {
+  display: inline-block;
+  width: 100%;
+  margin: 0;
+}
+.panel-half button {
+  margin: 0px 20px 25px 0px;
+}
+.num-acknowledged-text {
+  display: inline-block;
+}
+.num-acknowledged-text:hover {
+  cursor: pointer;
+  color: grey;
+}
+
+/* Policy and Survey Dialogs */
+.edit-policy-dialog .input-fullwidth,
+.edit-survey-dialog .input-fullwidth {
+  width: 100%;
+}
+.edit-policy-form,
+.edit-survey-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+mat-dialog-actions.dialog-actions button {
+  margin-right: 10px;
+}
+.small-text {
+  margin-top: 5px;
+  font-size: 0.7em;
+}
+
+

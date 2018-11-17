@@ -1,8 +1,8 @@
 <rcc-navigation></rcc-navigation>
 
 <h1 class='page-title'>View Policy</h1>
-<button id="create-button" *ngIf="userType === SUPERUSER || userType === ADMIN || userType === DPTHEAD" class="mat-raised-button mat-primary create-policy" mat-button-ripple (click)="openCreatePolicyDialog();">Create New Policy</button>
 <div class="container">
+  <button id="create-button" *ngIf="userType === SUPERUSER || userType === ADMIN || userType === DPTHEAD" class="mat-raised-button mat-primary create-policy" mat-button-ripple (click)="openCreatePolicyDialog();">Create New Policy</button>
   <mat-card>
     <mat-card-title>
       You have <strong>{{unackPolicies.length}}</strong> {{unackPolicies.length == 1 ? 'policy' : 'policies'}} that need{{unackPolicies.length == 1 ? 's' : ''}} to be acknowledged.
@@ -13,7 +13,7 @@
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title class="policy-header">
-          <h3 class="ackPolicyTitle">List of All Policies</h3>
+          <h3 class="ackTitle">List of All Policies</h3>
         </mat-panel-title>
       </mat-expansion-panel-header>
 
@@ -40,7 +40,7 @@
     <mat-expansion-panel [expanded]="true">
       <mat-expansion-panel-header>
         <mat-panel-title class="policy-header">
-          <h3 class="ackPolicyTitle">Unacknowledged Policies</h3>
+          <h3 class="ackTitle">Unacknowledged Policies</h3>
         </mat-panel-title>
       </mat-expansion-panel-header>
 
@@ -61,7 +61,7 @@
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title class="policy-header">
-        <h3 class="ackPolicyTitle">Acknowledged Policies</h3>
+        <h3 class="ackTitle">Acknowledged Policies</h3>
         </mat-panel-title>
       </mat-expansion-panel-header>
 

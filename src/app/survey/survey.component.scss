@@ -1,68 +1,16 @@
-/*
 .container {
   margin-bottom: 20px;
-}
-
-.section-title {
-  text-align: left;
-  margin-left: 15px;
 }
 .mat-card {
   margin-bottom: 20px;
 }
-.panel-half {
-  display: inline-block;
-  width: 100%;
-  margin: 0;
-}
-.panel-half button {
-  margin: 0px 20px 25px 0px;
-}
-.ackSurveyTitle {
-  margin-top: 0px;
-}
-button.create-survey {
-  display: block;
-  margin: 0 auto 50px auto;
-}
-button {
-  width: 100%;
-}
-#create-button {
-  width: auto;
-}
-.num-acknowledged-text {
-  display: inline-block;
-}
-.num-acknowledged-text:hover {
-  cursor: pointer;
-  color: grey;
-}
-
-
-//center icon in button
-i {
-  display: inline-flex;
-  vertical-align: middle;
-}
-
-.section-title {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
 
 @media only screen and (min-width: 992px) {
   .survey-header {
     font-size: 1.5em;
   }
-
   .mobile-icon-text {
     display: none;
-  }
-
-  button {
-    width: auto;
   }
   mat-card {
     padding-left: 50px;
@@ -98,4 +46,3 @@ i {
     margin-top: 10px;
   }
 }
-*/

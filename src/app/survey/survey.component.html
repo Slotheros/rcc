@@ -1,8 +1,8 @@
 <rcc-navigation></rcc-navigation>
 
 <h1 class='page-title'>View Survey</h1>
-<button id="create-button" *ngIf="userType === SUPERUSER || userType === ADMIN || userType === DPTHEAD" class="mat-raised-button mat-primary create-survey" mat-button-ripple (click)="openCreateSurveyDialog();">Create New Survey</button>
 <div class="container">
+  <button id="create-button" *ngIf="userType === SUPERUSER || userType === ADMIN || userType === DPTHEAD" class="mat-raised-button mat-primary create-survey" mat-button-ripple (click)="openCreateSurveyDialog();">Create New Survey</button>
   <mat-card>
     <mat-card-title>
       You have <strong>{{unackSurveys.length}}</strong> {{unackSurveys.length == 1 ? 'survey' : 'surveys'}} that need{{unackSurveys.length == 1 ? 's' : ''}} to be acknowledged.
@@ -13,7 +13,7 @@
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title class="survey-header">
-          <h3 class="ackSurveyTitle">List of All Surveys</h3>
+          <h3 class="ackTitle">List of All Surveys</h3>
         </mat-panel-title>
       </mat-expansion-panel-header>
 
@@ -40,7 +40,7 @@
     <mat-expansion-panel [expanded]="true">
       <mat-expansion-panel-header>
         <mat-panel-title class="survey-header">
-          <h3 class="ackSurveyTitle">Uncompleted Surveys</h3>
+          <h3 class="ackTitle">Uncompleted Surveys</h3>
         </mat-panel-title>
       </mat-expansion-panel-header>
 
@@ -58,7 +58,7 @@
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title class="survey-header">
-          <h3 class="ackSurveyTitle">Completed Surveys</h3>
+          <h3 class="ackTitle">Completed Surveys</h3>
         </mat-panel-title>
       </mat-expansion-panel-header>
 
