@@ -33,11 +33,12 @@ a:hover {
 }
 
 /* Create Buttons */
-.create-button-wrapper #create-button {
+#create-button {
   display: flex;
   align-content: center;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 40px;
 }
 
 /* Departments Checkboxes */
@@ -49,6 +50,18 @@ a:hover {
     margin: 0 5px;
     display: block;
   }
+}
+
+/* Employee Tables */
+.container td.mat-cell {
+  padding-right: 24px;
+}
+.container th {
+  font-size: 1em;
+}
+.center-container {
+  display: flex;
+  justify-content: center;
 }
 
 /* Errors */
@@ -70,6 +83,22 @@ a:hover {
   vertical-align: middle;
 }
 
+/* Navigation */
+#nav-banner {
+  width: 100%;
+  display: flex;
+  background: #eee;
+}
+nav{
+  background-color: #3f51b5;
+}
+.welcome-title {
+  color: white;
+}
+#rrcc-logo {
+  margin: 10px auto 10px auto;
+}
+
 /* Send Text Form */
 button#send-text {
   width: 100%;
@@ -84,17 +113,10 @@ button#send-text {
   margin-bottom: 40px;
 }
 
-/* Employee Tables */
-.container td.mat-cell {
-  padding-right: 24px;
-}
-.container th {
-  font-size: 1em;
-}
-
 /* Home */
 #banner-img {
-  width: 100%;;
+  width: 100%;
+  margin-bottom: 40px;
 }
 .notifications .material-icons {
   font-size: 24px;
@@ -109,7 +131,7 @@ button#send-text {
 
 /* Policies and Surveys */
 .ackTitle {
-  margin-top: 0px;
+  margin-top:10px;
 }
 .panel-half {
   display: inline-block;
