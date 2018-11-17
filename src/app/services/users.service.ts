@@ -6,6 +6,8 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { ConfigService } from './config.service';
 import { Department } from '../department';
 import {ManageUserSettings} from '../manageUserSettings';
+import { UpdatedEmployee } from '../updatedEmployee';
+
 
 @Injectable({
   providedIn: 'root'
@@ -103,6 +105,24 @@ export class UsersService {
   // Service used to get all unacknowledged surveys given a policy id
   getUnackedBySurveyID(surveyID: number) {
     return this.http.get(this.config.getRccUrl() + '/surveys/getUnackEmployees/' + surveyID, this.config.getHttpOptions()).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  updateUser(updatedUser) {
+    return this.http.post(this.config.getRccUrl() + '/users/editUser', updatedUser ,this.config.getHttpOptions()).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  updatePassword(updatedPass) {
+    return this.http.post(this.config.getRccUrl() + '/users/resetPassword', updatedPass ,this.config.getHttpOptions()).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  forgotPassword(emailAddress){
+    return this.http.post(this.config.getRccUrl() + '/users/resetPassword', emailAddress ,this.config.getHttpOptions()).pipe(
       catchError(this.handleError)
     );
   }
