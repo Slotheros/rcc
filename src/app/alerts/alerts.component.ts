@@ -22,15 +22,16 @@ import { MatSnackBar } from '@angular/material';
 
 export class AlertsComponent implements OnInit {
 
+  // constants for user types
   readonly SUPERUSER: number = 1;
   readonly ADMIN: number = 2;
   readonly STANDARD: number = 3;
   readonly DPTHEAD: number = 4;
 
+  // variables
   message: Message;
   selectedDepartments: Department[] = [];
   alertMessage = '';
-
   isDisabled = false;
   isDisabledGroup = false;
   isChecked = false;
@@ -38,6 +39,7 @@ export class AlertsComponent implements OnInit {
   userDeptName = null;
   currentDeptObj = null;
 
+  // constructor
   constructor(private usersService: UsersService,
     private alertsService: AlertsService,
     private authService: AuthService,
@@ -48,6 +50,13 @@ export class AlertsComponent implements OnInit {
     private errorDialogService: ErrorDialogService,
     public snackBar: MatSnackBar) {}
 
+
+  /**
+   * ngOnInit checkes that user is logged in an permitted to view this specific
+   * page or else they will be routed to the login page. it then sets various 
+   * user variables from the user obj that is returned If the user is a DeptHead, 
+   * it will only allow them to send messages to their dept.
+   */
   ngOnInit() {
     this.authService.loggedIn().subscribe(result => {
       console.log(result);
@@ -73,21 +82,24 @@ export class AlertsComponent implements OnInit {
     };
   }
 
+
+  /**
+   * SendMsg will put the selected departments from the user input checkboxes
+   * into an array which will be added to a message object. It will then grab 
+   * the text input from the UI and store it in a message object. This function
+   * then calls the alerts service to make the request.
+   * @param msg - a string that contains the alert message text inputted by the user
+   */
   sendMsg(msg) {
     this.selectedDepartments = this.selectedDepartmentsService.getSelectedDepartments();
-    this.selectedDepartments.forEach(element => {
-      console.log('selectedList: ' + element.name);
-
-    });
 
     if (this.selectedDepartments.length > this.globals.departments.length) {
       console.log('ERROR: department list is incorrect');
       return;
     }
-    // console.log(this.selectedDepartments);
+
     this.message.message = this.alertMessage;
     this.message.departments = this.selectedDepartments;
-    // this.usersService.getPhoneNumbersByDepartments(this.selectedDepartments).subscribe(result => {
     this.alertsService.sendAlert(this.message).subscribe(result => {
       if (result) {
         // reset values on the page
@@ -101,7 +113,6 @@ export class AlertsComponent implements OnInit {
         this.snackBar.open('Alert successfully sent', 'Close');
       }
     }, error => {
-      console.log("TRYING");
       this.errorDialogService.setErrorMsg(error.errMsg);
       this.errorDialogService.openDialog(this.errorDialogService.getErrorMsg());
     });

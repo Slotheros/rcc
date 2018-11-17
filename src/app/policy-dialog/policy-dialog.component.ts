@@ -37,7 +37,7 @@ export class PolicyDialogComponent implements OnInit {
     private selectedDepartmentsService: SelectedDepartmentsService,
     private authService: AuthService,
     private router: Router,
-    @Inject(MAT_DIALOG_DATA) public data: Policy ) {
+    @Inject(MAT_DIALOG_DATA) public data ) {
     this.policy = data;
   }
 
@@ -66,25 +66,21 @@ export class PolicyDialogComponent implements OnInit {
 
   getSelected() {
     this.selectedDepartments = this.selectedDepartmentsService.getSelectedDepartments();
-    console.log('selected depts:');
-    console.log(this.selectedDepartmentsService.getSelectedDepartments());
     return this.selectedDepartments;
   }
 
   submit(form) {
     const data = this.form.getRawValue();
     data['depts'] = this.getSelected();
+
+    // append http to beginning of link if it is not there
     if (
       data['url'].substr(0, 7) !== 'http://'
       && data['url'].substr(0, 8) !== 'https://'
       && data['url'] !== '') {
-      data['url'] = 'http://' + data['url'];
+        data['url'] = 'http://' + data['url'];
     }
     return this.dialogRef.close(data);
-  }
-
-  save() {
-    // return this.dialogRef.close(this.form.value);
   }
 
   close() {

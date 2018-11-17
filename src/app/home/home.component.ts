@@ -14,6 +14,7 @@ import { SurveyService } from '../services/survey.service';
 })
 export class HomeComponent implements OnInit {
 
+  //variables
   userID: number = null;
   userType: number = null;
   newPolicy: Policy;
@@ -22,24 +23,27 @@ export class HomeComponent implements OnInit {
   ackSurveys = Array<Survey>();
   unackSurveys = Array<Survey>();
 
+  // constructor
   constructor(private authService: AuthService,
     private router: Router,
     private usersService: UsersService,
     private acknowledgePolicyService: PolicyService,
     private surveyService: SurveyService) { }
 
+  /**
+   * ngOnInit checkes that user is logged in an permitted to view this specific
+   * page or else they will be routed to the login page. it then gets all of the 
+   * unacknowledged policy and surveys for that specific user so that the notifications
+   * can be displayed on their home page.
+   */
   ngOnInit() {
     this.authService.loggedIn().subscribe(result => {
-      console.log(result);
       this.userID = result['eId'];
       this.userType = result['usertype']['id'];
-      // console.log("who is logged in var: " + UsersService.userType);
-      // console.log("who is logged in method: " + UsersService.getUser);
     }, error => {
       this.router.navigate(['login']);
     }, () => {
       // After userID is found, initialize the ack and unack policy arrays
-      console.log('Searching for unack policies using eId: ' + this.userID);
       this.acknowledgePolicyService.getUnacknowledged(this.userID).subscribe(result => {
         for (const policy of result as Array<Object>) {
           const depts = [];
@@ -60,8 +64,6 @@ export class HomeComponent implements OnInit {
             } as Policy;
           this.unackPolicies.push(p);
         }
-        console.log('Unack Policies:');
-        console.log(this.unackPolicies);
       }, error => {
         console.log('Error retrieving unack policies');
         console.log(error);

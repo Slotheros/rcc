@@ -7,4 +7,6 @@ export interface Policy {
   url: string;
   acknowledged: boolean;
   date: string;
+  numHaveAcked: number;
+  numHavePolicy: number;
 }

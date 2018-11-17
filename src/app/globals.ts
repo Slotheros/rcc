@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Department } from './department';
 import { Policy } from './policy';
+import {UserType} from './userType';
 
 @Injectable()
 export class Globals {
@@ -12,6 +13,18 @@ export class Globals {
     { id: 5, name: 'Production' }
   ];
 
+  userTypes: UserType[] = [
+    { id: 1, name: 'Super User' },
+    { id: 2, name: 'Admin' },
+    { id: 3, name: 'Standard' },
+    { id: 4, name: 'Department Head' }
+  ];
+
+  readonly SUPERUSER: number = 1;
+  readonly ADMIN: number = 2;
+  readonly STANDARD: number = 3;
+  readonly DPTHEAD: number = 4;
+
   EMPTY_POLICY = {
     id: null,
     title: '',
@@ -19,7 +32,37 @@ export class Globals {
     departments: null,
     url: null,
     acknowledged: null,
-    date: null
+    date: null,
+    numHaveAcked: null,
+    numHavePolicy: null
+  };
+
+  EMPTY_SURVEY = {
+    id: null,
+    title: '',
+    description: null,
+    departments: null,
+    url: null,
+    acknowledged: null,
+    date: null,
+    numHaveAcked: null,
+    numHaveSurvey: null
+  };
+
+  EMPTY_USER = {
+    fName: null,
+    lName: null,
+    email: null,
+    phoneNum: null,
+    department: null,
+    status: null
+  };
+
+  EMPTY_MANAGE_USER_SETTINGS = {
+    department: null,
+    active: null,
+    userType: null,
+    userID: null
   };
 
 }

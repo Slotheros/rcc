@@ -22,6 +22,10 @@ import { SelectDepartmentsComponent } from './select-departments/select-departme
 import { SurveyComponent } from './survey/survey.component';
 import { SurveyDialogComponent } from './survey-dialog/survey-dialog.component';
 import { CsvCompareComponent } from './csv-compare/csv-compare.component';
+import { ManageUsersComponent } from './manage-users/manage-users.component';
+import { UserSettingsDialogComponent } from './user-settings-dialog/user-settings-dialog.component';
+import { AckListDialogComponent } from './ack-list-dialog/ack-list-dialog.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +43,11 @@ import { CsvCompareComponent } from './csv-compare/csv-compare.component';
     SelectDepartmentsComponent,
     SurveyComponent,
     SurveyDialogComponent,
-    CsvCompareComponent
+    CsvCompareComponent,
+    ManageUsersComponent,
+    UserSettingsDialogComponent,
+    AckListDialogComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -51,8 +59,20 @@ import { CsvCompareComponent } from './csv-compare/csv-compare.component';
     HttpClientModule,
     FileUploadModule
   ],
-  exports: [ErrorDialogComponent, PolicyDialogComponent, SurveyDialogComponent],
-  entryComponents: [ErrorDialogComponent, PolicyDialogComponent, SurveyDialogComponent],
+  exports: [
+    ErrorDialogComponent,
+    PolicyDialogComponent,
+    SurveyDialogComponent,
+    AckListDialogComponent,
+    UserSettingsDialogComponent
+  ],
+  entryComponents: [
+    ErrorDialogComponent,
+    PolicyDialogComponent,
+    SurveyDialogComponent,
+    AckListDialogComponent,
+    UserSettingsDialogComponent
+  ],
   providers: [ Globals ],
   bootstrap: [AppComponent]
 })

@@ -1,5 +1,5 @@
 <form [formGroup]="form" (ngSubmit)="submit(form)" class="edit-survey-form">
-  <h2 mat-dialog-title>Edit Survey: <strong>{{survey.title}}</strong></h2>
+  <h2 mat-dialog-title>{{survey.title === '' ? 'Create New Survey' : 'Editing Survey: '}}<strong>{{survey.title}}</strong></h2>
   <rcc-select-departments></rcc-select-departments>
   <mat-dialog-content class="edit-survey-dialog">
     <mat-form-field class="input-fullwidth">
@@ -18,7 +18,7 @@
 
   <mat-dialog-actions class="dialog-actions">
     <button class="mat-raised-button" (click)="close()" type="button">Cancel</button>
-    <button class="mat-raised-button mat-primary"(click)="save()" type="submit">Save</button>
+    <button class="mat-raised-button mat-primary" type="submit">Save</button>
     <mat-label class="small-text">*You may leave fields empty to keep those values unchanged.</mat-label>
   </mat-dialog-actions>
 </form>

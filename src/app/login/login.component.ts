@@ -11,13 +11,15 @@ import { UsersService } from '../services/users.service'
   styleUrls: ['./login.component.scss', '../app.component.scss']
 })
 export class LoginComponent implements OnInit {
+
+  // variables
   email: string;
   password: string;
   hideInvalidMsg = true;
-  // Used to display error messages
   emailValid = true;
   passwordValid = true;
 
+  // constructor
   constructor(
     private authService: AuthService,
     private usersService: UsersService,
@@ -26,6 +28,11 @@ export class LoginComponent implements OnInit {
     public snackBar: MatSnackBar,
     private validationService: ValidationService) { }
 
+  
+  /**
+   * ngOnInit checkes if the user is currently loggedIn and if they
+   * are, redirects them back to the home page.
+   */
   ngOnInit() {
     this.authService.loggedIn().subscribe(result => {
       if (result) {

@@ -3,10 +3,13 @@ import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { AlertsService } from '../services/alerts.service';
 import { PolicyService } from '../services/policy.service';
+import { UsersService } from '../services/users.service';
 import { Policy } from '../policy';
 import { Globals } from '../globals';
 import { MatDialog, MatDialogConfig, MatDialogRef, MatExpansionPanel } from '@angular/material';
 import { PolicyDialogComponent } from '../policy-dialog/policy-dialog.component';
+import { AckListDialogComponent } from '../ack-list-dialog/ack-list-dialog.component';
+import {Employee} from '../employee';
 
 @Component({
   selector: 'rcc-view-policy',
@@ -28,7 +31,7 @@ export class PolicyComponent implements OnInit {
   readonly STANDARD: number = 3;
   readonly DPTHEAD: number = 4;
 
-  constructor( private alertsService: AlertsService, private authService: AuthService,
+  constructor( private alertsService: AlertsService, private authService: AuthService, private usersService: UsersService,
                private router: Router, private dialog: MatDialog, private globals: Globals,
                private acknowledgePolicyService: PolicyService) { }
 
@@ -71,7 +74,9 @@ export class PolicyComponent implements OnInit {
             'departments': depts,
             'url': policy['url'],
             'acknowledged': false,
-            'date': policy['date'].substr(0, 10)
+            'date': policy['date'].substr(0, 10),
+            'numHaveAcked': policy['acks'],
+            'numHavePolicy': policy['total']
           } as Policy;
           this.allPolicies.push(p);
         }
@@ -156,7 +161,6 @@ export class PolicyComponent implements OnInit {
   // opens the edit dialog box for creating a policy
   openCreatePolicyDialog() {
     // Reset the new policy to an empty Policy object
-    console.log('Editing policy: ' + this.newPolicy.title);
 
     // Open dialog and keep a reference to it
     this.dialogRef = this.dialog.open(PolicyDialogComponent, {
@@ -185,9 +189,7 @@ export class PolicyComponent implements OnInit {
   // Opens Edit Policy Dialog
   openEditPolicyDialog(policy: Policy) {
     // Reset the new policy to an empty Policy object
-    this.editPolicy = this.globals.EMPTY_POLICY;
-
-    console.log('Editing policy: ' + policy.title);
+    this.editPolicy = this.globals.EMPTY_POLICY as Policy;
 
     // Open dialog and keep a reference to it
     this.dialogRef = this.dialog.open(PolicyDialogComponent, {
@@ -204,8 +206,6 @@ export class PolicyComponent implements OnInit {
       if (policy) {
         if (data) {
           data['policyId'] = policy.id;
-          console.log('Sending to backend:');
-          console.log(data);
           this.acknowledgePolicyService.updatePolicy(data).subscribe(result => {
             // update policies array to show the changes
             this.updatePolicyArrays(); }, error => {
@@ -218,6 +218,26 @@ export class PolicyComponent implements OnInit {
       } else {
         console.log('Policy is null');
       }
+    });
+  }
+
+  // opens the list of employees that have not acknowledged that policy
+  openListUnackDialog(policy) {
+    let employees = Array<Employee>();
+    this.usersService.getUnackedByPolicyID(policy.id).subscribe(result => {
+      // populate employees array with data returned from backend call
+      employees = result as Array<Employee>;
+
+      // Open dialog and keep a reference to it
+      this.dialog.open(AckListDialogComponent, {
+        data: {
+          title: policy.title,
+          employees: employees
+        }
+      });
+    }, error => {
+      console.log('Failure to retrieve list of employees.');
+      console.log(error);
     });
   }
 }

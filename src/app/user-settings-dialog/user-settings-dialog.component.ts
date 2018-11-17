@@ -1,29 +1,28 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { Survey } from '../survey';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Globals } from '../globals';
-import {filter} from 'rxjs/operators';
 import { Department } from '../department';
-import { SelectDepartmentsComponent } from '../select-departments/select-departments.component';
 import { SelectedDepartmentsService } from '../services/selected-departments.service';
-import {Router} from '@angular/router';
-import {AuthService} from '../services/auth.service';
-
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
+import { ManageUserSettings } from '../manageUserSettings';
+import {Registrant} from '../registrant';
 
 @Component({
-  selector: 'rcc-edit-survey-dialog',
-  templateUrl: './survey-dialog.component.html',
-  styleUrls: ['./survey-dialog.component.scss']
+  selector: 'rcc-user-settings-dialog',
+  templateUrl: './user-settings-dialog.component.html',
+  styleUrls: ['./user-settings-dialog.component.scss']
 })
-export class SurveyDialogComponent implements OnInit {
+export class UserSettingsDialogComponent implements OnInit {
 
   readonly SUPERUSER: number = 1;
   readonly ADMIN: number = 2;
   readonly STANDARD: number = 3;
   readonly DPTHEAD: number = 4;
 
-  survey: Survey;
+  userSettings: ManageUserSettings;
+  user: Registrant;
   form: FormGroup;
   selectedDepartments: Department[] = [];
   userType: number = null;
@@ -32,21 +31,20 @@ export class SurveyDialogComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private dialogRef: MatDialogRef<SurveyDialogComponent>,
+    private dialogRef: MatDialogRef<UserSettingsDialogComponent>,
     private globals: Globals,
     private selectedDepartmentsService: SelectedDepartmentsService,
     private authService: AuthService,
     private router: Router,
-    @Inject(MAT_DIALOG_DATA) public data: Survey ) {
-    this.survey = data;
+    @Inject(MAT_DIALOG_DATA) public data ) {
+    this.user = data;
   }
 
   // TODO: use our own validators, not required
   ngOnInit() {
     this.form = this.fb.group({
-      title: [this.survey.title, Validators.required],
-      description: [this.survey.description, Validators.required],
-      url: [this.survey.url, Validators.required],
+      department: [this.userSettings.department, Validators.required],
+      userType: [this.userSettings.userType, Validators.required]
     });
 
     this.authService.loggedIn().subscribe(result => {
@@ -65,22 +63,8 @@ export class SurveyDialogComponent implements OnInit {
     });
   }
 
-  getSelected() {
-    this.selectedDepartments = this.selectedDepartmentsService.getSelectedDepartments();
-    return this.selectedDepartments;
-  }
-
   submit(form) {
     const data = this.form.getRawValue();
-    data['depts'] = this.getSelected();
-
-    // append http:// if it is not there
-    if (
-      data['url'].substr(0, 7) !== 'http://'
-      && data['url'].substr(0, 8) !== 'https://'
-      && data['url'] !== '') {
-        data['url'] = 'http://' + data['url'];
-    }
     return this.dialogRef.close(data);
   }
 

@@ -1,0 +1,30 @@
+<form [formGroup]="form" (ngSubmit)="submit(form)" class="user-settings-form">
+  <h2 mat-dialog-title>Editing User: <strong>{{user.fName}}</strong></h2>
+  <rcc-select-departments></rcc-select-departments>
+  <mat-dialog-content class="edit-policy-dialog">
+
+    <mat-form-field class="input-fullwidth">
+      <mat-label>Department</mat-label>
+      <mat-select matInput placeholder="{{userSettings.department}}" formControlName="department">
+        <option *ngFor="let dept of userDepartments" [value]="dept.value">
+          {{dept.viewValue}}
+        </option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="input-fullwidth">
+      <mat-label>User Role</mat-label>
+      <mat-select matInput placeholder="{{userSettings.userType}}" formControlName="userType">
+        <option *ngFor="let type of userTypes" [value]="type.value">
+          {{type.viewValue}}
+        </option>
+      </mat-select>
+    </mat-form-field>
+
+  </mat-dialog-content>
+  <mat-dialog-actions class="dialog-actions">
+    <button class="mat-raised-button" (click)="close()" type="button">Cancel</button>
+    <button class="mat-raised-button mat-primary" type="submit">Save</button>
+    <mat-label class="small-text">*You may leave fields empty to keep those values unchanged.</mat-label>
+  </mat-dialog-actions>
+</form>

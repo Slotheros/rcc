@@ -22,6 +22,7 @@
         <div class="panel-half">
           <a matTooltip="{{survey.url}}" target="_blank" class="survey-title" href="{{survey.url}}">{{survey.title}}</a>
           <p class="survey-description">{{survey.description}}</p>
+          <p class="num-acknowledged-text" matTooltip="click to see list" (click)="openListUnackDialog(survey)"><strong>{{survey.numHaveAcked}}</strong> / <strong>{{survey.numHaveSurvey}}</strong> have acknowledged</p>
         </div>
         <div class="panel-half">
           <button *ngIf="userType === SUPERUSER || userType === ADMIN || userType === DPTHEAD" class="ackBtn mat-raised-button" mat-button-ripple (click)="openEditSurveyDialog(survey);">
