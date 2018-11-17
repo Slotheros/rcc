@@ -1,2 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
+/* Styles imported from libraries */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+/* Global Styles */
+
+/* Page Headers */
+.page-title {
+  text-align: center;
+}
