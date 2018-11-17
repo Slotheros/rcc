@@ -1,5 +1,4 @@
 <rcc-navigation></rcc-navigation>
-<br/>
 
 <h1 class='page-title'>CSV Compare</h1>
 <div class="container">
@@ -23,7 +22,7 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
 
-      <table mat-table [dataSource]= "newEmployees">
+      <table class="employee-table" mat-table [dataSource]="newEmployees">
         <!-- Errors seen below are a problem with the IDE, not the code :-) -->
         <!-- Name Column -->
         <ng-container matColumnDef="name">

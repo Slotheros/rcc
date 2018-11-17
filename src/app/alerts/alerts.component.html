@@ -1,7 +1,7 @@
 <rcc-navigation></rcc-navigation>
 
-<div class='container'>
-  <h1>Send Alerts</h1>
+<div class="container">
+  <h1 class="page-title">Send Alerts</h1>
 
   <form (ngSubmit)="sendMsg(alertMessage)" id="alert-form" #registrationForm="ngForm">
     <rcc-select-departments></rcc-select-departments>
@@ -9,7 +9,7 @@
     <label for="message">Alert Message:</label>
     <textarea class="form-control" rows="10" id="message" name="msg" [(ngModel)]="alertMessage">{{alertMessage}}</textarea>
     <!-- <button mat-raised-button color="primary" (click)="sendMessage(alertMessage)">Send Alert</button> -->
-    <button mat-raised-button color="primary" type="submit">Send Alert</button>
+    <button mat-raised-button id="send-alert" color="primary" type="submit">Send Alert</button>
     <!-- </form> -->
   </form>
 </div>
