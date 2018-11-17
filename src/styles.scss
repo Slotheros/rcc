@@ -56,7 +56,7 @@ a:hover {
 .material-icons.md-24 { font-size: 24px; }
 .material-icons.md-36 { font-size: 36px; }
 .material-icons.md-42 { font-size: 42px; }
-.error-color {
+.error, .error-color {
   color: red;
 }
 .mat-typography {
@@ -85,6 +85,12 @@ button#send-text {
 }
 
 /* Employee Tables */
+.container td.mat-cell {
+  padding-right: 24px;
+}
+.container th {
+  font-size: 1em;
+}
 
 /* Home */
 #banner-img {
