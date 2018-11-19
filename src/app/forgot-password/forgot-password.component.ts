@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UsersService } from '../services/users.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+
 
 
 @Component({
@@ -17,12 +19,20 @@ export class ForgotPasswordComponent implements OnInit {
 
   // constrcutor
   constructor(private usersService: UsersService,
-    private router: Router) {}
+    private router: Router,
+    private authService: AuthService,) {}
 
   /**
    * ngOnInit initializes the resetPasswordObj
    */
   ngOnInit() {
+    this.authService.loggedIn().subscribe(result => {
+      if (result) {
+        this.router.navigate(['home']);
+      }
+    }, error => {
+      // error handling
+    });
     this.resetPasswordObj = {
       eId: undefined,
       password: undefined,
