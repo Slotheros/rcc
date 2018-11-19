@@ -10,13 +10,18 @@ import { Router } from '@angular/router';
 })
 export class ForgotPasswordComponent implements OnInit {
 
+  // variables
   email: string;
   resetPasswordObj = {};
   
 
+  // constrcutor
   constructor(private usersService: UsersService,
-              private router: Router) { }
+    private router: Router) {}
 
+  /**
+   * ngOnInit initializes the resetPasswordObj
+   */
   ngOnInit() {
     this.resetPasswordObj = {
       eId: undefined,
@@ -26,8 +31,13 @@ export class ForgotPasswordComponent implements OnInit {
     }
   }
 
+  /**
+   * sendEmailForPasswordReset will set the email address of the user
+   * to the resetPasswordObj and call the usersService's forgotPassword
+   * method to make request to the back end which will send the user a 
+   * temporary password to the email address they provided.
+   */
   sendEmailForPasswordReset(){
-    console.log(this.email);
     this.resetPasswordObj['email'] = this.email;
     this.usersService.forgotPassword(this.resetPasswordObj).subscribe(result =>{
       this.router.navigate(['/login']);
