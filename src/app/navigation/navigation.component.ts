@@ -20,7 +20,7 @@ export class NavigationComponent implements OnInit {
   // constructor
   constructor(private authService: AuthService,
     private usersService: UsersService,
-    private router: Router) {}
+    public router: Router) {}
 
 
   /**

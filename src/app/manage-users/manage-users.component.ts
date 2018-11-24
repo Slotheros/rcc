@@ -8,7 +8,6 @@ import {PolicyDialogComponent} from '../policy-dialog/policy-dialog.component';
 import {Policy} from '../policy';
 import {Registrant} from '../registrant';
 import {Validators} from '@angular/forms';
-import {UserSettingsDialogComponent} from '../user-settings-dialog/user-settings-dialog.component';
 import {ManageUserSettings} from '../manageUserSettings';
 
 @Component({
@@ -21,7 +20,6 @@ export class ManageUsersComponent implements OnInit {
   editUserSettings = this.globals.EMPTY_MANAGE_USER_SETTINGS as ManageUserSettings;
   userDepartments = this.globals.departments;
   userTypes = this.globals.userTypes;
-  dialogRef: MatDialogRef<UserSettingsDialogComponent>;
   userID: number = null;
   userType: number = null;
   displayedColumns = ['name', 'email', 'department', 'userType', 'active'];
@@ -158,72 +156,5 @@ export class ManageUsersComponent implements OnInit {
       console.log(error);
     });
   }
-
-  // partially implemented functionality, but feature is not in the project charter
-  /*
-  // opens a dialog box that allows a new user to be created by an admin
-  openCreateUserDialog() {
-    // Open dialog and keep a reference to it
-    this.dialogRef = this.dialog.open(UserSettingsDialogComponent, {
-      data: {
-        fName: this.newUserSettings.fName,
-        lName: this.newUserSettings.lName,
-        email: this.newUserSettings.email,
-        phoneNum: this.newUserSettings.phoneNum,
-        department: this.newUserSettings.department,
-      }
-    });
-
-    // After the dialog is close, handle the data from the forms
-    this.dialogRef.afterClosed().subscribe(data => {
-      if (data) {
-        console.log('Creating user with this data:');
-        console.log(data);
-
-        this.usersService.register(data).subscribe(result => {
-          // update employees list to show the changes
-          this.populateEmployees(); }, error => {
-          console.log('Failure adding new user to the DB.');
-        });
-
-      } else {
-        console.log('User is null');
-      }
-    });
-  }
-
-  // opens a dialog box that allows a user's settings to be changed by an admin
-  openEditUserDialog(user) {
-    console.log('Opening settings for user ' + user.fName + ' ' + user.lName + '...');
-
-     // Reset the new policy to an empty Policy object
-    this.editUserSettings = this.globals.EMPTY_MANAGE_USER_SETTINGS;
-
-    // Open dialog and keep a reference to it
-    this.dialogRef = this.dialog.open(UserSettingsDialogComponent, {
-      data: {
-        departments: user ? user.department : '',
-        usertype: user ? user.userType : '',
-        active: user ? user.status : false
-      }
-    });
-
-    // After the dialog is close, handle the data from the forms
-    this.dialogRef.afterClosed().subscribe(data => {
-      if (user) {
-        if (data) {
-          this.editUserSettings.userID = data['userID'];
-          this.editUserSettings.department = data['department'];
-          this.editUserSettings = data['userType'];
-          this.updateManagedUser();
-        } else {
-          console.log('Edit cancelled');
-        }
-      } else {
-        console.log('User is null');
-      }
-    });
-  }
-  */
 
 }

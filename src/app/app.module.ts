@@ -23,7 +23,6 @@ import { SurveyComponent } from './survey/survey.component';
 import { SurveyDialogComponent } from './survey-dialog/survey-dialog.component';
 import { CsvCompareComponent } from './csv-compare/csv-compare.component';
 import { ManageUsersComponent } from './manage-users/manage-users.component';
-import { UserSettingsDialogComponent } from './user-settings-dialog/user-settings-dialog.component';
 import { AckListDialogComponent } from './ack-list-dialog/ack-list-dialog.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
@@ -45,7 +44,6 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     SurveyDialogComponent,
     CsvCompareComponent,
     ManageUsersComponent,
-    UserSettingsDialogComponent,
     AckListDialogComponent,
     ForgotPasswordComponent
   ],
@@ -63,15 +61,13 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     ErrorDialogComponent,
     PolicyDialogComponent,
     SurveyDialogComponent,
-    AckListDialogComponent,
-    UserSettingsDialogComponent
+    AckListDialogComponent
   ],
   entryComponents: [
     ErrorDialogComponent,
     PolicyDialogComponent,
     SurveyDialogComponent,
-    AckListDialogComponent,
-    UserSettingsDialogComponent
+    AckListDialogComponent
   ],
   providers: [ Globals ],
   bootstrap: [AppComponent]
