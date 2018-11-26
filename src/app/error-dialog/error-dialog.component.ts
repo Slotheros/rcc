@@ -1,8 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material';
 
-// import { ErrorDialogService } from '../services/error-dialog.service';
-
 @Component({
   selector: 'rcc-error-dialog',
   templateUrl: './error-dialog.component.html',

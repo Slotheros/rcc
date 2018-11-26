@@ -1,61 +1,9 @@
-/* can be removed (not mobile though)
-.section-title {
-  margin-left: 10px;
-}
-
-.mat-card-title {
-  margin-left: 10px;
-}
-
-h6 {
-  font-size: 1.2em;
-  margin: 0px 0px 20px 20px;
-  font-weight: 400;
-}
-
-a, a:visited, a:active {
-  color: black;
-}
-
-a:hover {
-  text-decoration: none;
-}
-
-.mat-card {
-  margin: 0;
-  padding: 0;
-}
-
-.material-icons {
-  font-size: 24px;
-}
-
-.mat-card-content a {
-  font-size: 8pt;
-}
-
-.notifications mat-card {
-  padding: 25px;
-}
-
-.material-icons.orange600 { color: #FB8C00; }
-
-//center icon in button
-i {
-  display: inline-flex;
-  vertical-align: middle;
-}
-*/
 @media only screen and (min-width: 992px) {
 
 
   .notifications mat-card {
     padding: 25px;
   }
-
-  // .notifications mat-card-content {
-  //   margin-top: 5px;
-  // }
 
   .notifications h6 {
     margin-top: 20px;

@@ -17,6 +17,7 @@ export class NavigationComponent implements OnInit {
   readonly DPTHEAD:number = 4;
   userType: number = null;
   fName: string = null;
+  helpUrl = '';
   // constructor
   constructor(private authService: AuthService,
     private usersService: UsersService,
@@ -32,7 +33,16 @@ export class NavigationComponent implements OnInit {
     this.authService.loggedIn().subscribe(result => {
       this.userType = result['usertype']['id'];
       this.fName = result['fname'];
-    }, error => {
+      if (this.userType == 1) {
+        this.helpUrl = "https://drive.google.com/open?id=1_kSeUNz8GpbqzapTf711_thi9EI_iCVg";
+      } else if (this.userType == 2) {
+        this.helpUrl = "https://drive.google.com/open?id=10rqJvS-Bf89l-ZqJdhukH0vyRPzFXIYT";
+      } else if (this.userType == 3) {
+        this.helpUrl = "https://drive.google.com/open?id=1v4tEJgMjGKi2C2C7I5OxUQKd4sG--x2y";
+      } else if (this.userType == 4) {
+        this.helpUrl = "https://drive.google.com/open?id=1ZyT_Wc1YhZqd3aFCELY5va_OcmxPqTxM";
+      }
+      }, error => {
       this.router.navigate(['login']);
     });
   }

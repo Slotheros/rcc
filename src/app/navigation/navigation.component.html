@@ -32,13 +32,12 @@
                 <a class="nav-link" routerLink="/user-settings">User Settings</a>
             </li>
         </ul>
-        <!--      <div class="dropdown-divider"></div>-->
         <button (click)="callLogoutService()" id="mobile-logout" mat-raised-button routerLink="/login" color="warn" class="order-sm-12">Logout</button>
         <div class="dropdown-divider"></div>
 
     </div>
+    <a id="help-link" href="{{helpUrl}}" target="_blank">Help?</a>
     <h6 class="oder-sm-1 welcome-title">Welcome, {{fName}}!</h6>
-    <!-- <a href="/home/"><i class="material-icons notification-icon">inbox</i></a> -->
     <button (click)="callLogoutService()" mat-raised-button routerLink="/login" id="desktop-logout" color="warn">Logout</button>
 
 </nav>
