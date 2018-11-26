@@ -18,11 +18,13 @@ import {AuthService} from '../services/auth.service';
 })
 export class SurveyDialogComponent implements OnInit {
 
+  // Constants
   readonly SUPERUSER: number = 1;
   readonly ADMIN: number = 2;
   readonly STANDARD: number = 3;
   readonly DPTHEAD: number = 4;
 
+  // Class Variables
   survey: Survey;
   form: FormGroup;
   selectedDepartments: Department[] = [];
@@ -41,7 +43,6 @@ export class SurveyDialogComponent implements OnInit {
     this.survey = data;
   }
 
-  // TODO: use our own validators, not required
   ngOnInit() {
     this.form = this.fb.group({
       title: [this.survey.title, Validators.required],
@@ -64,11 +65,13 @@ export class SurveyDialogComponent implements OnInit {
     });
   }
 
+  // Returns the selected departments from the checkboxes
   getSelected() {
     this.selectedDepartments = this.selectedDepartmentsService.getSelectedDepartments();
     return this.selectedDepartments;
   }
 
+  // Returns the data from the form to the Survey component
   submit(form) {
     const data = this.form.getRawValue();
     data['depts'] = this.getSelected();
@@ -83,6 +86,7 @@ export class SurveyDialogComponent implements OnInit {
     return this.dialogRef.close(data);
   }
 
+  // Closes the dialog box
   close() {
     this.dialogRef.close();
   }

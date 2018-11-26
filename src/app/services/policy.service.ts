@@ -24,6 +24,7 @@ export class PolicyService {
     );
   }
 
+  // Service used to get all policies given a department ID
   getAllPoliciesForDept(departmentID: number) {
     return this.http.get(this.config.getRccUrl() + '/policies/getAllForDept/' + departmentID, this.config.getHttpOptions()).pipe(
       catchError(this.handleError)

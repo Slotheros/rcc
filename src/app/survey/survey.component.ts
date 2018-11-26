@@ -17,6 +17,8 @@ import {AckListDialogComponent} from '../ack-list-dialog/ack-list-dialog.compone
   styleUrls: ['./survey.component.scss']
 })
 export class SurveyComponent implements OnInit {
+
+  // Class variables
   userID: number = null;
   dialogRef: MatDialogRef<SurveyDialogComponent>;
   newSurvey: Survey = this.globals.EMPTY_SURVEY;

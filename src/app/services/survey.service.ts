@@ -23,6 +23,7 @@ export class SurveyService {
     );
   }
 
+  // Service used to get all surveys for a given department ID
   getAllSurveysForDept(surveyID: number) {
     return this.http.get(this.config.getRccUrl() + '/surveys/getAllForDept/' + surveyID, this.config.getHttpOptions()).pipe(
       catchError(this.handleError)
@@ -72,7 +73,7 @@ export class SurveyService {
     );
   }
 
-
+  // Helper function to handle errors from http requests
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.

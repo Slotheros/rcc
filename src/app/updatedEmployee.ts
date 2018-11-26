@@ -6,4 +6,3 @@ export interface UpdatedEmployee {
     email: string;
     phone: string;
   }
-  

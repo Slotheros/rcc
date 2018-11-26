@@ -8,16 +8,14 @@ import { UpdatedEmployee } from '../updatedEmployee';
 import { UsersService } from '../services/users.service';
 import { ValidationService } from '../services/validation.service';
 
-
-
-
-
 @Component({
   selector: 'rcc-user-settings',
   templateUrl: './user-settings.component.html',
   styleUrls: ['./user-settings.component.scss']
 })
 export class UserSettingsComponent implements OnInit {
+
+  // Class variables
   updatedUser: UpdatedEmployee;
   eId: number = null;
   fName: string = null;
@@ -31,7 +29,6 @@ export class UserSettingsComponent implements OnInit {
   pwMatch = true;
   updatedUserInfo = {};
   updatedPassword = {};
-
 
   constructor(private alertsService: AlertsService,
       private authService: AuthService,

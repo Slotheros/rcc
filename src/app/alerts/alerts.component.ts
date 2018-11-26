@@ -82,7 +82,6 @@ export class AlertsComponent implements OnInit {
     };
   }
 
-
   /**
    * SendMsg will put the selected departments from the user input checkboxes
    * into an array which will be added to a message object. It will then grab 

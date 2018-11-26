@@ -31,12 +31,14 @@ export class UsersService {
     );
   }
 
+  // Service that returns all users in the database
   getUsers() {
     return this.http.get(this.config.getRccUrl() + '/users/getUsers', this.config.getHttpOptions()).pipe(
       catchError(this.handleError)
     );
   }
 
+  // Service the returns all phone numbers from a given list of departments
   // need to pass array of departments with GET for query
   getPhoneNumbersByDepartments(departments: Department[]) {
     return this.http.post(this.config.getRccUrl() + '/users/getPhoneNumbersByDepts', departments, this.config.getHttpOptions()).pipe(
@@ -51,7 +53,7 @@ export class UsersService {
     );
   }
 
-  // updates a user's type
+  // Service that updates a user's type given a user ID
   updateManagedUserType(user: ManageUserSettings) {
     const data = {
       eId: user.userID,
@@ -62,7 +64,7 @@ export class UsersService {
     );
   }
 
-  // updates a user's department
+  // Service that updates a user's department given a department ID
   updateManagedUserDepartment(user: ManageUserSettings) {
     const data = {
       eId: user.userID,
@@ -73,10 +75,13 @@ export class UsersService {
     );
   }
 
+  // Helper function for login to set the user type
   setUser(user: any) {
     this.userType = user.usertype.id;
   }
 
+  // Sets a user to active or inactive based on the given active status
+  // Calls the appropriate endpoint to set them either to 'active' or 'inactive'
   updateManagedUserStatus(user: ManageUserSettings) {
     const data = {
       eId: user.userID
@@ -108,24 +113,28 @@ export class UsersService {
     );
   }
 
+  // Service that updates a user given a user object
   updateUser(updatedUser) {
     return this.http.post(this.config.getRccUrl() + '/users/editUser', updatedUser ,this.config.getHttpOptions()).pipe(
       catchError(this.handleError)
     );
   }
 
+  // Service that updates a user's password given a password string
   updatePassword(updatedPass) {
     return this.http.post(this.config.getRccUrl() + '/users/resetPassword', updatedPass ,this.config.getHttpOptions()).pipe(
       catchError(this.handleError)
     );
   }
 
-  forgotPassword(emailAddress){
+  // Service that sends a forgot password link to a given user's email
+  forgotPassword(emailAddress) {
     return this.http.post(this.config.getRccUrl() + '/users/resetPassword', emailAddress ,this.config.getHttpOptions()).pipe(
       catchError(this.handleError)
     );
   }
 
+  // Helper function to handle errors from http requests
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.

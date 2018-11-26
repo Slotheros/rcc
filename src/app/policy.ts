@@ -1,4 +1,5 @@
-/* Policy interface represents a policy with a description, url, and acknowledged field */
+/* Policy interface represents a policy with a description, url, and acknowledged field.
+ * It also keeps track of the number of users who have acknowledged the policy */
 export interface Policy {
   id: number;
   title: string;

@@ -41,7 +41,6 @@ export class PolicyDialogComponent implements OnInit {
     this.policy = data;
   }
 
-  // TODO: use our own validators, not required
   ngOnInit() {
     this.form = this.fb.group({
       title: [this.policy.title, Validators.required],
@@ -63,11 +62,13 @@ export class PolicyDialogComponent implements OnInit {
     });
   }
 
+  // Returns the selected departments from the checkboxes
   getSelected() {
     this.selectedDepartments = this.selectedDepartmentsService.getSelectedDepartments();
     return this.selectedDepartments;
   }
 
+  // Sends the data from the dialog form back to the Policy component
   submit(form) {
     const data = this.form.getRawValue();
     data['depts'] = this.getSelected();
@@ -82,6 +83,7 @@ export class PolicyDialogComponent implements OnInit {
     return this.dialogRef.close(data);
   }
 
+  // closes the dialog modal
   close() {
     this.dialogRef.close();
   }

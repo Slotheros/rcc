@@ -15,6 +15,7 @@ const URL = 'http://localhost:3000/users/csvCompare';
 })
 export class CsvCompareComponent implements OnInit {
 
+  // Class Variables
   userID: number = null;
   userType: number = null;
   public uploader: FileUploader = new FileUploader(
@@ -94,12 +95,16 @@ export class CsvCompareComponent implements OnInit {
     if (this.uploader.getNotUploadedItems()[0]) {
       const name = this.uploader.getNotUploadedItems()[this.uploader.getNotUploadedItems().length - 1].some.name;
       if (name.substr(name.length - 4, 4) === '.csv') {
+        console.log('file is a csv');
+        console.log(this.uploader);
         this.uploader.uploadAll();
       } else {
         // remove incorrect file types from the queue
+        console.log('wrong file type');
         this.uploader.queue[0].remove();
       }
     } else {
+      console.log('no file?');
     }
   }
 }

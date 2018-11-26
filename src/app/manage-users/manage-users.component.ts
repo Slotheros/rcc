@@ -17,6 +17,7 @@ import {ManageUserSettings} from '../manageUserSettings';
 })
 export class ManageUsersComponent implements OnInit {
 
+  // User Information Variables
   editUserSettings = this.globals.EMPTY_MANAGE_USER_SETTINGS as ManageUserSettings;
   userDepartments = this.globals.departments;
   userTypes = this.globals.userTypes;
@@ -83,6 +84,7 @@ export class ManageUsersComponent implements OnInit {
   }
 
   // Updates the database to match the editted user settings
+  // Unused, but could be wanted for a different mode of editting user data
   updateManagedUser() {
     // update the department
     this.usersService.updateManagedUserDepartment(this.editUserSettings).subscribe(result => {
@@ -107,6 +109,7 @@ export class ManageUsersComponent implements OnInit {
     this.updateEmployees();
   }
 
+  // Updates the user's department in the database
   updateDepartment(dept, userID) {
     // set the form's option's id to be the new department
     this.editUserSettings.department = dept;
@@ -122,6 +125,7 @@ export class ManageUsersComponent implements OnInit {
     });
   }
 
+  // Updates the user's role in the database
   updateUserType(type, userID) {
     if (this.userType === this.SUPERUSER) {
       // set the form's option's id to be the new usertype
@@ -141,8 +145,6 @@ export class ManageUsersComponent implements OnInit {
 
   // Updates the database to match the editted user status
   updateUserStatus(active: boolean, userID: number) {
-    console.log('Setting user status to ' + active + '...');
-
     const data  = {
       active: active,
       userID: userID

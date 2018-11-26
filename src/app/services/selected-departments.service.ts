@@ -15,7 +15,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 export class SelectedDepartmentsService {
 
-  // variables
+  // class variable for the selected departments
   selectedDepartments: Department[];
 
   // constructor

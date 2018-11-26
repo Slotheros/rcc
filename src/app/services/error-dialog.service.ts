@@ -11,15 +11,17 @@ export class ErrorDialogService {
 
   constructor(public dialog: MatDialog) { }
 
-
+  // sets the text of the error message
   setErrorMsg(error: string) {
     this.errorMsg = error;
   }
 
+  // gets the text of the error message
   getErrorMsg():string {
     return this.errorMsg;
   }
 
+  // opens the error message dialog box
   openDialog(errorMsg: string) {
     this.dialog.open(ErrorDialogComponent, {data: errorMsg});
   }

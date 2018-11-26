@@ -20,11 +20,13 @@ export class Globals {
     { id: 4, name: 'Department Head' }
   ];
 
+  // User role definitions
   readonly SUPERUSER: number = 1;
   readonly ADMIN: number = 2;
   readonly STANDARD: number = 3;
   readonly DPTHEAD: number = 4;
 
+  // Blank Policy constant
   EMPTY_POLICY = {
     id: null,
     title: '',
@@ -37,6 +39,7 @@ export class Globals {
     numHavePolicy: null
   };
 
+  // Blank Survey constant
   EMPTY_SURVEY = {
     id: null,
     title: '',
@@ -49,6 +52,7 @@ export class Globals {
     numHaveSurvey: null
   };
 
+  // Blank User constant
   EMPTY_USER = {
     fName: null,
     lName: null,
@@ -58,6 +62,7 @@ export class Globals {
     status: null
   };
 
+  // Bank Manage User Settings object constant
   EMPTY_MANAGE_USER_SETTINGS = {
     department: null,
     active: null,
