@@ -1,0 +1,13 @@
+
+.center-container {
+    widows: 50%;
+    display: flex;
+    justify-content: center;
+  }
+
+@media only screen and (min-width: 992px) {
+    .center-container {
+    display: flex;
+    justify-content: center;
+    }
+}

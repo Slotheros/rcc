@@ -4,6 +4,10 @@
 .mat-card {
   margin-bottom: 20px;
 }
+/* Policies and Surveys */
+.ackTitle {
+  font-size: 1.4em;
+}
 
 @media only screen and (min-width: 992px) {
   .survey-header {
@@ -29,6 +33,10 @@
   }
   .completed {
     margin-bottom: 0;
+  }
+  /* Policies and Surveys */
+  .ackTitle {
+    font-size: 1.5em;
   }
   .ackBtn {
     float: right;

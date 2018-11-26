@@ -41,6 +41,12 @@ a:hover {
   margin-bottom: 40px;
 }
 
+
+// .uploader {
+//   display: block;
+//   width: 90%;
+// }
+
 /* Departments Checkboxes */
 #checkbox-group > * {
   margin: 0 5px;
@@ -107,11 +113,11 @@ button#send-text {
 
 /* --- Page-Specific --- */
 /* CSV buttons */
-.uploader {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 40px;
-}
+// .uploader {
+//   display: flex;
+//   justify-content: center;
+//   margin-bottom: 40px;
+// }
 
 /* Home */
 #banner-img {
@@ -131,6 +137,7 @@ button#send-text {
 
 /* Policies and Surveys */
 .ackTitle {
+  font-size: 1.75em;
   margin-top:10px;
 }
 .panel-half {
