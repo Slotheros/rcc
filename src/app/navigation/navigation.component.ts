@@ -34,13 +34,13 @@ export class NavigationComponent implements OnInit {
       this.userType = result['usertype']['id'];
       this.fName = result['fname'];
       if (this.userType == 1) {
-        this.helpUrl = "https://drive.google.com/open?id=1_kSeUNz8GpbqzapTf711_thi9EI_iCVg";
+        this.helpUrl = "https://drive.google.com/open?id=1uEdoYkyFaeHjUWxVnVztuPxfUe0BM4ZI";
       } else if (this.userType == 2) {
-        this.helpUrl = "https://drive.google.com/open?id=10rqJvS-Bf89l-ZqJdhukH0vyRPzFXIYT";
+        this.helpUrl = "https://drive.google.com/open?id=1yStIwicvVd4GbEng7u_C9bo_7Zj2bWrb";
       } else if (this.userType == 3) {
-        this.helpUrl = "https://drive.google.com/open?id=1v4tEJgMjGKi2C2C7I5OxUQKd4sG--x2y";
+        this.helpUrl = "https://drive.google.com/open?id=1wrIBkzs6DaECo8IB4CyoTRU5tFNoUrwP";
       } else if (this.userType == 4) {
-        this.helpUrl = "https://drive.google.com/open?id=1ZyT_Wc1YhZqd3aFCELY5va_OcmxPqTxM";
+        this.helpUrl = "https://drive.google.com/open?id=1V3hWneFvP9TN4g3pdp_9FZ9G4Z5cwM7_";
       }
       }, error => {
       this.router.navigate(['login']);
